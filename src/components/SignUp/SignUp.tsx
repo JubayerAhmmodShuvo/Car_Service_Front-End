@@ -26,11 +26,11 @@ const SignupPage = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userSignup({ ...data }).unwrap();
-      if (res?.accessToken) {
-        router.push("/profile");
+     
+        router.push("/login");
         message.success("User registered successfully!");
-      }
-      storeUserInfo({ accessToken: res?.accessToken });
+     
+     
     } catch (err: any) {
       console.error(err.message);
     }
@@ -44,8 +44,8 @@ const SignupPage = () => {
         minHeight: "100vh",
       }}
     >
-      <Col sm={12} md={16} lg={10}>
-        <Image src={signupImage} width={500} alt="signup image" />
+      <Col sm={10} md={16} lg={10}>
+        <Image src={signupImage} width={400} alt="signup image" />
       </Col>
       <Col sm={12} md={8} lg={8}>
         <h1

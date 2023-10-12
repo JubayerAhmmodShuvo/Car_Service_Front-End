@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "UMS | Login",
+  title: "Budget Car Service | Login",
 };
 const page = () => {
   return (
