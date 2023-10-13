@@ -1,10 +1,19 @@
 "use client";
 
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import { useGetAdminProfileQuery } from "@/redux/api/adminProfile";
+import { useGetUserProfileQuery } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
 
-const Admin = () => {
-  const { role } = getUserInfo() as any;
+const AdminPage = () => {
+ 
+  
+  const { id ,role} = getUserInfo() as any;
+ 
+  
+  const { data: admin } = useGetUserProfileQuery(id);
+ 
+
   return (
     <div>
       <UMBreadCrumb
@@ -15,7 +24,7 @@ const Admin = () => {
           },
           {
             label: "profile",
-            link: `${role}/profile`,
+            link: "/profile",
           },
         ]}
       />
@@ -24,4 +33,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminPage;

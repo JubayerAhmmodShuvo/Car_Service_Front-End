@@ -1,12 +1,24 @@
 "use client";
 
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import { useGetUserProfileQuery } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
 
 const UserProfile = () => {
-  const { role } = getUserInfo() as any;
+  
+ const { id ,role} = getUserInfo() as any;
 
-  const base = "user";
+
+
+  const {
+  data:user
+  } = useGetUserProfileQuery(id);
+
+
+  
+
+  
+
   return (
     <>
       <UMBreadCrumb
@@ -17,12 +29,13 @@ const UserProfile = () => {
           },
           {
             label: "profile",
-            link: `${role}/profile`,
+            link: "/profile",
           },
         ]}
       />
       <div>
-        <h1>{ role} profile</h1>
+        <h1>{role} profile</h1>
+        <h1>{user?.name}</h1>
       </div>
     </>
   );

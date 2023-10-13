@@ -4,25 +4,30 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useGetUserProfileQuery } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
 
-const SuperAdmin = () => {
-  const { role } = getUserInfo() as any;
-  const { id } = getUserInfo() as any;
+const Profile = () => {
+  
+ const { id ,role} = getUserInfo() as any;
+
+
+
+  const {
+  data:user
+  } = useGetUserProfileQuery(id);
+ 
+
 
   
 
-  const { data: user} = useGetUserProfileQuery(id);
+  
 
   return (
     <>
       <UMBreadCrumb
         items={[
-          {
-            label: `${role}`,
-            link: `/${role}`,
-          },
+         
           {
             label: "profile",
-            link: "/profile",
+            link: `/profile`,
           },
         ]}
       />
@@ -34,4 +39,4 @@ const SuperAdmin = () => {
   );
 };
 
-export default SuperAdmin;
+export default Profile;

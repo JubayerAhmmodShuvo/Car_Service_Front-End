@@ -18,6 +18,8 @@ type FormValues = {
 };
 
 const LoginPage = () => {
+
+  
   const [userLogin] = useUserLoginMutation();
   const router = useRouter();
 
@@ -28,7 +30,7 @@ const LoginPage = () => {
       const res = await userLogin({ ...data }).unwrap();
       // console.log(res);
       if (res?.accessToken) {
-        router.push("/user/profile");
+        router.push("/profile");
         message.success("User logged in successfully!");
       }
       storeUserInfo({ accessToken: res?.accessToken });

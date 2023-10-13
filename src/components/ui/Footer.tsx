@@ -11,8 +11,8 @@ const Footer = () => {
           backgroundColor: "#001529",
           color: "white",
           padding: "20px 0px",
-          margin:"20px 0px 5px 0px",
-          textAlign: "center", 
+          margin: "20px 0px 5px 0px",
+          textAlign: "center",
         }}
       >
         <Row justify="center" gutter={16}>
@@ -31,8 +31,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -42,8 +41,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -53,8 +51,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -64,8 +61,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -90,8 +86,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -101,8 +96,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -112,8 +106,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -123,8 +116,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -149,8 +141,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -160,8 +151,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -171,8 +161,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -182,8 +171,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -218,8 +206,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -229,8 +216,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -240,8 +226,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -251,8 +236,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -262,8 +246,7 @@ const Footer = () => {
                 <li>
                   <Link
                     style={{
-                     
-                      margin: "9px 0px",
+                      margin: "9px 0px 10px 0px",
                     }}
                     href="#"
                   >
@@ -274,6 +257,22 @@ const Footer = () => {
             </div>
           </Col>
         </Row>
+        <p>
+          Developed By  
+          <Link
+            style={{
+              color: "red",
+              fontSize: "1rem",
+              margin: "9px 0px",
+              padding:"6px"
+            }}
+            href="https://github.com/JubayerAhmmodShuvo"
+            target="_blank" rel="noopener noreferrer"
+          >
+               Jubayer Ahmmod Shuvo
+        
+          </Link>
+        </p>
       </div>
     </>
   );
