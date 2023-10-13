@@ -10,7 +10,9 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
+import { getUserInfo } from "@/services/auth.service";
 export const sidebarItems = (role: string) => {
+  const { id } = getUserInfo() as any;
   const defaultSidebarItems: MenuProps["items"] = [
     {
       label: "Profile",
@@ -18,13 +20,18 @@ export const sidebarItems = (role: string) => {
       icon: <ProfileOutlined />,
       children: [
         {
+          label: <Link href={`/${role}/dashboard`}>Dashborad</Link>,
+
+          key: `/${role}/dashboard`,
+        },
+        {
           label: <Link href={`/${role}/profile`}>Account Profile</Link>,
           key: `/${role}/profile`,
         },
         {
-          label: <Link href={`/${role}/dashboard`}>Dashborad</Link>,
-         
-          key: `/${role}/dashboard`,
+          label: <Link href={`/${role}/edit/${id}`}>Update Profile</Link>,
+
+          key: `/${role}/update`,
         },
       ],
     },
