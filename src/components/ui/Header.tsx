@@ -3,6 +3,8 @@ import { UserOutlined } from "@ant-design/icons";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { authKey } from "@/constants/storageKey";
 import { useRouter } from "next/navigation";
+import React, { CSSProperties } from "react"; // Import React and CSSProperties
+
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
@@ -23,36 +25,43 @@ const Header = () => {
       ),
     },
   ];
-  const { role } = getUserInfo() as any;
+  const { role, name } = getUserInfo() as any;
+
   return (
-    <AntHeader
-      style={{
-        background: "#fff",
-      }}
-    >
-      <Row
-        justify="end"
-        align="middle"
+    <>
+      <AntHeader
         style={{
-          height: "100%",
+          background: "#fff",
         }}
       >
-        <p
+        <Row
+          justify="end"
+          align="middle"
           style={{
-            margin: "0px 5px",
+            height: "100%",
           }}
         >
-          {role}
-        </p>
-        <Dropdown menu={{ items }}>
-          <a>
-            <Space wrap size={16}>
-              <Avatar size="large" icon={<UserOutlined />} />
-            </Space>
-          </a>
-        </Dropdown>
-      </Row>
-    </AntHeader>
+         
+          {window.innerWidth >= 768 ? (
+            <p
+              style={{
+                margin: "0px 5px",
+              }}
+            >
+              {name}
+            </p>
+          ) : null}
+
+          <Dropdown menu={{ items }}>
+            <a>
+              <Space wrap size={16}>
+                <Avatar size="large" icon={<UserOutlined />} />
+              </Space>
+            </a>
+          </Dropdown>
+        </Row>
+      </AntHeader>
+    </>
   );
 };
 

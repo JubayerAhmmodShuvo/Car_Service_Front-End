@@ -10,6 +10,7 @@ export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
   if (authToken) {
     const decodedData = decodedToken(authToken);
+   
     return decodedData;
   }
   else {
@@ -26,4 +27,6 @@ export const isLoggedIn = () => {
 export const removeUserInfo = (key: string) => {
   return localStorage.removeItem(key);
 };
+
+
 
