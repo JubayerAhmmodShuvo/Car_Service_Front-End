@@ -1,14 +1,13 @@
 "use client";
-
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { getUserInfo } from "@/services/auth.service";
+import React from "react";
 
-const UserProfile = () => {
+const SuperAdmin = () => {
   const { role } = getUserInfo() as any;
 
-  const base = "user";
   return (
-    <>
+    <div>
       <UMBreadCrumb
         items={[
           {
@@ -21,11 +20,9 @@ const UserProfile = () => {
           },
         ]}
       />
-      <div>
-        <h1>{ role} profile</h1>
-      </div>
-    </>
+      ;<h1>Super Admin</h1>
+    </div>
   );
 };
 
-export default UserProfile;
+export default SuperAdmin;
