@@ -12,6 +12,8 @@ import { getUserInfo } from "@/services/auth.service";
 import { bloodGroupOptions } from "@/constants/global";
 
 import { Button, Col, Row, Select, message } from "antd";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const { Option } = Select;
 
@@ -23,48 +25,46 @@ type IDProps = {
 
 const EditAdminPage = ({ params }: IDProps) => {
   const { id } = params;
-  // console.log(id);
-
-   const { data: user } = useGetUserProfileQuery(id);
+ const router = useRouter();
+  const [updatedUser, setUpdatedUser] = useState(null);
+  const { data: user } = useGetUserProfileQuery(id);
+  const { role } = getUserInfo() as any;
 
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
- 
 
   const onSubmit = async (values: any) => {
-    console.log(values);
-     message.loading("Updating.....");
+    message.loading("Updating.....");
     try {
-       
-       const res = await updateUserProfile({
-         id: id,
-         body: values,
-       }).unwrap();
-    
+      const res = await updateUserProfile({
+        id: id,
+        body: values,
+      }).unwrap();
 
-       if (res?.id) {
-         message.success("Admin Successfully Updated!");
-       }
-     } catch (err:any) {
-       console.error("Error updating user:", err);
+      if (res?.id) {
+        setUpdatedUser(res);
+        message.success("Admin Successfully Updated!");
+        router.push("/profile");
+      }
+    } catch (err: any) {
+      console.error("Error updating user:", err);
       message.error(err.message || "Failed to update user");
       console.log(err);
-     }
-   };
+    }
+  };
+  const userData = updatedUser || user;
 
   // @ts-ignore
   const defaultValues = {
-    name: user?.name || "",
-    email: user?.email || "",
-    number: user?.number || "",
-    role: user?.role ||"",
-    bio: user?.bio || "",
-    bloodGroup: user?.bloodGroup || "",
-    address: user?.address || "",
-    id:user?.id || "",
-
-
+    name: userData?.name || "",
+    email: userData?.email || "",
+    number: userData?.number || "",
+    role: userData?.role || "",
+    bio: userData?.bio || "",
+    bloodGroup: userData?.bloodGroup || "",
+    address: userData?.address || "",
+   
   };
-  const {  role } = getUserInfo() as any;
+  
 
   return (
     <>
@@ -170,7 +170,15 @@ const EditAdminPage = ({ params }: IDProps) => {
             </Col>
           </Row>
         </div>
-        <Button htmlType="submit">Submit</Button>
+        <div style={{ display: "flex", justifyContent: "center",marginBottom:"30px" }}>
+          <Button
+            type="primary" 
+            htmlType="submit"
+            style={{ backgroundColor: "darkviolet", border: "none",width:"20%" }}
+          >
+            Update
+          </Button>
+        </div>
       </Form>
     </>
   );
