@@ -127,6 +127,7 @@ const EditAdminPage = ({ params }: IDProps) => {
                 type="text"
               />
             </Col>
+            
             <Col
               xs={24}
               sm={24}

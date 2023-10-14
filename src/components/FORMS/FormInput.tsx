@@ -3,6 +3,7 @@
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 import { Input } from "antd";
 import { spawn } from "child_process";
+import { useEffect, useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
 interface IInput {
   name: string;
@@ -32,6 +33,14 @@ const FormInput = ({
     formState: { errors },
   } = useFormContext();
 
+ 
+  const [inputValue, setInputValue] = useState(value || "");
+
+
+  useEffect(() => {
+    setInputValue(value || "");
+  }, [value]);
+
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
   return (
@@ -56,7 +65,8 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               {...field}
-              value={value ? value : field.value}
+              value={inputValue} 
+              onChange={(e) => setInputValue(e.target.value)} 
             />
           ) : (
             <Input
@@ -64,7 +74,8 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               {...field}
-              value={value ? value : field.value}
+              value={inputValue} 
+              onChange={(e) => setInputValue(e.target.value)} 
             />
           )
         }

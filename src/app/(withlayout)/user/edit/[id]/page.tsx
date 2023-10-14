@@ -22,7 +22,7 @@ type IDProps = {
   params: any;
 };
 
-const EditAdminPage = ({ params }: IDProps) => {
+const UserPage = ({ params }: IDProps) => {
   const { id } = params;
   const router = useRouter();
   const [updatedUser, setUpdatedUser] = useState(null);
@@ -192,4 +192,4 @@ const EditAdminPage = ({ params }: IDProps) => {
   );
 };
 
-export default EditAdminPage;
+export default UserPage;
