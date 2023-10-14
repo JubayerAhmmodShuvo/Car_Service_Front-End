@@ -23,9 +23,11 @@ export const profileApi = baseApi.injectEndpoints({
 
     updateUserProfile: build.mutation({
       query: (data) => ({
-        url: `${USER_URL}/${data?.id}`,
+        
+        url: `${USER_URL}/${data.id}`,
         method: "PATCH",
         data: data.body,
+        
       }),
       invalidatesTags: [tagTypes.user],
     }),

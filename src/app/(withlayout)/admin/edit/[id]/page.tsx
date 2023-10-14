@@ -3,17 +3,19 @@
 
 import Form from "@/components/FORMS/Form";
 import FormInput from "@/components/FORMS/FormInput";
+import FormSelectField from "@/components/FORMS/FormSelectField";
 import FormTextArea from "@/components/FORMS/FormTextArea";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
+import { bloodGroupOptions } from "@/constants/global";
 
 import { Button, Col, Row, Select, message } from "antd";
 
 const { Option } = Select;
 
-const bloodGroupOptions = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
+
 
 type IDProps = {
   params: any;
@@ -21,38 +23,46 @@ type IDProps = {
 
 const EditAdminPage = ({ params }: IDProps) => {
   const { id } = params;
-  console.log(id);
+  // console.log(id);
 
-  const { data: user } = useGetUserProfileQuery(id);
+   const { data: user } = useGetUserProfileQuery(id);
+
+  const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
  
-  const [updateUserProfile,error] = useUpdateUserProfileMutation();
 
- 
- const onSubmit = async (values: any) => {
-   message.loading("Updating.....");
-   try {
-     // Update the user's profile with the form values
-     const updatedProfile = {
-       id, // Include the user's ID
-       ...values, // Include the form values (e.g., name, phoneNumber, etc.)
-     };
+  const onSubmit = async (values: any) => {
+    console.log(values);
+     message.loading("Updating.....");
+    try {
+       
+       const res = await updateUserProfile({
+         id: id,
+         body: values,
+       }).unwrap();
+    
 
-     // Call the updateUserProfile mutation with the updated profile data
-     const response = await updateUserProfile(updatedProfile);
-
-     if (error) {
-       message.error("Error updating the profile");
-     } else {
-       message.success("Profile updated successfully");
+       if (res?.id) {
+         message.success("Admin Successfully Updated!");
+       }
+     } catch (err:any) {
+       console.error("Error updating user:", err);
+      message.error(err.message || "Failed to update user");
+      console.log(err);
      }
-   } catch (err: any) {
-     message.error(err.message);
-   }
- };
+   };
 
   // @ts-ignore
   const defaultValues = {
-    title: user?.title || "",
+    name: user?.name || "",
+    email: user?.email || "",
+    number: user?.number || "",
+    role: user?.role ||"",
+    bio: user?.bio || "",
+    bloodGroup: user?.bloodGroup || "",
+    address: user?.address || "",
+    id:user?.id || "",
+
+
   };
   const {  role } = getUserInfo() as any;
 
@@ -73,7 +83,7 @@ const EditAdminPage = ({ params }: IDProps) => {
       >
         Update Profile
       </h1>
-      <Form submitHandler={onSubmit}>
+      <Form submitHandler={onSubmit} defaultValues={defaultValues}>
         <div
           style={{
             border: "1px solid #d9d9d9",
@@ -110,11 +120,11 @@ const EditAdminPage = ({ params }: IDProps) => {
               style={{ margin: "10px 0" }}
             >
               <FormInput
-                name="phoneNumber"
+                name="number"
                 label="Phone Number"
                 size="large"
                 value={user?.number}
-                type="tel"
+                type="text"
               />
             </Col>
             <Col
@@ -125,18 +135,13 @@ const EditAdminPage = ({ params }: IDProps) => {
               xl={8}
               style={{ margin: "10px 0" }}
             >
-              <label htmlFor="bloodGroup">Blood Group</label>{" "}
-              {/* Add this label */}
-              <Select
-                id="bloodGroup" // Add an id for accessibility
-                style={{ width: "100%", height: "40px" }}
-              >
-                {bloodGroupOptions.map((group) => (
-                  <Option key={group} value={group}>
-                    {group}
-                  </Option>
-                ))}
-              </Select>
+              <FormSelectField
+                size="large"
+                name="bloodGroup"
+                options={bloodGroupOptions}
+                label="Blood group"
+                placeholder="Select"
+              />
             </Col>
             <Col
               xs={24}
