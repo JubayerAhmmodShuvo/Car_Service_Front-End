@@ -18,43 +18,31 @@ import { Button, Col, Row, message } from "antd";
 import { useUserSignUpMutation } from "@/redux/api/authApi";
 
 const CreateUserPage = () => {
-
   const [addAdminWithFormData] = useUserSignUpMutation();
   //@ts-ignore
 
+  const onSubmit = async (values: any) => {
+    try {
+      const formData = new FormData();
 
-const onSubmit = async (values: any) => {
-  try {
-    console.log("Form values:", values);
-
-    // Create FormData
-    const formData = new FormData();
-
-    // Iterate over the values and append them to the formData
-    for (const key in values) {
-      if (values.hasOwnProperty(key)) {
-        // Append each key-value pair to the formData
-        formData.append(key, values[key]);
+      for (const key in values) {
+        if (values.hasOwnProperty(key)) {
+          formData.append(key, values[key]);
+        }
       }
+
+      message.loading("Creating...");
+      const response = await addAdminWithFormData(formData);
+
+      if (response) {
+        message.success("User created successfully!");
+      } else {
+        message.error("User creation failed.");
+      }
+    } catch (err: any) {
+      console.error(err.message);
     }
-
-    console.log("Form Data:", formData);
-
-    message.loading("Creating...");
-    const response = await addAdminWithFormData(formData);
-    console.log("API response:", response);
-
-    if (response) {
-      message.success("User created successfully!");
-    } else {
-      message.error("User creation failed.");
-    }
-  } catch (err: any) {
-    console.error(err.message);
-  }
-};
-
-
+  };
 
   return (
     <div>
@@ -164,10 +152,7 @@ const onSubmit = async (values: any) => {
                   name="role"
                   label="Role"
                   placeholder="Select"
-                  options={[
-                 
-                    { label: "User", value: "user" },
-                  ]}
+                  options={[{ label: "User", value: "user" }]}
                 />
               </Col>
 
