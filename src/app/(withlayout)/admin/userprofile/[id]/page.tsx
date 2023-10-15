@@ -23,7 +23,7 @@ type IDProps = {
   params: any;
 };
 
-const EditAdminPage = ({ params }: IDProps) => {
+const UserUpdatePage = ({ params }: IDProps) => {
   const { id } = params;
  const router = useRouter();
   const [updatedUser, setUpdatedUser] = useState(null);
@@ -39,12 +39,13 @@ const EditAdminPage = ({ params }: IDProps) => {
         id: id,
         body: values,
       }).unwrap();
+     
 
       if (res?.id) {
         setUpdatedUser(res);
-        message.success("Admin Successfully Updated!");
+        message.success("User Successfully Updated!");
+        router.push("/admin/user-table");
         refetch();
-        router.push("/profile");
       }
     } catch (err: any) {
       console.error("Error updating user:", err);
@@ -120,6 +121,36 @@ const EditAdminPage = ({ params }: IDProps) => {
               xl={8}
               style={{ margin: "10px 0" }}
             >
+              {role === "admin" ? (
+                <FormSelectField
+                  size="large"
+                  name="role"
+                  options={[
+                   
+                    { label: "Admin", value: "admin" },
+                  ]}
+                  label="Role"
+                  placeholder="Select"
+                />
+              ) : (
+                <FormInput
+                  name="role"
+                  label="Role"
+                  size="large"
+                  value={user?.role}
+                 
+                />
+              )}
+            </Col>
+
+            <Col
+              xs={24}
+              sm={24}
+              md={12}
+              lg={8}
+              xl={8}
+              style={{ margin: "10px 0" }}
+            >
               <FormInput
                 name="number"
                 label="Phone Number"
@@ -128,7 +159,7 @@ const EditAdminPage = ({ params }: IDProps) => {
                 type="text"
               />
             </Col>
-            
+
             <Col
               xs={24}
               sm={24}
@@ -172,11 +203,21 @@ const EditAdminPage = ({ params }: IDProps) => {
             </Col>
           </Row>
         </div>
-        <div style={{ display: "flex", justifyContent: "center",marginBottom:"30px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "30px",
+          }}
+        >
           <Button
-            type="primary" 
+            type="primary"
             htmlType="submit"
-            style={{ backgroundColor: "darkviolet", border: "none",width:"20%" }}
+            style={{
+              backgroundColor: "darkviolet",
+              border: "none",
+              width: "20%",
+            }}
           >
             Update
           </Button>
@@ -186,4 +227,4 @@ const EditAdminPage = ({ params }: IDProps) => {
   );
 };
 
-export default EditAdminPage;
+export default UserUpdatePage;

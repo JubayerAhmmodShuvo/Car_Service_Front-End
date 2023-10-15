@@ -29,7 +29,7 @@ const UMTable = ({
     ? {
         pageSize: pageSize,
         total: totalPages,
-        pageSizeOptions: [5, 10, 20],
+        pageSizeOptions: [2,5, 10, 20],
         showSizeChanger: showSizeChanger,
         onChange: onPaginationChange,
       }

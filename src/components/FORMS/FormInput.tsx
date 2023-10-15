@@ -21,7 +21,6 @@ const FormInput = ({
   name,
   type,
   size = "large",
-  value,
   id,
   placeholder,
   validation,
@@ -32,14 +31,6 @@ const FormInput = ({
     control,
     formState: { errors },
   } = useFormContext();
-
- 
-  const [inputValue, setInputValue] = useState(value || "");
-
-
-  useEffect(() => {
-    setInputValue(value || "");
-  }, [value]);
 
   const errorMessage = getErrorMessageByPropertyName(errors, name);
 
@@ -65,8 +56,6 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               {...field}
-              value={inputValue} 
-              onChange={(e) => setInputValue(e.target.value)} 
             />
           ) : (
             <Input
@@ -74,8 +63,6 @@ const FormInput = ({
               size={size}
               placeholder={placeholder}
               {...field}
-              value={inputValue} 
-              onChange={(e) => setInputValue(e.target.value)} 
             />
           )
         }
@@ -84,5 +71,6 @@ const FormInput = ({
     </>
   );
 };
+
 
 export default FormInput;

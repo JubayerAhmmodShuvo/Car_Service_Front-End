@@ -3,10 +3,9 @@ import {
   ProfileOutlined,
   TableOutlined,
   AppstoreOutlined,
-  ScheduleOutlined,
-  ThunderboltOutlined,
-  CreditCardOutlined,
-  DashboardOutlined,
+  UserOutlined,
+  ControlOutlined,
+  BookOutlined 
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
@@ -38,11 +37,7 @@ export const sidebarItems = (role: string) => {
   ];
 
   const commonAdminSidebarItems: MenuProps["items"] = [
-    {
-      label: <Link href={`/${role}/`}></Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/`,
-    },
+  
   
   ];
 
@@ -50,29 +45,55 @@ export const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
     {
-      label: "",
-      key: "",
-      icon: <TableOutlined />,
+      label: "User Management",
+      key: "user-management",
+      icon: <UserOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/`}></Link>,
-          key: `/${role}/`,
+          label: <Link href={`/${role}/user-table`}>User Table</Link>,
+          key: `/${role}/user-table`,
         },
-       
       ],
     },
     {
-      label: "",
-      key: "",
+      label: "Service Management",
+      key: "service-management",
+      icon: <ControlOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/user-table`}>User Table</Link>,
+          key: `/${role}/user-table`,
+        },
+      ],
+    },
+    {
+      label: "Booking Management",
+      key: "Booking-management",
+      icon: <BookOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/user-table`}>User Table</Link>,
+          key: `/${role}/user-table`,
+        },
+      ],
+    },
+    {
+      label: "Content Management",
+      key: "content-management",
       icon: <AppstoreOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/`}></Link>,
-          key: `/${role}/`,
+          label: <Link href={`/${role}/add-blogs`}>Add Blogs</Link>,
+          key: `/${role}/add-blogs`,
         },
-       
-       
-       
+        {
+          label: <Link href={`/${role}/blogs`}>Blogs</Link>,
+          key: `/${role}/blogs`,
+        },
+        {
+          label: <Link href={`/${role}/faqs`}>FAQs</Link>,
+          key: `/${role}/faqs`,
+        },
       ],
     },
   ];
