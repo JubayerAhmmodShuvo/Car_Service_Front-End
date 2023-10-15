@@ -19,7 +19,7 @@ import {
   useDeleteUserProfileMutation,
 } from "@/redux/api/userProfile";
 import UMModal from "@/components/ui/UMModal";
-import { useGetAllBlogsQuery } from "@/redux/api/blogsApi";
+import { useDeleteblogMutation, useGetAllBlogsQuery } from "@/redux/api/blogsApi";
 
 
 const UserTablePage = () => {
@@ -41,7 +41,7 @@ const UserTablePage = () => {
   );
   const [open, setOpen] = useState<boolean>(false);
   const [adminId, setAdminId] = useState<string>("");
-  const [deleteAdmin] = useDeleteUserProfileMutation();
+  const [deleteblog] = useDeleteblogMutation();
 
 
   
@@ -136,12 +136,14 @@ const UserTablePage = () => {
   };
 
   const deleteAdminHandler = async (id: any) => {
+   
     try {
       const fi = id?._id;
-      const res = await deleteAdmin(fi);
+      
+      const res = await deleteblog(fi);
 
       if (res) {
-        message.success("User Successfully Deleted!");
+        message.success("Blog Successfully Deleted!");
         setOpen(false);
       }
     } catch (error: any) {
@@ -201,12 +203,12 @@ const UserTablePage = () => {
       />
 
       <UMModal
-        title="Remove admin"
+        title="Remove blog"
         isOpen={open}
         closeModal={() => setOpen(false)}
         handleOk={() => deleteAdminHandler(adminId)}
       >
-        <p className="my-5">Do you want to remove this user?</p>
+        <p className="my-5">Do you want to remove this blog?</p>
       </UMModal>
     </div>
   );

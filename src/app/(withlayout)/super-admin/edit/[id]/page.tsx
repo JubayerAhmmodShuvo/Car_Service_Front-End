@@ -47,7 +47,7 @@ const SuperAdminPage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating Super Admin:", err);
       message.error(err.message || "Failed to update Super Admin");
-      console.log(err);
+      
     }
   };
   const userData = updatedUser || user;

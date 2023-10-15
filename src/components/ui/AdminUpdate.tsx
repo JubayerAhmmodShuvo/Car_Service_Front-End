@@ -20,20 +20,18 @@ const AdminUpdate = () => {
 
    const OnSubmit = async (values: any) => {
      try {
-       // Call the mutation function to update the user's profile
+       
        const response = await updateUserProfile({ id, ...values });
 
        if ("error" in response) {
-         // Handle the error, show a message, or perform any error-specific actions.
          console.error(response.error);
        } else {
-         // Handle a successful update, show a success message, or perform any success-specific actions.
         
          message.success("User profile updated successfully");
-         console.log("User profile updated successfully", response.data);
+        
        }
      } catch (error) {
-       // Handle unexpected errors
+       
        console.error(error);
      }
    };
