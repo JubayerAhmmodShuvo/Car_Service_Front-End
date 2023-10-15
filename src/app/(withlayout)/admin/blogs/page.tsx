@@ -19,8 +19,7 @@ import {
   useDeleteUserProfileMutation,
 } from "@/redux/api/userProfile";
 import UMModal from "@/components/ui/UMModal";
-
-
+import { useGetAllBlogsQuery } from "@/redux/api/blogsApi";
 
 
 const UserTablePage = () => {
@@ -33,45 +32,31 @@ const UserTablePage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const {
-    data: user,
+    data,
     isLoading,
     refetch,
-  } = useGetAllUsersQuery(
+  } = useGetAllBlogsQuery(
     {},
     { refetchOnMountOrArgChange: true, pollingInterval: 2000 }
-    
   );
-   const [open, setOpen] = useState<boolean>(false);
-   const [adminId, setAdminId] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [adminId, setAdminId] = useState<string>("");
   const [deleteAdmin] = useDeleteUserProfileMutation();
-  
-  const filteredUsers = user?.filter((user: { role: string; }) => user.role === "user") || [];
+
+
   
 
- 
-  
- 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
 
-
-
-
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "Title",
+      dataIndex: "title", 
     },
-    {
-      title: "Role",
-      dataIndex: "role",
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-    },
+    
     {
       title: "CreatedAt",
       dataIndex: "createdAt",
@@ -85,7 +70,26 @@ const UserTablePage = () => {
       render: function (data: any) {
         return (
           <>
-            <Link href={`/admin/userprofile/${data?.id}`}>
+            <Link
+              style={{
+                margin: "0px 5px",
+                color: "green",
+              }}
+              href={`/admin/blogs/viewblog/${data?._id}`}
+            >
+              <Button
+                style={{
+                  margin: "0px 5px",
+                  color: "green",
+                  backgroundColor:"greenyellow"
+                }}
+            
+                type="primary"
+              >
+                <EyeOutlined />
+              </Button>
+            </Link>
+            <Link href={`/admin/blogs/updateblog/${data?._id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
@@ -102,7 +106,6 @@ const UserTablePage = () => {
                 setOpen(true);
                 setAdminId(data);
               }}
-              
               danger
               style={{ marginLeft: "3px" }}
             >
@@ -133,11 +136,10 @@ const UserTablePage = () => {
   };
 
   const deleteAdminHandler = async (id: any) => {
-   
     try {
       const fi = id?._id;
-     const res = await deleteAdmin(fi);
-      
+      const res = await deleteAdmin(fi);
+
       if (res) {
         message.success("User Successfully Deleted!");
         setOpen(false);
@@ -158,7 +160,7 @@ const UserTablePage = () => {
         ]}
       />
 
-      <ActionBar title="User List">
+      <ActionBar title="Blogs List">
         <Input
           type="text"
           size="large"
@@ -171,8 +173,8 @@ const UserTablePage = () => {
           }}
         />
         <div>
-          <Link href="/admin/createuser">
-            <Button type="primary">Create User</Button>
+          <Link href="/admin/blogs/addblog">
+            <Button type="primary">Add New Blog</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
             <Button
@@ -189,7 +191,7 @@ const UserTablePage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={filteredUsers}
+        dataSource={data}
         pageSize={size}
         totalPages={100}
         showSizeChanger={true}
@@ -199,7 +201,7 @@ const UserTablePage = () => {
       />
 
       <UMModal
-        title="Remove User"
+        title="Remove admin"
         isOpen={open}
         closeModal={() => setOpen(false)}
         handleOk={() => deleteAdminHandler(adminId)}

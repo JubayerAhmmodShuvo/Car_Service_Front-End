@@ -4,20 +4,20 @@ import { baseApi } from "./baseApi";
 
 const { id } = getUserInfo() as any;
 
-const USER_URL = "/user";
+const SERVICE_URL = "/service";
 
-export const profileApi = baseApi.injectEndpoints({
+export const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getUserProfile: build.query({
+    getAllBlogs: build.query({
       query: (id) => ({
-        url: `${USER_URL}/${id}`,
+        url: `${SERVICE_URL}/${id}`,
         method: "GET",
       }),
     }),
 
     updateUserProfile: build.mutation({
       query: (data) => ({
-        url: `${USER_URL}/${data.id}`,
+        url: `${SERVICE_URL}/${data.id}`,
         method: "PATCH",
         data: data.body,
       }),
@@ -25,14 +25,14 @@ export const profileApi = baseApi.injectEndpoints({
     }),
     getAllUsers: build.query({
       query: () => ({
-        url: `${USER_URL}/`, 
+        url: `${SERVICE_URL}/`, 
         method: "GET",
       }),
     }),
     deleteUserProfile: build.mutation({
-    query: (id) => ({
-    url: `${USER_URL}/${id}`,
-    method: "DELETE",
+      query: (id) => ({
+        url: `${SERVICE_URL}/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: [tagTypes.user],
     }),
@@ -40,8 +40,8 @@ export const profileApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetUserProfileQuery,
+useGetAllBlogsQuery,
   useUpdateUserProfileMutation,
-  useGetAllUsersQuery, 
+  useGetAllUsersQuery,
   useDeleteUserProfileMutation,
-} = profileApi;
+} = serviceApi;

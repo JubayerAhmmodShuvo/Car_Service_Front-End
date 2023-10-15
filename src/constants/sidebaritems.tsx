@@ -83,7 +83,7 @@ export const sidebarItems = (role: string) => {
       icon: <AppstoreOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/add-blogs`}>Add Blogs</Link>,
+          label: <Link href={`/${role}/blogs/addblog`}>Add Blogs</Link>,
           key: `/${role}/add-blogs`,
         },
         {
