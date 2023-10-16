@@ -8,40 +8,40 @@ const SERVICE_URL = "/service";
 
 export const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllBlogs: build.query({
+    getServiceById: build.query({
       query: (id) => ({
         url: `${SERVICE_URL}/${id}`,
         method: "GET",
       }),
     }),
 
-    updateUserProfile: build.mutation({
+    updateServiceById: build.mutation({
       query: (data) => ({
         url: `${SERVICE_URL}/${data.id}`,
         method: "PATCH",
         data: data.body,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.service],
     }),
-    getAllUsers: build.query({
+    getAllService: build.query({
       query: () => ({
         url: `${SERVICE_URL}/`, 
         method: "GET",
       }),
     }),
-    deleteUserProfile: build.mutation({
+    deleteService: build.mutation({
       query: (id) => ({
         url: `${SERVICE_URL}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.service],
     }),
   }),
 });
 
 export const {
-useGetAllBlogsQuery,
-  useUpdateUserProfileMutation,
-  useGetAllUsersQuery,
-  useDeleteUserProfileMutation,
+  useGetAllServiceQuery,
+  useUpdateServiceByIdMutation,
+  useGetServiceByIdQuery,
+  useDeleteServiceMutation,
 } = serviceApi;

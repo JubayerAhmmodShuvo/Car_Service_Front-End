@@ -1,5 +1,6 @@
 "use client";
 
+import AbailableService from "@/components/ui/AbailableService";
 import Footer from "@/components/ui/Footer";
 import HeroSectionPage from "@/components/ui/HeroSection";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -21,10 +22,11 @@ const MainPage = () => {
       />
       <div
         style={{
-          margin: "20px 0px",
+          margin: "20px 0px 0px 0px",
         }}
       >
         <HeroSectionPage />
+        <AbailableService />
         <Footer />
       </div>
     </>

@@ -21,7 +21,7 @@ export const blogApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data.body,
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.blog],
     }),
     getAllBlogs: build.query({
       query: () => ({
@@ -34,7 +34,7 @@ export const blogApi = baseApi.injectEndpoints({
         url: `${BLOGS_URL}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.blog],
     }),
     createBlog: build.mutation({
       query: (blogData:any) => ({

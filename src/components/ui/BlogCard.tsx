@@ -51,7 +51,7 @@ const ReusableCard: React.FC<ReusableCardProps> = ({ title, children }) => {
           {expanded ? children : truncateDescription(children)}
         </div>
 
-        {children && children.toString().split(" ").length > 1 && (
+        {children && children.toString().split(" ").length > 30 && (
           <button onClick={toggleExpand} style={buttonStyle}>
             {expanded ? "Show Less" : "Show More"}
           </button>

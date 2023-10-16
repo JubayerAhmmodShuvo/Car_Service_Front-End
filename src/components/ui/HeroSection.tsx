@@ -13,14 +13,20 @@ const carouselData = [
   },
   {
     image:
-      "https://bookmygarage.com/_next/image/?url=%2Fstatic%2Fseo-pages%2Fuploads%2Fcar-servicing-header-2.png&w=3840&q=75",
+      "https://www.gaadizo.com/gaadizo-car-service-repairs/assets/media/components/b-main-slider/dent%20repairs.jpg",
     text: "Slide 2 Text",
     buttonText: "Get Started",
   },
   {
     image:
-      "https://bookmygarage.com/_next/image/?url=%2Fstatic%2Fseo-pages%2Fuploads%2Fcar-servicing-header-2.png&w=3840&q=75",
+      "https://resources.servicemycar.com/upimages/blogs/Here-is-Everything-You-Need-to-Know-About-Getting-a-Car-Service-min-20210323120345.png",
     text: "Slide 3 Text",
+    buttonText: "Read More",
+  },
+  {
+    image:
+      "https://cdn.boggsautomotive.com/wp-content/uploads/boggs-automotive-car-maintenance.jpg.webp",
+    text: "Slide 4 Text",
     buttonText: "Read More",
   },
 ];
