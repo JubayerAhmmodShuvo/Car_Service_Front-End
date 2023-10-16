@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Button, Rate } from "antd";
 
 const { Meta } = Card;
+import Link from "next/link";
 
 interface CustomCardProps {
   image: string;
@@ -11,6 +12,7 @@ interface CustomCardProps {
   availability: boolean;
   onAddToCart: () => void;
   onDetails: () => void;
+  serviceId: string | undefined;
 }
 
 const CustomCard: React.FC<CustomCardProps> = ({
@@ -21,6 +23,7 @@ const CustomCard: React.FC<CustomCardProps> = ({
   availability,
   onAddToCart,
   onDetails,
+  serviceId,
 }) => (
   <Card
     hoverable
@@ -73,9 +76,11 @@ const CustomCard: React.FC<CustomCardProps> = ({
         alignItems: "center",
       }}
     >
-      <div style={{
-        margin:"7px 0px"
-      }} >
+      <div
+        style={{
+          margin: "7px 0px",
+        }}
+      >
         <Rate allowHalf disabled defaultValue={rating} />
       </div>
     </div>
@@ -89,9 +94,11 @@ const CustomCard: React.FC<CustomCardProps> = ({
       <Button type="primary" onClick={onAddToCart}>
         Add to Cart
       </Button>
-      <Button onClick={onDetails} >
-        Details
-      </Button>
+
+      <Link href={`/viewservice/${serviceId}`}>
+        {/* <Button>Details</Button> */}
+        <Button onClick={onDetails}>Details</Button>
+      </Link>
     </div>
   </Card>
 );

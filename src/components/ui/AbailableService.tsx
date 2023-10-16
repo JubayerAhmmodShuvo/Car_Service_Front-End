@@ -5,19 +5,24 @@ import { Row, Col, Button } from "antd";
 
 const AvailableService = () => {
   const { data: services, isLoading } = useGetAllServiceQuery({});
-  const [visibleServices, setVisibleServices] = useState(6); 
+  const [visibleServices, setVisibleServices] = useState(6);
 
   const loadMore = () => {
     setVisibleServices(visibleServices + 6);
+
+
   };
+
+
 
   return (
     <div style={{ backgroundColor: "#fff7e6" }}>
       <h1
         style={{
           textAlign: "center",
-          margin: "20px 0px",
-          color: "red",
+          margin: "0px 0px 0px 30px",
+          color: "dark violet",
+          padding: "20px",
         }}
       >
         Available Service
@@ -30,7 +35,7 @@ const AvailableService = () => {
             ?.slice(0, visibleServices)
             .map(
               (service: {
-                _id: React.Key | null | undefined;
+                _id: React.Key | string | null | undefined;
                 images: string;
                 title: string;
                 pricing: number;
@@ -46,6 +51,7 @@ const AvailableService = () => {
                     availability={service?.availability}
                     onAddToCart={() => {}}
                     onDetails={() => {}}
+                    serviceId={service?._id as string | undefined}
                   />
                 </Col>
               )
