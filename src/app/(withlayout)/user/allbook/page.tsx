@@ -1,22 +1,19 @@
-"use client";
-import { useGetAllServiceQuery } from "@/redux/api/serviceApi";
+"use client"; 
+
+import { useGetAllServiceQuery } from '@/redux/api/serviceApi';
 import React, { useState } from "react";
-import CustomCard from "./CustomCard";
+
 import { Row, Col, Button } from "antd";
-import Link from "next/link";
+import CustomCard from '@/components/ui/CustomCard';
 
-const AvailableService = () => {
+const page = () => {
   const { data: services, isLoading } = useGetAllServiceQuery({});
-  const [visibleServices, setVisibleServices] = useState(6);
+   const [visibleServices, setVisibleServices] = useState(6);
 
-  const loadMore = () => {
-    setVisibleServices(visibleServices + 0);
-
-
-  };
-
-
-
+   const loadMore = () => {
+     setVisibleServices(visibleServices + 6);
+   };
+  
   return (
     <div style={{ backgroundColor: "#fff7e6" }}>
       <h1
@@ -62,19 +59,17 @@ const AvailableService = () => {
       )}
       {services && visibleServices < services.length && (
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
-          <Link href={`/user/allbook`} >
-            <Button
-              style={{ textAlign: "center", marginBottom: "20px" }}
-              type="primary"
-              onClick={loadMore}
-            >
-              See More
-            </Button>
-          </Link>
+          <Button
+            style={{ textAlign: "center", marginBottom: "20px" }}
+            type="primary"
+            onClick={loadMore}
+          >
+            See More
+          </Button>
         </div>
       )}
     </div>
   );
 };
 
-export default AvailableService;
+export default page;
