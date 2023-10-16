@@ -1,3 +1,5 @@
+"use client"
+
 import React, { ReactNode, useState } from "react";
 import { Card } from "antd";
 
@@ -14,9 +16,9 @@ const ReusableCard: React.FC<ReusableCardProps> = ({ title, children }) => {
   };
 
   const cardStyle = {
-    width: "100vw", // Set width to 100% for mobile
-    margin: "10px auto", // Set margin to "auto" to center the card horizontally
-    overflow: "hidden", // Prevent text from overflowing outside the card
+    width: "100vw", 
+    margin: "10px auto", 
+    overflow: "hidden", 
   };
 
   const buttonStyle = {

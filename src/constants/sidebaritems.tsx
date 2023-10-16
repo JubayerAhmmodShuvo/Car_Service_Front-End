@@ -5,7 +5,8 @@ import {
   AppstoreOutlined,
   UserOutlined,
   ControlOutlined,
-  BookOutlined 
+  BookOutlined,
+  BulbOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./role";
@@ -120,11 +121,15 @@ export const sidebarItems = (role: string) => {
   const userSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link href={`/${role}/courses`}>Courses</Link>,
-      icon: <TableOutlined />,
+      label: <Link href={`/${role}/blog`}>Blogs</Link>,
+      icon: <BookOutlined />,
       key: `/${role}/courses`,
     },
-   
+    {
+      label: <Link href={`/${role}/faqs`}>FAQ's</Link>,
+      icon: <BulbOutlined />,
+      key: `/${role}/faqs`,
+    },
   ];
 
   if (role === USER_ROLE.SUPER_ADMIN) return superAdminSidebarItems;

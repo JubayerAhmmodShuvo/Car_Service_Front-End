@@ -4,6 +4,7 @@ import { baseApi } from "./baseApi";
 
 const { id } = getUserInfo() as any;
 
+
 const SERVICE_URL = "/service";
 
 export const serviceApi = baseApi.injectEndpoints({
@@ -12,6 +13,13 @@ export const serviceApi = baseApi.injectEndpoints({
       query: (id) => ({
         url: `${SERVICE_URL}/${id}`,
         method: "GET",
+      }),
+    }),
+    addReview: build.mutation({
+      query: (body:any) => ({
+        url: `${SERVICE_URL}/${id}/add-review`,
+        method: "POST",
+        data: body,
       }),
     }),
 
@@ -25,7 +33,7 @@ export const serviceApi = baseApi.injectEndpoints({
     }),
     getAllService: build.query({
       query: () => ({
-        url: `${SERVICE_URL}/`, 
+        url: `${SERVICE_URL}/`,
         method: "GET",
       }),
     }),
@@ -44,4 +52,5 @@ export const {
   useUpdateServiceByIdMutation,
   useGetServiceByIdQuery,
   useDeleteServiceMutation,
+  useAddReviewMutation
 } = serviceApi;
