@@ -160,6 +160,7 @@ const UserTablePage = () => {
             link: "/super_admin",
           },
         ]}
+        style={{ marginTop: "10px", color: "black" }}
       />
 
       <ActionBar title="Blogs List">

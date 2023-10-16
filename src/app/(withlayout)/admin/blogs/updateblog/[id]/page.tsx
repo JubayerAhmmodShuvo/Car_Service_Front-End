@@ -67,6 +67,7 @@ const UpdateBLogPage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
+        style={{ marginTop: "10px", color: "black" }}
       />
       <h1
         style={{
@@ -121,7 +122,6 @@ const UpdateBLogPage = ({ params }: IDProps) => {
                 value={blog?.description}
               />
             </Col>
-           
           </Row>
         </div>
         <div

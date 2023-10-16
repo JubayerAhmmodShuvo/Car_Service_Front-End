@@ -4,11 +4,13 @@ import { HomeOutlined } from "@ant-design/icons";
 
 const UMBreadCrumb = ({
   items,
+  style, 
 }: {
   items: {
     label: string;
     link: string;
   }[];
+  style?: React.CSSProperties; 
 }) => {
   const breadCrumbItems = [
     {
@@ -29,7 +31,12 @@ const UMBreadCrumb = ({
     }),
   ];
 
-  return <Breadcrumb items={breadCrumbItems}></Breadcrumb>;
+  return (
+    <div style={style}>
+     
+      <Breadcrumb items={breadCrumbItems}></Breadcrumb>
+    </div>
+  );
 };
 
 export default UMBreadCrumb;

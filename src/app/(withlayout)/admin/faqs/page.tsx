@@ -135,6 +135,7 @@ const FaqTablePage = () => {
             link: "/super_admin",
           },
         ]}
+        style={{ marginTop: "10px",color:"black" }}
       />
 
       <ActionBar title="FAQ's List">

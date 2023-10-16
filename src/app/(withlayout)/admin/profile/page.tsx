@@ -8,7 +8,8 @@ import { getUserInfo } from "@/services/auth.service";
 const AdminPage = () => {
  
   
-  const { id ,role} = getUserInfo() as any;
+  const { id, role } = getUserInfo() as any;
+  
  
   
   const { data: admin } = useGetUserProfileQuery(id);
@@ -27,6 +28,7 @@ const AdminPage = () => {
             link: "/profile",
           },
         ]}
+        style={{ marginTop: "10px",color:"black" }}
       />
       <h1>Admin</h1>
     </div>

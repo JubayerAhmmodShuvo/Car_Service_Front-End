@@ -32,6 +32,7 @@ const UserProfile = () => {
             link: "/profile",
           },
         ]}
+        style={{ marginTop: "10px", color: "black" }}
       />
       <div>
         <h1>{role} profile</h1>

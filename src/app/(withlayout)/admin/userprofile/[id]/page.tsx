@@ -75,6 +75,7 @@ const UserUpdatePage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
+        style={{ marginTop: "10px",color:"black" }}
       />
       <h1
         style={{

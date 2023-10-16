@@ -21,6 +21,7 @@ const SuperAdminPage = () => {
             link: `/${role}`,
           },
         ]}
+        style={{ marginTop: "10px",color:"black" }}
       />
       <div>
         <h1>{role} profile</h1>
