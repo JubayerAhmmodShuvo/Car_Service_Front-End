@@ -2,7 +2,7 @@ import { tagTypes } from "../tag-types";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { baseApi } from "./baseApi";
 
-const { id } = getUserInfo() as any;
+
 
 
 const SERVICE_URL = "/service";
@@ -16,7 +16,7 @@ export const serviceApi = baseApi.injectEndpoints({
       }),
     }),
     addReview: build.mutation({
-      query: (body:any) => ({
+      query: ({id,body}) => ({
         url: `${SERVICE_URL}/${id}/add-review`,
         method: "POST",
         data: body,

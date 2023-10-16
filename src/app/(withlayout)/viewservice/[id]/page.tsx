@@ -13,7 +13,6 @@ import { commentSchema } from "@/schemas/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 
-
 type IDProps = {
   params: any;
 };
@@ -44,48 +43,58 @@ const responsiveCardStyle = {
 
 const ViewServicePage = ({ params }: IDProps) => {
   const id = params.id;
-
   const { data: service } = useGetServiceByIdQuery(id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 6000,
   });
-
-
-  
+  const { role,name } = getUserInfo() as any;
 
   
- const [addService, { error }] = useAddReviewMutation();
+ const serviceId: string = service?._id;
+
+ const [addReview, { error }] = useAddReviewMutation();
+
+const onSubmit = async (values: any) => {
+  try {
+    const formData = new FormData();
+
+   
+    values.rating = parseInt(values.rating, 10);
+
+      formData.append("comment", values.comment);
+      formData.append("rating", values.rating);
+      formData.append("email", values.email);
+
+ 
+    console.log("Form Values:", values);
+
+    for (const key in values) {
+      if (values.hasOwnProperty(key)) {
+        formData.append(key, values[key]);
+      }
+    }
 
 
- const onSubmit = async (values: any) => {
-   console.log(values);
+    console.log("Form Data:", formData);
+
+    message.loading("Commenting...");
+    const response = await addReview({ id: serviceId, body: formData });
+
   
-   try {
-     const formData = new FormData();
-     console.log(formData);
-     for (const key in values) {
-       if (values.hasOwnProperty(key)) {
-         formData.append(key, values[key]);
-       }
-     }
+    console.log("API Response:", response);
 
-     message.loading("Commenting...");
-     const response = await addService({
-       id: id, 
-       data: formData, 
-     });
-     console.log(response);
+    if (response) {
+      message.success("Thanks for your valuable comment");
+    } else {
+      message.error("Comment failed.");
+    }
+  } catch (err: any) {
+    console.error(err.message);
+  }
+};
 
-     if (response) {
-       message.success("Thanks for your valuable comment");
-     } else {
-       message.error("Comment failed.");
-     }
-   } catch (err: any) {
-     console.error(err.message);
-   }
- };
-  const { role } = getUserInfo() as any;
+
+
  
 
   return (
@@ -264,21 +273,51 @@ const ViewServicePage = ({ params }: IDProps) => {
                 Comment about the service your comment is valuable for us..
               </p>
               <Row>
-                <FormInput
-                  name="email"
-                  label="User Email"
-                  size="large"
-                  type="text"
-                  required
-                />
-                <FormInput
-                  name="rating"
-                  label="User Rating"
-                  size="large"
-                  type="number"
-                  required
-                />
-                <FormTextArea name="comment" label="Comment" rows={4} />
+                <Col
+                  xs={24}
+                  sm={24}
+                  md={24}
+                  lg={24}
+                  xl={24}
+                  style={{ margin: "10px 0" }}
+                >
+                  <FormInput
+                    name="email"
+                    label="User Email"
+                    size="large"
+                    type="text"
+                    required
+                  />
+                </Col>
+                <Col
+                  xs={24}
+                  sm={24}
+                  md={24}
+                  lg={24}
+                  xl={24}
+                  style={{ margin: "10px 0" }}
+                >
+                  <FormInput
+                    name="rating"
+                    label="User Rating"
+                    size="large"
+                    type="number"
+                    required
+                    min={1} 
+                    max={5} 
+                  />
+                </Col>
+
+                <Col
+                  xs={24}
+                  sm={24}
+                  md={24}
+                  lg={24}
+                  xl={24}
+                  style={{ margin: "10px 0" }}
+                >
+                  <FormTextArea name="comment" label="Comment" rows={4} />
+                </Col>
               </Row>
             </div>
             <div
@@ -303,7 +342,6 @@ const ViewServicePage = ({ params }: IDProps) => {
           </Form>
         </Col>
       </Row>
-    
     </>
   );
 };

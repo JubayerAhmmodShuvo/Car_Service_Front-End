@@ -15,7 +15,9 @@ interface IInput {
   validation?: object;
   label?: string;
   required?: boolean;
-  disabled?:boolean;
+  disabled?: boolean;
+  min?:number;
+  max?:number;
 }
 
 const FormInput = ({
@@ -26,6 +28,8 @@ const FormInput = ({
   placeholder,
   validation,
   label,
+  min,
+  max,
   required,
   disabled,
 }: IInput) => {
