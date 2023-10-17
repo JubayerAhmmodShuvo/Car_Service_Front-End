@@ -135,7 +135,7 @@ const FaqTablePage = () => {
             link: "/super_admin",
           },
         ]}
-        style={{ marginTop: "10px",color:"black" }}
+        style={{ marginTop: "10px", color: "black" }}
       />
 
       <ActionBar title="FAQ's List">
@@ -150,7 +150,7 @@ const FaqTablePage = () => {
             setSearchTerm(e.target.value);
           }}
         />
-        <div>
+        <div style={{ overflowX: "hidden" }}>
           <Link href="/admin/faqs/addfaq">
             <Button type="primary">Add New FAQ</Button>
           </Link>
@@ -175,8 +175,7 @@ const FaqTablePage = () => {
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
-        showPagination={true}
-      />
+        showPagination={true} sortOrder={""} sortBy={""}      />
 
       <UMModal
         title="Remove blog"

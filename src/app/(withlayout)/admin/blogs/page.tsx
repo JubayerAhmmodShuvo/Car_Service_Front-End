@@ -200,8 +200,7 @@ const UserTablePage = () => {
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
-        showPagination={true}
-      />
+        showPagination={true} sortOrder={""} sortBy={""}      />
 
       <UMModal
         title="Remove blog"

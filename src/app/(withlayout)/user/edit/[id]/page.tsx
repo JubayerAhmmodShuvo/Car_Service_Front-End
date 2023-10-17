@@ -89,6 +89,7 @@ const UserPage = ({ params }: IDProps) => {
             borderRadius: "5px",
             padding: "15px",
             marginBottom: "10px",
+             overflowX: "hidden" 
           }}
         >
           <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>

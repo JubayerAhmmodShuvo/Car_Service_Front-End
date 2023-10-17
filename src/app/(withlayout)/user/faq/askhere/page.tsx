@@ -43,7 +43,7 @@ const Ask = () => {
     }
   };
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <Form submitHandler={onSubmit}>
         <div
           style={{

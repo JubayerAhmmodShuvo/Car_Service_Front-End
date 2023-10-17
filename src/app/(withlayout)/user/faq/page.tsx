@@ -26,7 +26,7 @@ const Page = () => {
   }));
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <h1
         style={{
           textAlign: "center",

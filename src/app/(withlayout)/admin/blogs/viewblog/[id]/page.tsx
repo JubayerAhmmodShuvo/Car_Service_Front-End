@@ -12,7 +12,7 @@ const ViewBlog = ({ params }: IDProps) => {
   const { data: blog, isLoading, isError } = useGetBlogByIdQuery(id);
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       {isLoading ? (
         <div></div>
       ) : isError ? (

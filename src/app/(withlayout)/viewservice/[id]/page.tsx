@@ -108,7 +108,7 @@ const ViewServicePage = ({ params }: IDProps) => {
         style={{ marginTop: "10px", color: "black" }}
       />
       <div style={centerAlign}>
-        <div>
+        <div style={{ overflowX: "hidden" }}>
           <Row gutter={[16, 16]}>
             <Col sm={24} md={12} lg={12}>
               <img
@@ -304,8 +304,8 @@ const ViewServicePage = ({ params }: IDProps) => {
                     size="large"
                     type="number"
                     required
-                    min={1} 
-                    max={5} 
+                    min={1}
+                    max={5}
                   />
                 </Col>
 

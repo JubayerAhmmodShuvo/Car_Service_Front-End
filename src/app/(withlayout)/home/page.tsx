@@ -1,6 +1,7 @@
 "use client";
 
 import AbailableService from "@/components/ui/AbailableService";
+import BlogPage from "@/components/ui/Blog";
 import Testimonials from "@/components/ui/ClientTestimonial";
 import Footer from "@/components/ui/Footer";
 import HeroSectionPage from "@/components/ui/HeroSection";
@@ -35,6 +36,7 @@ const MainPage = () => {
         <AbailableService />
         <UpComingServices />
         <Testimonials />
+        <BlogPage />
         <TeamMembers />
         <WhyChooseUs />
         <Footer />

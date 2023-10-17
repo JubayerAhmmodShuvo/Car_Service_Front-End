@@ -15,7 +15,7 @@ const page = () => {
    };
   
   return (
-    <div style={{ backgroundColor: "#fff7e6" }}>
+    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden"  }}>
       <h1
         style={{
           textAlign: "center",

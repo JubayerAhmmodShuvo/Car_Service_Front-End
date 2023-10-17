@@ -5,7 +5,7 @@ import { Card, Row, Col } from "antd";
 import Link from "next/link";
 import { getUserInfo } from "@/services/auth.service";
 
-const Page = () => {
+const Blog = () => {
   const {
     data: blogs,
     isLoading,
@@ -17,7 +17,7 @@ const Page = () => {
   const { role } = getUserInfo() as any;
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <h1>Blog List</h1>
       {isLoading ? (
         <p>Loading...</p>
@@ -80,4 +80,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Blog;
