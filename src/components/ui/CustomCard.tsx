@@ -27,7 +27,7 @@ const CustomCard: React.FC<CustomCardProps> = ({
 }) => (
   <Card
     hoverable
-    style={{ width: "100%", maxWidth: "300px", margin: "20px auto" }}
+    style={{ width: "100%", maxWidth: "80%", margin: "20px auto" }}
   >
     <style>
       {`

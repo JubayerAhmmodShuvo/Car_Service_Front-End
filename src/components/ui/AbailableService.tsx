@@ -30,7 +30,7 @@ const AvailableService = () => {
         Available Service
       </h1>
       {isLoading ? (
-        <p>Loading...</p>
+        <p></p>
       ) : (
         <Row gutter={16}>
           {services
