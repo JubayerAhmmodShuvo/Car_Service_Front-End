@@ -6,6 +6,7 @@ import BlogPage from "@/components/ui/Blog";
 import Testimonials from "@/components/ui/ClientTestimonial";
 import Footer from "@/components/ui/Footer";
 import HeroSectionPage from "@/components/ui/HeroSection";
+import PartnerShip from "@/components/ui/PartnerShip";
 import TeamMembers from "@/components/ui/TeamMembers";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import UpComingServices from "@/components/ui/UpComingServices";
@@ -37,8 +38,9 @@ const MainPage = () => {
         <AbailableService />
         <UpComingServices />
         <Testimonials />
-        <BlogPage />
         <TeamMembers /> 
+        <BlogPage />
+        <PartnerShip />
         <WhyChooseUs />
         <AskHere />
         <Footer />
