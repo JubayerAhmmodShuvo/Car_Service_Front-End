@@ -3,10 +3,20 @@
 import Form from "@/components/FORMS/Form";
 import FormTextArea from "@/components/FORMS/FormTextArea";
 import { useCreateFaqMutation } from "@/redux/api/faqApi";
+import { useGetUserProfileQuery } from "@/redux/api/userProfile";
+import { getUserInfo } from "@/services/auth.service";
 import { Row, Col, Button, message } from "antd";
 import React from "react";
 
 const Ask = () => {
+  // const { id: userId } = getUserInfo() as any;
+  // console.log(userId);
+
+  // const { data: user } = useGetUserProfileQuery(userId);
+  // console.log(user.name);
+
+
+
   const [create, { error }] = useCreateFaqMutation();
   const onSubmit = async (values: any) => {
   

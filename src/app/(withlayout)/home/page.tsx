@@ -4,6 +4,8 @@ import AbailableService from "@/components/ui/AbailableService";
 import Footer from "@/components/ui/Footer";
 import HeroSectionPage from "@/components/ui/HeroSection";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import UpComingServices from "@/components/ui/UpComingServices";
+
 import { getUserInfo } from "@/services/auth.service";
 
 const { role } = getUserInfo() as any;
@@ -27,6 +29,7 @@ const MainPage = () => {
       >
         <HeroSectionPage />
         <AbailableService />
+        <UpComingServices />
         <Footer />
       </div>
     </>

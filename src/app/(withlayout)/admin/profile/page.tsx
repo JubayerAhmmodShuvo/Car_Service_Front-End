@@ -13,6 +13,7 @@ const AdminPage = () => {
  
   
   const { data: admin } = useGetUserProfileQuery(id);
+  console.log(admin);
  
 
   return (

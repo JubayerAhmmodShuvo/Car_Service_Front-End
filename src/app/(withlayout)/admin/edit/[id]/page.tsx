@@ -171,6 +171,7 @@ const EditAdminPage = ({ params }: IDProps) => {
             >
               <FormTextArea name="bio" label="Bio" rows={4} value={user?.bio} />
             </Col>
+            
           </Row>
         </div>
         <div style={{ display: "flex", justifyContent: "center",marginBottom:"30px" }}>

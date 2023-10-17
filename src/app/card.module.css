@@ -1,0 +1,39 @@
+/* UpComingServices.css */
+.upcoming-services {
+  width: 100%;
+  max-width: 600px; /* Adjust the maximum width as needed */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.events-list {
+  list-style: none;
+  padding: 0;
+}
+
+.event {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.event-image {
+  flex: 1;
+}
+
+.event-image img {
+  width: 100%;
+  max-width: 200px; /* Adjust the maximum image width as needed */
+  height: auto;
+}
+
+.event-details {
+  flex: 2;
+  padding-left: 20px;
+}
+
+.upcoming-tag {
+  background-color: #f9a825;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 5px;
+}
