@@ -54,7 +54,8 @@ const ViewServicePage = ({ params }: IDProps) => {
 
  const [addReview, { error }] = useAddReviewMutation();
 
-const onSubmit = async (values: any) => {
+  const onSubmit = async (values: any) => {
+  
   try {
     const formData = new FormData();
 

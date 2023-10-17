@@ -1,5 +1,3 @@
-"use client";
-
 import { Table } from "antd";
 
 type UMTableProps = {
@@ -7,17 +5,25 @@ type UMTableProps = {
   columns: any;
   dataSource: any;
   pageSize?: number;
+  totalRecords?: number;
   totalPages?: number;
   showSizeChanger?: boolean;
   onPaginationChange?: (page: number, pageSize: number) => void;
   onTableChange?: (pagination: any, filter: any, sorter: any) => void;
   showPagination?: boolean;
+  page?: number;
+  sortOrder: string; 
+  sortBy: string; 
 };
 
 const UMTable = ({
   loading = false,
   columns,
+  page,
+  sortOrder,
+  sortBy,
   dataSource,
+  totalRecords,
   pageSize,
   totalPages,
   showSizeChanger = true,
@@ -27,9 +33,10 @@ const UMTable = ({
 }: UMTableProps) => {
   const paginationConfig = showPagination
     ? {
+        current: page, 
         pageSize: pageSize,
-        total: totalPages,
-        pageSizeOptions: [2,5, 10, 20],
+        total: totalRecords,
+        pageSizeOptions: [2, 5, 10, 20],
         showSizeChanger: showSizeChanger,
         onChange: onPaginationChange,
       }

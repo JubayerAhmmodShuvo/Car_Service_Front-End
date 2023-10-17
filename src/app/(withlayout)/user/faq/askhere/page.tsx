@@ -9,6 +9,7 @@ import React from "react";
 const Ask = () => {
   const [create, { error }] = useCreateFaqMutation();
   const onSubmit = async (values: any) => {
+  
     try {
       const formData = new FormData();
 
