@@ -18,7 +18,7 @@ const AvailableService = () => {
 
 
   return (
-    <div style={{ backgroundColor: "#fff7e6" }}>
+    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden" }}>
       <h1
         style={{
           textAlign: "center",
@@ -62,9 +62,9 @@ const AvailableService = () => {
       )}
       {services && visibleServices < services.length && (
         <div style={{ textAlign: "center", padding: "20px" }}>
-          <Link href={`/user/allbook`} >
+          <Link href={`/user/allbook`}>
             <Button
-              style={{ textAlign: "center", }}
+              style={{ textAlign: "center" }}
               type="primary"
               onClick={loadMore}
             >

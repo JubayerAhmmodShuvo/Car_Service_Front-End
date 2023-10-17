@@ -10,9 +10,10 @@ const Footer = () => {
           fontSize: "16px",
           backgroundColor: "#001529",
           color: "white",
-          padding: "20px 0px",
-          margin: "20px 0px 5px 0px",
+          padding: "30px 0px",
+          margin: "0px 0px 5px 0px",
           textAlign: "center",
+          overflowX: "hidden"
         }}
       >
         <Row justify="center" gutter={16}>

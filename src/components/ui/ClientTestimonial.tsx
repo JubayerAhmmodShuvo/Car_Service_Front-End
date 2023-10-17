@@ -69,7 +69,7 @@ const Testimonials = () => {
           backgroundColor: "#001529",
           margin: "auto",
           alignItems: "center",
-          fontSize:"28px"
+          fontSize:"28px" , overflowX: "hidden"
         }}
       >
         Testimonials
@@ -77,7 +77,7 @@ const Testimonials = () => {
       <div
         style={{
           padding: "30px",
-          paddingBottom: "40px",
+          paddingBottom: "50px",
           display: "flex",
           justifyContent: "center",
           backgroundColor: "#001529",
@@ -90,7 +90,7 @@ const Testimonials = () => {
           <Col xs={24} sm={24} md={24} lg={8}>
             <Card
               style={{
-                height: "200px",
+                height: "250px",
                 width: "100%",
                 maxWidth: "400px",
                 margin: "auto",
@@ -110,7 +110,7 @@ const Testimonials = () => {
                       defaultValue={5}
                       character={<StarOutlined />}
                     />
-                    <Paragraph ellipsis={{ rows: 4, expandable: true }}>
+                    <Paragraph >
                       {clientTestimonials[currentTestimonialIndex].feedback}
                     </Paragraph>
                   </>
@@ -121,7 +121,7 @@ const Testimonials = () => {
           <Col xs={24} sm={24} md={24} lg={8}>
             <Card
               style={{
-                height: "200px",
+                height: "250px",
                 width: "100%",
                 maxWidth: "400px",
                 margin: "auto",
@@ -150,7 +150,7 @@ const Testimonials = () => {
                       defaultValue={4}
                       character={<StarOutlined />}
                     />
-                    <Paragraph ellipsis={{ rows: 4, expandable: true }}>
+                    <Paragraph >
                       {
                         clientTestimonials[
                           (currentTestimonialIndex + 1) %
@@ -166,7 +166,7 @@ const Testimonials = () => {
           <Col xs={24} sm={24} md={24} lg={8}>
             <Card
               style={{
-                height: "200px",
+                height: "250px",
                 width: "100%",
                 maxWidth: "400px",
                 margin: "auto",
@@ -195,7 +195,7 @@ const Testimonials = () => {
                       defaultValue={4}
                       character={<StarOutlined />}
                     />
-                    <Paragraph ellipsis={{ rows: 4, expandable: true }}>
+                    <Paragraph>
                       {
                         clientTestimonials[
                           (currentTestimonialIndex + 2) %
