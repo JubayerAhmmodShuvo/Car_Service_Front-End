@@ -1,6 +1,7 @@
 "use client";
 
 import AbailableService from "@/components/ui/AbailableService";
+import Testimonials from "@/components/ui/ClientTestimonial";
 import Footer from "@/components/ui/Footer";
 import HeroSectionPage from "@/components/ui/HeroSection";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -30,6 +31,7 @@ const MainPage = () => {
         <HeroSectionPage />
         <AbailableService />
         <UpComingServices />
+        <Testimonials />
         <Footer />
       </div>
     </>

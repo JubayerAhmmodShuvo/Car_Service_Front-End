@@ -54,77 +54,79 @@ const UpComingServices = () => {
   };
 
   return (
-    <div style={{ margin: "20px" }}>
-      <h1
-        style={{
-          textAlign: "center",
-          margin: "20px 0px",
-          fontStyle: "italic",
-          color: "green",
-        }}
-      >
-        Upcoming Services
-      </h1>
-      <Row gutter={16}>
-        {services.map((service) => (
-          <Col xs={24} sm={24} md={12} lg={8} key={service.title}>
-            <Card
-              cover={
-                <div style={{ height: "200px", overflow: "hidden" }}>
-                  <img
-                    alt={service.title}
-                    src={service.image}
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  />
-                </div>
-              }
-              style={{ marginTop: 20 }}
-            >
-              {service.upcoming && (
-                <Badge.Ribbon
-                  text="Upcoming"
-                  color="#87d068"
-                  style={{ marginRight: -20, marginTop: 12 }}
-                >
-                  <Card.Meta
-                    title={service.title}
-                    description={
-                      expandedDescriptions[service.title]
-                        ? service.description
-                        : `${service.description.slice(0, 40)}${
-                            service.description.length > 40 ? "..." : ""
-                          }`
-                    }
-                  />
-                  {service.description.length > 40 && (
-                    <Button
-                      style={{ marginTop: "20px" }}
-                      type="link"
-                      onClick={() => toggleDescription(service.title)}
-                    >
-                      {expandedDescriptions[service.title]
-                        ? "Show Less"
-                        : "Show More"}
-                    </Button>
-                  )}
-                  <Link
-                    href={service.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  ></Link>
-                </Badge.Ribbon>
-              )}
-              {!service.upcoming && (
-                <Card.Meta title={service.title} description={service.date} />
-              )}
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    <div style={{ backgroundColor: "#001529" }}>
+      <div style={{ margin: "0px" }}>
+        <h1
+          style={{
+            textAlign: "center",
+            padding: "20px 0px",
+            fontStyle: "italic",
+            color: "green",
+          }}
+        >
+          Upcoming Services
+        </h1>
+        <Row gutter={16}>
+          {services.map((service) => (
+            <Col xs={24} sm={24} md={12} lg={8} key={service.title}>
+              <Card
+                cover={
+                  <div style={{ height: "200px", overflow: "hidden" }}>
+                    <img
+                      alt={service.title}
+                      src={service.image}
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </div>
+                }
+                style={{ marginTop: 20 }}
+              >
+                {service.upcoming && (
+                  <Badge.Ribbon
+                    text="Upcoming"
+                    color="#87d068"
+                    style={{ marginRight: -20, marginTop: 12 }}
+                  >
+                    <Card.Meta
+                      title={service.title}
+                      description={
+                        expandedDescriptions[service.title]
+                          ? service.description
+                          : `${service.description.slice(0, 40)}${
+                              service.description.length > 40 ? "..." : ""
+                            }`
+                      }
+                    />
+                    {service.description.length > 40 && (
+                      <Button
+                        style={{ marginTop: "20px" }}
+                        type="link"
+                        onClick={() => toggleDescription(service.title)}
+                      >
+                        {expandedDescriptions[service.title]
+                          ? "Show Less"
+                          : "Show More"}
+                      </Button>
+                    )}
+                    <Link
+                      href={service.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    ></Link>
+                  </Badge.Ribbon>
+                )}
+                {!service.upcoming && (
+                  <Card.Meta title={service.title} description={service.date} />
+                )}
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 };

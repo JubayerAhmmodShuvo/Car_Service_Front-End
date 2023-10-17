@@ -22,7 +22,7 @@ const AvailableService = () => {
       <h1
         style={{
           textAlign: "center",
-          margin: "0px 0px 0px 30px",
+          margin: "0px 0px 0px 0px",
           color: "dark violet",
           padding: "20px",
         }}
@@ -61,10 +61,10 @@ const AvailableService = () => {
         </Row>
       )}
       {services && visibleServices < services.length && (
-        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+        <div style={{ textAlign: "center", padding: "20px" }}>
           <Link href={`/user/allbook`} >
             <Button
-              style={{ textAlign: "center", marginBottom: "20px" }}
+              style={{ textAlign: "center", }}
               type="primary"
               onClick={loadMore}
             >
