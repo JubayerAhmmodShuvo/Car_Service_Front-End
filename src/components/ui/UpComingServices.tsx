@@ -61,7 +61,7 @@ const UpComingServices = () => {
             textAlign: "center",
             margin: "20px 0px",
             fontStyle: "italic",
-            color: "green",
+            color: "#fff",
           }}
         >
           Upcoming Services

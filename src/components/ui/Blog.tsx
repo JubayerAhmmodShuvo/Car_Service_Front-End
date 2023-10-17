@@ -16,17 +16,17 @@ const BlogPage = () => {
     { refetchOnMountOrArgChange: true, pollingInterval: 2000 }
   );
 
-  // State to track the currently displayed card index
+
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
-  // Function to cycle to the next card
+
   const cycleToNextCard = () => {
     setCurrentCardIndex((currentCardIndex + 1) % (blogs ? blogs.length : 0));
   };
 
-  // Use useEffect to automatically cycle to the next card every few seconds
+  
   useEffect(() => {
-    const timer = setInterval(cycleToNextCard, 5000); // Change 5000 to your desired interval in milliseconds
+    const timer = setInterval(cycleToNextCard, 5000); 
     return () => {
       clearInterval(timer);
     };
@@ -40,6 +40,7 @@ const BlogPage = () => {
         overflowX: "hidden",
       }}
     >
+      <h1 style={{fontStyle:"italic", fontSize:"2rem", color:"#fff", textAlign:"center"}} >Blogs</h1>
       <div>
         {isLoading ? (
           <p>Loading...</p>

@@ -10,8 +10,8 @@ const Footer = () => {
           fontSize: "16px",
           backgroundColor: "#001529",
           color: "white",
-          padding: "30px 0px",
-          margin: "0px 0px 5px 0px",
+          padding: "45px 0px",
+         
           textAlign: "center",
           overflowX: "hidden"
         }}
@@ -264,7 +264,7 @@ const Footer = () => {
             style={{
               color: "red",
               fontSize: "1rem",
-              margin: "9px 0px",
+              margin: "0px 0px",
               padding:"6px"
             }}
             href="https://github.com/JubayerAhmmodShuvo"

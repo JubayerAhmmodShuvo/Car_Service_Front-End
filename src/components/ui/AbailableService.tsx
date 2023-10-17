@@ -18,13 +18,14 @@ const AvailableService = () => {
 
 
   return (
-    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: "#001529", overflowX: "hidden" }}>
       <h1
         style={{
           textAlign: "center",
           margin: "0px 0px 0px 0px",
-          color: "dark violet",
+          color: "#fff",
           padding: "20px",
+          fontStyle:"italic"
         }}
       >
         Available Service
