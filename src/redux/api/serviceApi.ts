@@ -16,7 +16,7 @@ export const serviceApi = baseApi.injectEndpoints({
       }),
     }),
     addReview: build.mutation({
-      query: ({id,body}) => ({
+      query: ({ id, body }) => ({
         url: `${SERVICE_URL}/${id}/add-review`,
         method: "POST",
         data: body,
@@ -44,6 +44,12 @@ export const serviceApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.service],
     }),
+    searchServices: build.query({
+      query: (query) => ({
+        url: `${SERVICE_URL}/search?query=${query}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -52,5 +58,6 @@ export const {
   useUpdateServiceByIdMutation,
   useGetServiceByIdQuery,
   useDeleteServiceMutation,
-  useAddReviewMutation
+  useAddReviewMutation,
+  useSearchServicesQuery
 } = serviceApi;
