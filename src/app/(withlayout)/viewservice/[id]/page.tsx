@@ -46,7 +46,7 @@ const ViewServicePage = ({ params }: IDProps) => {
   const id = params.id;
   const { data: service } = useGetServiceByIdQuery(id, {
     refetchOnMountOrArgChange: true,
-    pollingInterval: 6000,
+    pollingInterval: 2000,
   });
   const { role, name, id: userId } = getUserInfo() as any;
   const { data: individualId } = useGetUserProfileQuery(userId);
@@ -189,16 +189,21 @@ const ViewServicePage = ({ params }: IDProps) => {
                     Out of Stock
                   </p>
                 )}
-                {
-                  <p style={{ paddingTop: "8px" }}>
-                    <Rate
-                      allowHalf
-                      disabled
-                      defaultValue={service?.overallRating}
-                    />
+                <p style={{ paddingTop: "8px" }}>
+                  <p>
+                    Overall Rating:{" "}
+                    {service?.overallRating !== undefined
+                      ? service?.overallRating.toFixed(2)
+                      : "N/A"}
                   </p>
-                }
-                {/* <Rate allowHalf disabled defaultValue={service?.overallRating} /> */}
+                </p>
+
+                <Rate
+                  style={{ paddingTop: "8px" }}
+                  allowHalf
+                  disabled
+                  defaultValue={service?.overallRating}
+                />
               </div>
             </Col>
           </Row>
