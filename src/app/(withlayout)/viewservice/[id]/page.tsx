@@ -1,7 +1,10 @@
-"use client"
+"use client";
 
-import React from "react";
-import { useAddReviewMutation, useGetServiceByIdQuery } from "@/redux/api/serviceApi";
+import React, { useState } from "react";
+import {
+  useAddReviewMutation,
+  useGetServiceByIdQuery,
+} from "@/redux/api/serviceApi";
 import { getUserInfo } from "@/services/auth.service";
 import { Row, Col, Divider, Card, Rate, message, Button } from "antd";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -11,7 +14,7 @@ import Form from "@/components/FORMS/Form";
 
 import { commentSchema } from "@/schemas/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { useGetUserProfileQuery } from "@/redux/api/userProfile";
 
 type IDProps = {
   params: any;
@@ -21,7 +24,6 @@ const centerAlign = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
- 
 };
 
 const imageStyle = {
@@ -38,7 +40,6 @@ const cardStyle = {
 const responsiveCardStyle = {
   width: "100vw",
   maxWidth: "100%",
-  
 };
 
 const ViewServicePage = ({ params }: IDProps) => {
@@ -47,56 +48,41 @@ const ViewServicePage = ({ params }: IDProps) => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 6000,
   });
-  const { role,name } = getUserInfo() as any;
+  const { role, name, id: userId } = getUserInfo() as any;
+  const { data: individualId } = useGetUserProfileQuery(userId);
 
-  
- const serviceId: string = service?._id;
+  const [visibleComments, setVisibleComments] = useState(4);
+  const showMoreComments = () => {
+    setVisibleComments((prev) => prev + 4);
+  };
 
- const [addReview, { error }] = useAddReviewMutation();
+  const serviceId: string = service?._id;
+
+  const [addReview, { error }] = useAddReviewMutation();
 
   const onSubmit = async (values: any) => {
-  
-  try {
-    const formData = new FormData();
+    try {
+      values.rating = parseFloat(values.rating);
 
-   
-    values.rating = parseInt(values.rating, 10);
+      values.name = individualId?.name;
+      const val = {
+        name: values.name,
+        rating: values.rating,
+        comment: values.comment,
+      };
 
-      formData.append("comment", values.comment);
-      formData.append("rating", values.rating);
-      formData.append("email", values.email);
+      message.loading("Commenting...");
+      const response = await addReview({ id: serviceId, body: val });
 
- 
-    console.log("Form Values:", values);
-
-    for (const key in values) {
-      if (values.hasOwnProperty(key)) {
-        formData.append(key, values[key]);
+      if (response) {
+        message.success("Thanks for your valuable comment");
+      } else {
+        message.error("Comment failed.");
       }
+    } catch (err: any) {
+      console.error(err.message);
     }
-
-
-    console.log("Form Data:", formData);
-
-    message.loading("Commenting...");
-    const response = await addReview({ id: serviceId, body: formData });
-
-  
-    console.log("API Response:", response);
-
-    if (response) {
-      message.success("Thanks for your valuable comment");
-    } else {
-      message.error("Comment failed.");
-    }
-  } catch (err: any) {
-    console.error(err.message);
-  }
-};
-
-
-
- 
+  };
 
   return (
     <>
@@ -196,13 +182,16 @@ const ViewServicePage = ({ params }: IDProps) => {
                     Out of Stock
                   </p>
                 )}
-                <p style={{ paddingTop: "8px" }}>
-                  <Rate
-                    allowHalf
-                    disabled
-                    defaultValue={service?.overallRating}
-                  />
-                </p>
+                {
+                  <p style={{ paddingTop: "8px" }}>
+                    <Rate
+                      allowHalf
+                      disabled
+                      defaultValue={service?.overallRating}
+                    />
+                  </p>
+                }
+                {/* <Rate allowHalf disabled defaultValue={service?.overallRating} /> */}
               </div>
             </Col>
           </Row>
@@ -230,28 +219,86 @@ const ViewServicePage = ({ params }: IDProps) => {
                 User Reviews
               </h3>
               <ul>
-                {service?.userReviews.map((review: any) => (
-                  <Card
-                    key={review?._id}
-                    style={{ ...cardStyle, ...responsiveCardStyle }}
-                  >
-                    <p>
-                      Email:
-                      <span style={{ color: "#1fada6", fontSize: "16px" }}>
-                        &nbsp;{review?.email}
-                      </span>
-                    </p>
-                    <p style={{ margin: "5px 0px" }}>
-                      Comment: {review?.comment}
-                    </p>
-                    <p>
-                      Rating:
-                      <Rate allowHalf disabled defaultValue={review?.rating} />
-                    </p>
-                  </Card>
-                ))}
+                {service?.userReviews
+                  .slice(0, visibleComments)
+                  .map(
+                    (review: {
+                      _id: React.Key | null | undefined;
+                      name:
+                        | string
+                        | number
+                        | boolean
+                        | React.ReactElement<
+                            any,
+                            string | React.JSXElementConstructor<any>
+                          >
+                        | Iterable<React.ReactNode>
+                        | React.ReactPortal
+                        | React.PromiseLikeOfReactNode
+                        | null
+                        | undefined;
+                      comment:
+                        | string
+                        | number
+                        | boolean
+                        | React.ReactElement<
+                            any,
+                            string | React.JSXElementConstructor<any>
+                          >
+                        | Iterable<React.ReactNode>
+                        | React.ReactPortal
+                        | React.PromiseLikeOfReactNode
+                        | null
+                        | undefined;
+                      rating: number | undefined;
+                    }) => (
+                      <Card
+                        key={review?._id}
+                        style={{ ...cardStyle, ...responsiveCardStyle }}
+                      >
+                        <p>
+                          Name:
+                          <span style={{ color: "#1fada6", fontSize: "16px" }}>
+                            &nbsp;{review?.name}
+                          </span>
+                        </p>
+                        <p style={{ margin: "5px 0px" }}>
+                          Comment: {review?.comment}
+                        </p>
+                        <p>
+                          Rating:
+                          <Rate
+                            allowHalf
+                            disabled
+                            defaultValue={review?.rating}
+                          />
+                        </p>
+                      </Card>
+                    )
+                  )}
               </ul>
             </div>
+            {visibleComments < service?.userReviews.length && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginBottom: "30px",
+                }}
+              >
+                <Button
+                  type="primary"
+                  style={{
+                    backgroundColor: "darkviolet",
+                    border: "none",
+                    width: "30%",
+                  }}
+                  onClick={showMoreComments}
+                >
+                  Show More
+                </Button>
+              </div>
+            )}
           </div>
         </Col>
         <Col style={{ marginTop: "30px" }}>
@@ -274,22 +321,6 @@ const ViewServicePage = ({ params }: IDProps) => {
                 Comment about the service your comment is valuable for us..
               </p>
               <Row>
-                <Col
-                  xs={24}
-                  sm={24}
-                  md={24}
-                  lg={24}
-                  xl={24}
-                  style={{ margin: "10px 0" }}
-                >
-                  <FormInput
-                    name="email"
-                    label="User Email"
-                    size="large"
-                    type="text"
-                    required
-                  />
-                </Col>
                 <Col
                   xs={24}
                   sm={24}
@@ -337,7 +368,7 @@ const ViewServicePage = ({ params }: IDProps) => {
                   width: "30%",
                 }}
               >
-                Create Blog
+                Comment
               </Button>
             </div>
           </Form>
