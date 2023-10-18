@@ -14,6 +14,7 @@ import { bloodGroupOptions } from "@/constants/global";
 import { Button, Col, Row, Select, message } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { uploadCloudinary } from "@/types/uploads";
 
 const { Option } = Select;
 
@@ -30,28 +31,69 @@ const EditAdminPage = ({ params }: IDProps) => {
   const { data: user,refetch } = useGetUserProfileQuery(id);
   const { role } = getUserInfo() as any;
 
+   const [image, setImage] = useState<File[]>([]);
+   const [links, setLinks] = useState<string[]>([]); 
+
+   const handleSubmit = async (e: any) => {
+     e.preventDefault();
+
+     try {
+       let arr = [];
+       for (let i = 0; i < image.length; i++) {
+         const userProfile = await uploadCloudinary(image[i]);
+         console.log(userProfile.url);
+         arr.push(userProfile.url); 
+       }
+       setLinks(arr); 
+     } catch (err: any) {
+       console.log("error", err);
+     }
+   };
+  console.log(links);
+
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
-  const onSubmit = async (values: any) => {
-    message.loading("Updating.....");
-    try {
-      const res = await updateUserProfile({
-        id: id,
-        body: values,
-      }).unwrap();
-
-      if (res?.id) {
-        setUpdatedUser(res);
-        message.success("Admin Successfully Updated!");
-        refetch();
-        router.push("/profile");
-      }
-    } catch (err: any) {
-      console.error("Error updating user:", err);
-      message.error(err.message || "Failed to update user");
-      console.log(err);
+ const onSubmit = async (values: any) => {
+   message.loading("Updating.....");
+   try {
+    if (links.length > 0) {
+      values.image = links[0]; 
     }
-  };
+
+ 
+    const val = {
+      title: values.title,
+      description: values.description,
+      image: values.image, 
+      pricing: values.pricing,
+      availability: values.availability,
+      location: values.location,
+      contactInfo: values.contactInfo,
+      bio: values.bio,
+      bloodGroup: values.bloodGroup,
+      address: values.address,
+    };
+    
+
+     const res = await updateUserProfile({
+       id: id,
+       body: val,
+     }).unwrap();
+     console.log(res);
+
+     if (res?.id) {
+       setUpdatedUser(res);
+       message.success("Admin Successfully Updated!");
+       refetch();
+       router.push("/profile");
+     }
+   } catch (err: any) {
+     console.error("Error updating user:", err);
+     message.error(err.message || "Failed to update user");
+     console.log(err);
+   }
+ };
+
   const userData = updatedUser || user;
 
   // @ts-ignore
@@ -63,6 +105,9 @@ const EditAdminPage = ({ params }: IDProps) => {
     bio: userData?.bio || "",
     bloodGroup: userData?.bloodGroup || "",
     address: userData?.address || "",
+ 
+    location:userData?.location || ""
+   
    
   };
   
@@ -74,7 +119,7 @@ const EditAdminPage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
-        style={{ marginTop: "10px",color:"black" }}
+        style={{ marginTop: "10px", color: "black" }}
       />
       <h1
         style={{
@@ -129,7 +174,7 @@ const EditAdminPage = ({ params }: IDProps) => {
                 type="text"
               />
             </Col>
-            
+
             <Col
               xs={24}
               sm={24}
@@ -171,19 +216,42 @@ const EditAdminPage = ({ params }: IDProps) => {
             >
               <FormTextArea name="bio" label="Bio" rows={4} value={user?.bio} />
             </Col>
-            
           </Row>
         </div>
-        <div style={{ display: "flex", justifyContent: "center",marginBottom:"30px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "30px",
+          }}
+        >
           <Button
-            type="primary" 
+            type="primary"
             htmlType="submit"
-            style={{ backgroundColor: "darkviolet", border: "none",width:"20%" }}
+            style={{
+              backgroundColor: "darkviolet",
+              border: "none",
+              width: "20%",
+            }}
           >
             Update
           </Button>
         </div>
       </Form>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="file"
+            onChange={(e) => {
+              if (e.target.files) {
+                const selectedFiles = Array.from(e.target.files);
+                setImage(selectedFiles);
+              }
+            }}
+          />
+          <button type="submit">upload</button>
+        </div>
+      </form>
     </>
   );
 };

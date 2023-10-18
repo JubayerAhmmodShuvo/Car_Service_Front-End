@@ -20,6 +20,7 @@ import {
 } from "@/redux/api/userProfile";
 import UMModal from "@/components/ui/UMModal";
 import { useDeleteblogMutation, useGetAllBlogsQuery } from "@/redux/api/blogsApi";
+import { withRoleAccess } from "@/app/roleBasedAccessControl";
 
 
 const UserTablePage = () => {
@@ -214,4 +215,5 @@ const UserTablePage = () => {
   );
 };
 
-export default UserTablePage;
+
+export default withRoleAccess(["admin"])(UserTablePage);
