@@ -7,47 +7,50 @@ import FormSelectField from "@/components/FORMS/FormSelectField";
 import FormTextArea from "@/components/FORMS/FormTextArea";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { bloodGroupOptions } from "@/constants/global";
 import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
+import { bloodGroupOptions } from "@/constants/global";
 
 import { Button, Col, Row, Select, message } from "antd";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const { Option } = Select;
+
 
 
 type IDProps = {
   params: any;
 };
 
-const SuperAdminPage = ({ params }: IDProps) => {
+const UserUpdatePage = ({ params }: IDProps) => {
   const { id } = params;
-  const router = useRouter();
+ const router = useRouter();
   const [updatedUser, setUpdatedUser] = useState(null);
-  const { data: user } = useGetUserProfileQuery(id);
+  const { data: user,refetch } = useGetUserProfileQuery(id);
   const { role } = getUserInfo() as any;
 
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
   const onSubmit = async (values: any) => {
-    message.loading("Super Admin Updating.....");
+    message.loading("Updating.....");
     try {
       const res = await updateUserProfile({
         id: id,
         body: values,
       }).unwrap();
+     
 
       if (res?.id) {
         setUpdatedUser(res);
-        message.success("Super Admin Successfully Updated!");
-        router.push("/profile");
+        message.success("User Successfully Updated!");
+        router.push("/admin/user-table");
+        refetch();
       }
     } catch (err: any) {
-      console.error("Error updating Super Admin:", err);
-      message.error(err.message || "Failed to update Super Admin");
-      
+      console.error("Error updating user:", err);
+      message.error(err.message || "Failed to update user");
+      console.log(err);
     }
   };
   const userData = updatedUser || user;
@@ -61,8 +64,9 @@ const SuperAdminPage = ({ params }: IDProps) => {
     bio: userData?.bio || "",
     bloodGroup: userData?.bloodGroup || "",
     address: userData?.address || "",
-  
+   
   };
+  
 
   return (
     <>
@@ -118,6 +122,36 @@ const SuperAdminPage = ({ params }: IDProps) => {
               xl={8}
               style={{ margin: "10px 0" }}
             >
+              {role === "admin" ? (
+                <FormSelectField
+                  size="large"
+                  name="role"
+                  options={[
+                   
+                    { label: "Admin", value: "admin" },
+                  ]}
+                  label="Role"
+                  placeholder="Select"
+                />
+              ) : (
+                <FormInput
+                  name="role"
+                  label="Role"
+                  size="large"
+                  value={user?.role}
+                 
+                />
+              )}
+            </Col>
+
+            <Col
+              xs={24}
+              sm={24}
+              md={12}
+              lg={8}
+              xl={8}
+              style={{ margin: "10px 0" }}
+            >
               <FormInput
                 name="number"
                 label="Phone Number"
@@ -126,6 +160,7 @@ const SuperAdminPage = ({ params }: IDProps) => {
                 type="text"
               />
             </Col>
+
             <Col
               xs={24}
               sm={24}
@@ -193,4 +228,4 @@ const SuperAdminPage = ({ params }: IDProps) => {
   );
 };
 
-export default SuperAdminPage;
+export default UserUpdatePage;

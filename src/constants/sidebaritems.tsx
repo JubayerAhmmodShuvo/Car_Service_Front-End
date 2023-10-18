@@ -103,17 +103,25 @@ export const sidebarItems = (role: string) => {
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
     {
-      label: <Link href={`/${role}/admin`}>Manage Admin</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/admin`,
+      label: "Booking Management",
+      key: "Booking-management",
+      icon: <BookOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/user-table`}>User Table</Link>,
+          key: `/${role}/user-table`,
+        },
+        {
+          label: <Link href={`/${role}/admin-table`}>Admin Table</Link>,
+          key: `/${role}/admin-table`,
+        },
+      ],
     },
     {
       label: <Link href={`/${role}/user`}>Manage User</Link>,
       icon: <TableOutlined />,
       key: `/${role}/user`,
     },
-    
-   
   ];
 
   

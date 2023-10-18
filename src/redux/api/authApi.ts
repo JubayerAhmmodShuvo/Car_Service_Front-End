@@ -21,6 +21,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.user],
     }),
+    
   }),
 });
 
