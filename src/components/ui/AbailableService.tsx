@@ -63,7 +63,7 @@ const AvailableService = () => {
       )}
       {services && visibleServices < services.length && (
         <div style={{ textAlign: "center", padding: "20px" }}>
-          <Link href={`/user/allbook`}>
+          <Link href={`/user/allservice`}>
             <Button
               style={{ textAlign: "center" }}
               type="primary"
