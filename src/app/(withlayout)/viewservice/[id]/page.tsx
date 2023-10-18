@@ -56,6 +56,13 @@ const ViewServicePage = ({ params }: IDProps) => {
     setVisibleComments((prev) => prev + 4);
   };
 
+
+
+
+
+
+  
+
   const serviceId: string = service?._id;
 
   const [addReview, { error }] = useAddReviewMutation();
@@ -302,7 +309,7 @@ const ViewServicePage = ({ params }: IDProps) => {
           </div>
         </Col>
         <Col style={{ marginTop: "30px" }}>
-          <Form submitHandler={onSubmit}>
+          <Form submitHandler={onSubmit} resolver={yupResolver(commentSchema)}>
             <div
               style={{
                 border: "1px solid #d9d9d9",
@@ -331,12 +338,10 @@ const ViewServicePage = ({ params }: IDProps) => {
                 >
                   <FormInput
                     name="rating"
-                    label="User Rating"
+                    label=" Rating"
                     size="large"
                     type="number"
-                    required
-                    min={1}
-                    max={5}
+                    placeholder="Enter rating (1-5)"
                   />
                 </Col>
 
