@@ -1,64 +1,63 @@
 "use client"; 
 
+import { useGetAllServiceQuery } from '@/redux/api/serviceApi';
 import React, { useState } from "react";
-import { useGetAllServiceQuery } from "@/redux/api/serviceApi";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store"; // Import your RootState type
+
 import { Row, Col, Button } from "antd";
-import CustomCard from "@/components/ui/CustomCard";
-import PriceFilter from "@/components/ui/FliterComponent";
- // Import your PriceFilter component
+import CustomCard from '@/components/ui/CustomCard';
 
-const Page: React.FC = () => {
+const page = () => {
   const { data: services, isLoading } = useGetAllServiceQuery({});
-  const { minPrice, maxPrice } = useSelector(
-    (state: RootState) => state.services
-  );
+   const [visibleServices, setVisibleServices] = useState(6);
 
-  const filteredServices = services?.filter(
-    (service) => service.pricing >= minPrice && service.pricing <= maxPrice
-  );
-
-  const [visibleServices, setVisibleServices] = useState(6);
-
-  const loadMore = () => {
-    setVisibleServices(visibleServices + 6);
-  };
-
+   const loadMore = () => {
+     setVisibleServices(visibleServices + 6);
+   };
+  
   return (
-    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden"  }}>
       <h1
         style={{
           textAlign: "center",
           margin: "0px 0px 0px 30px",
-          color: "darkviolet",
+          color: "dark violet",
           padding: "20px",
         }}
       >
         Available Service
       </h1>
-      <PriceFilter /> {/* Include the PriceFilter component here */}
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <Row gutter={16}>
-          {filteredServices?.slice(0, visibleServices).map((service) => (
-            <Col xs={24} sm={24} md={12} lg={8} xl={8} key={service._id}>
-              <CustomCard
-                image={service.images}
-                title={service.title}
-                price={service.pricing}
-                rating={service.overallRating}
-                availability={service.availability}
-                onAddToCart={() => {}}
-                onDetails={() => {}}
-                serviceId={service._id}
-              />
-            </Col>
-          ))}
+          {services
+            ?.slice(0, visibleServices)
+            .map(
+              (service: {
+                _id: React.Key | string | null | undefined;
+                images: string;
+                title: string;
+                pricing: number;
+                overallRating: number;
+                availability: boolean;
+              }) => (
+                <Col xs={24} sm={24} md={12} lg={8} xl={8} key={service?._id}>
+                  <CustomCard
+                    image={service?.images}
+                    title={service?.title}
+                    price={service?.pricing}
+                    rating={service?.overallRating}
+                    availability={service?.availability}
+                    onAddToCart={() => {}}
+                    onDetails={() => {}}
+                    serviceId={service?._id as string | undefined}
+                  />
+                </Col>
+              )
+            )}
         </Row>
       )}
-      {filteredServices && visibleServices < filteredServices.length && (
+      {services && visibleServices < services.length && (
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <Button
             style={{ textAlign: "center", marginBottom: "20px" }}
@@ -73,4 +72,4 @@ const Page: React.FC = () => {
   );
 };
 
-export default Page;
+export default page;
