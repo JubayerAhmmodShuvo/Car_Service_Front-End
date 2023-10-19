@@ -39,12 +39,11 @@ const Admin = () => {
           {
             label: `${role}`,
             link: `/${role}`,
-            },
-             {
+          },
+          {
             label: "profile",
             link: `/${role}/profile`,
           },
-          
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />
@@ -65,63 +64,87 @@ const Admin = () => {
                 display: "flex",
               }}
             >
-              <div>
-                <h1
-                  style={{
-                    color: "palevioletred",
-                    fontSize: "2rem",
-                    margin: "10px 0px",
-                  }}
-                >
-                 Name: {admin?.name}
-                </h1>
-                <h3
-                  style={{
-                    color: "SlateBlue",
-                    fontSize: "16px",
-                    marginTop: "16px",
-                  }}
-                >
-                 email: {admin?.email}
-                </h3>
-                <h3
-                  style={{
-                    color: "SlateBlue",
-                    fontSize: "16px",
-                    marginTop: "16px",
-                  }}
-                >
-                 Number {admin?.number}
-                </h3>
+              <div style={centerAlign}>
+                <div style={{ overflowX: "hidden" }}>
+                  <Row gutter={[16, 16]}>
+                    <Col sm={24} md={12} lg={12}>
+                      <img
+                        src={admin?.image}
+                        alt="service image"
+                        style={imageStyle}
+                      />
+                    </Col>
+                    <Col
+                      sm={24}
+                      md={12}
+                      lg={12}
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
+                    >
+                      <div>
+                        <h1
+                          style={{
+                            color: "palevioletred",
+                            fontSize: "2rem",
+                            margin: "10px 0px",
+                          }}
+                        >
+                          Name: {admin?.name}
+                        </h1>
+                        <h3
+                          style={{
+                            color: "SlateBlue",
+                            fontSize: "16px",
+                            marginTop: "16px",
+                          }}
+                        >
+                          Email: {admin?.email}
+                        </h3>
+                        <h3
+                          style={{
+                            color: "SlateBlue",
+                            fontSize: "16px",
+                            marginTop: "16px",
+                          }}
+                        >
+                          Number{admin?.number}
+                        </h3>
 
-                <h3
-                  style={{
-                    color: "#6a5acd",
-                    fontSize: "16px",
-                    marginTop: "16px",
-                  }}
-                >
-                 Bio:  {admin?.bio}
-                </h3>
-                <h3
-                  style={{
-                    color: "#6a5acd",
-                    fontSize: "16px",
-                    marginTop: "16px",
-                  }}
-                >
-                Address:  {admin?.address}
-                </h3>
-                <h1
-                  style={{
-                    color: "MediumSeaGreen",
-                    fontSize: "16px",
-                    marginTop: "16px",
-                  }}
-                >
-                  $&nbsp;
-                  BloodGroup: {admin?.bloodGroup}
-                </h1>
+                        <h3
+                          style={{
+                            color: "#6a5acd",
+                            fontSize: "16px",
+                            marginTop: "16px",
+                          }}
+                        >
+                          Bio: {admin?.bio}
+                        </h3>
+                        <h3
+                          style={{
+                            color: "#6a5acd",
+                            fontSize: "16px",
+                            marginTop: "16px",
+                          }}
+                        >
+                          Address: {admin?.address}
+                        </h3>
+                        <h1
+                          style={{
+                            color: "MediumSeaGreen",
+                            fontSize: "16px",
+                            marginTop: "16px",
+                          }}
+                        >
+                          $&nbsp; BloodGroup: {admin?.bloodGroup}
+                        </h1>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
               </div>
             </Col>
           </Row>
