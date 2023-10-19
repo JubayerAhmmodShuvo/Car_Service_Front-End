@@ -22,6 +22,10 @@ export const sidebarItems = (role: string) => {
       children: [
        
         {
+          label: <Link href={"/"}>Home</Link>,
+          key: `/${role}/profile`,
+        },
+        {
           label: <Link href={`/${role}/profile`}>Account Profile</Link>,
           key: `/${role}/profile`,
         },
