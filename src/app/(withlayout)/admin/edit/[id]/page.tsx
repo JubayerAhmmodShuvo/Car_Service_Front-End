@@ -72,6 +72,7 @@ const EditAdminPage = ({ params }: IDProps) => {
       bio: values.bio,
       bloodGroup: values.bloodGroup,
       address: values.address,
+      number:values.number,
     };
     
 
@@ -105,7 +106,7 @@ const EditAdminPage = ({ params }: IDProps) => {
     bio: userData?.bio || "",
     bloodGroup: userData?.bloodGroup || "",
     address: userData?.address || "",
- 
+
     location:userData?.location || ""
    
    
