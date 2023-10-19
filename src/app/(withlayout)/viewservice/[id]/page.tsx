@@ -11,7 +11,7 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import FormInput from "@/components/FORMS/FormInput";
 import FormTextArea from "@/components/FORMS/FormTextArea";
 import Form from "@/components/FORMS/Form";
-
+import Link from "next/link";
 import { commentSchema } from "@/schemas/comment";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useGetUserProfileQuery } from "@/redux/api/userProfile";
@@ -88,6 +88,12 @@ const ViewServicePage = ({ params }: IDProps) => {
     }
   };
 
+  const onAddToCart = () => {
+    // Your logic to handle the click event
+    // You can access the 'serviceId' here
+   // console.log("Service ID:", serviceId);
+  }
+
   return (
     <>
       <UMBreadCrumb
@@ -163,7 +169,7 @@ const ViewServicePage = ({ params }: IDProps) => {
                     marginTop: "16px",
                   }}
                 >
-              {service?.pricing}
+                  {service?.pricing}
                 </h1>
                 {service?.availability ? (
                   <p
@@ -205,6 +211,21 @@ const ViewServicePage = ({ params }: IDProps) => {
             </Col>
           </Row>
         </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin:"30px"
+         
+        }}
+      >
+        <Link href={`/user/booking/${serviceId}`}>
+          <Button type="primary" onClick={onAddToCart}>
+            Add to Booking
+          </Button>
+        </Link>
       </div>
       <Divider />
       <Row>

@@ -93,7 +93,7 @@ const CustomCard: React.FC<CustomCardProps> = ({
     >
       <Link href={`/user/booking/${serviceId}`}>
         <Button type="primary" onClick={onAddToCart}>
-          Add to Cart
+          Add to Booking
         </Button>
       </Link>
 
