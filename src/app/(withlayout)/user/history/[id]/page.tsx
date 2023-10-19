@@ -129,19 +129,25 @@ const History = ({ params }: IDProps) => {
     },
     {
       title: "Action",
-      render: (data: { id: React.SetStateAction<string> }) => (
+      render: (data: {
+        status: string; id: React.SetStateAction<string> 
+}) => (
         <>
-          <Link href={`/super_admin/userprofile/${data.id}`}>
-            <Button
-              style={{
-                margin: "0px 5px",
-              }}
-              type="primary"
-            >
-              <EditOutlined />
-            </Button>
-          </Link>
-        
+          {data.status === "approved" && (
+            <Link href={`/super_admin/userprofile/${data.id}`}>
+              <Button
+                style={{
+                  margin: "0px 5px",
+                  backgroundColor: "#8A2BE2",
+                }}
+                type="primary"
+              >
+                Payment
+              </Button>
+            </Link>
+          )}
+
+          {data.status === "pending" && (
             <Button
               type="primary"
               onClick={() => {
@@ -151,9 +157,9 @@ const History = ({ params }: IDProps) => {
               danger
               style={{ marginLeft: "3px" }}
             >
-              <DeleteOutlined />
+              Delete
             </Button>
-      
+          )}
         </>
       ),
     },
