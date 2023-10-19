@@ -118,7 +118,7 @@ const Admin = () => {
                     marginTop: "16px",
                   }}
                 >
-                  $&nbsp; BloodGroup: {admin?.bloodGroup}
+                 BloodGroup: {admin?.bloodGroup}
                 </h1>
               </div>
             </Col>

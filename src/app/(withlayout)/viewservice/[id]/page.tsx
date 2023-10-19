@@ -163,7 +163,7 @@ const ViewServicePage = ({ params }: IDProps) => {
                     marginTop: "16px",
                   }}
                 >
-                  $&nbsp;{service?.pricing}
+              {service?.pricing}
                 </h1>
                 {service?.availability ? (
                   <p
