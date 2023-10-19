@@ -156,6 +156,10 @@ const ServicePage = () => {
             label: "super_admin",
             link: "/super_admin",
           },
+          {
+            label: "servicetable",
+            link: "/super_admin/servicetable",
+          },
         ]}
       />
 

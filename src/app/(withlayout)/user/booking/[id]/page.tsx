@@ -76,7 +76,7 @@ const CreateOrderPage = ({ params }: IDProps) => {
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
-          { label: "manage-order", link: `/${role}/manage-order` },
+          { label: "order", link: `/${role}/order` },
         ]}
       />
       <h1 style={{ margin: "10px 0", textAlign: "center", color: "#2F4F4F" }}>

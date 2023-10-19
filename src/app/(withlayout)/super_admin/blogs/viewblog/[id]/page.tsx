@@ -1,18 +1,27 @@
 "use client";
 import ReusableCard from "@/components/ui/BlogCard";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useGetBlogByIdQuery } from "@/redux/api/blogsApi";
+import { getUserInfo } from "@/services/auth.service";
 
 type IDProps = {
   params: any;
 };
 const ViewBlog = ({ params }: IDProps) => {
   const id = params.id;
-
+  const { role } = getUserInfo() as any;
 
   const { data: blog, isLoading, isError } = useGetBlogByIdQuery(id);
 
   return (
     <div style={{ overflowX: "hidden" }}>
+      <UMBreadCrumb
+        items={[
+          { label: `${role}`, link: `/${role}` },
+          { label: "update", link: `/${role}/update` },
+        ]}
+        style={{ marginTop: "10px", color: "black" }}
+      />
       {isLoading ? (
         <div></div>
       ) : isError ? (

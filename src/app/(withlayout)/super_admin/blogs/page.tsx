@@ -160,6 +160,10 @@ const UserTablePage = () => {
             label: "super_admin",
             link: "/super_admin",
           },
+          {
+            label: "viewblog",
+            link: "/super_admin/viewblog",
+          },
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />

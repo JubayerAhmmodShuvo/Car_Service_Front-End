@@ -5,6 +5,7 @@ import { Button, Collapse } from "antd";
 import UMCollapse, { ItemProps } from "@/components/ui/UMCollapse";
 import { useGetAllFaqQuery } from "@/redux/api/faqApi";
 import Link from "next/link";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 // Import UMCollapse and ItemProps
 
 const { Panel } = Collapse;
@@ -27,6 +28,19 @@ const Page = () => {
 
   return (
     <div style={{ overflowX: "hidden" }}>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "user",
+            link: "/user",
+          },
+          {
+            label: "faq",
+            link: "/user/faq",
+          },
+        ]}
+        style={{ marginTop: "10px", color: "black" }}
+      />
       <h1
         style={{
           textAlign: "center",

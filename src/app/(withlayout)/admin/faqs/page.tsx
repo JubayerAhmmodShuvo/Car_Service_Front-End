@@ -131,8 +131,12 @@ const FaqTablePage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/super_admin",
+            label: "admin",
+            link: "/admin",
+          },
+          {
+            label: "faq",
+            link: "/admin/faq",
           },
         ]}
         style={{ marginTop: "10px", color: "black" }}

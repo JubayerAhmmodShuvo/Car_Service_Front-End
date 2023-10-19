@@ -134,6 +134,10 @@ const FaqTablePage = () => {
             label: "super_admin",
             link: "/super_admin",
           },
+          {
+            label: "faq",
+            link: "/super_admin/faqs",
+          },
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />

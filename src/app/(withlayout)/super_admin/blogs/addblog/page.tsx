@@ -68,7 +68,7 @@ const CreateBlogPage = ({ params }: IDProps) => {
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
-          { label: "update", link: `/${role}/update` },
+          { label: "addblog", link: `/${role}/addblog` },
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />

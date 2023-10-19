@@ -1,5 +1,6 @@
 "use client";
 import ReusableCard from "@/components/ui/BlogCard";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useGetBlogByIdQuery } from "@/redux/api/blogsApi";
 
 type IDProps = {
@@ -13,6 +14,19 @@ const ViewBlog = ({ params }: IDProps) => {
 
   return (
     <div style={{ overflowX: "hidden" }}>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "admin",
+            link: "/admin",
+          },
+          {
+            label: "blog",
+            link: "/admin/viewblog",
+          },
+        ]}
+        style={{ marginTop: "10px", color: "black" }}
+      />
       {isLoading ? (
         <div></div>
       ) : isError ? (

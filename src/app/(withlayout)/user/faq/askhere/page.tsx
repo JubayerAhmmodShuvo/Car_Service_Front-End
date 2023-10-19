@@ -2,6 +2,7 @@
 
 import Form from "@/components/FORMS/Form";
 import FormTextArea from "@/components/FORMS/FormTextArea";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useCreateFaqMutation } from "@/redux/api/faqApi";
 import { useGetUserProfileQuery } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
@@ -44,6 +45,19 @@ const Ask = () => {
   };
   return (
     <div style={{ overflowX: "hidden" }}>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "user",
+            link: "/user",
+          },
+          {
+            label: "askhere",
+            link: "/user/askhere",
+          },
+        ]}
+        style={{ marginTop: "10px", color: "black" }}
+      />
       <Form submitHandler={onSubmit}>
         <div
           style={{

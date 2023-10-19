@@ -61,7 +61,7 @@ const CreateFaqPage = ({ params }: IDProps) => {
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
-          { label: "update", link: `/${role}/update` },
+          { label: "add", link: `/${role}/add` },
         ]}
         style={{ marginTop: "10px",color:"black" }}
       />

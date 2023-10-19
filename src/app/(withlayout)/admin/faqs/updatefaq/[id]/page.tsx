@@ -66,7 +66,7 @@ const UpdateFaqPage= ({ params }: IDProps) => {
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
-          { label: "update", link: `/${role}/update` },
+          { label: "updatefaq", link: `/${role}/update` },
         ]}
         style={{ marginTop: "10px",color:"black" }}
       />

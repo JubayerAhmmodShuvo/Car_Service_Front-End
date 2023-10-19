@@ -4,6 +4,7 @@ import React from "react";
 import { Card, Row, Col } from "antd";
 import Link from "next/link";
 import { getUserInfo } from "@/services/auth.service";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 
 const Blog = () => {
   const {
@@ -18,6 +19,19 @@ const Blog = () => {
 
   return (
     <div style={{ overflowX: "hidden" }}>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "user",
+            link: "/user",
+          },
+          {
+            label: "viewblog",
+            link: "/user/viewblog",
+          },
+        ]}
+        style={{ marginTop: "10px", color: "black" }}
+      />
       <h1>Blog List</h1>
       {isLoading ? (
         <p>Loading...</p>

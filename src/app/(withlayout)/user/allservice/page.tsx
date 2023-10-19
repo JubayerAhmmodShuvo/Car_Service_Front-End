@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 import { Row, Col, Button } from "antd";
 import CustomCard from '@/components/ui/CustomCard';
+import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 
 const page = () => {
   const { data: services, isLoading } = useGetAllServiceQuery({});
@@ -15,7 +16,20 @@ const page = () => {
    };
   
   return (
-    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden"  }}>
+    <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden" }}>
+      <UMBreadCrumb
+        items={[
+          {
+            label: "user",
+            link: "/user",
+          },
+          {
+            label: "all",
+            link: "/user/all",
+          },
+        ]}
+        style={{ marginTop: "10px", color: "black" }}
+      />
       <h1
         style={{
           textAlign: "center",

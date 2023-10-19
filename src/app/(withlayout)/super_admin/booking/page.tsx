@@ -163,40 +163,71 @@ const BookingTablePage = () => {
     },
     {
       title: "Action",
-      render: (data: { id: React.SetStateAction<string> }) => (
+      render: (data: {
+        status: string; id: React.SetStateAction<string> 
+}) => (
         <>
-          <Button
-            type="primary"
-            onClick={() => {
-             setOpenApproveModal(true);
-              setApprove(data);
-            }}
-            danger
-            style={{ marginLeft: "3px", backgroundColor: "#429d15" }}
-          >
-            Approve
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => {
-              setOpenCancelModal(true);
-              setCancelled(data);
-            }}
-            style={{ marginLeft: "3px", backgroundColor: "#aa8e05" }}
-          >
-            cancel
-          </Button>
-          <Button
-            type="primary"
-            onClick={() => {
-              setOpen(true);
-              setServiceToDelete(data);
-            }}
-            danger
-            style={{ marginLeft: "3px" }}
-          >
-            <DeleteOutlined />
-          </Button>
+          {data.status === "pending" && (
+            <>
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpenApproveModal(true);
+                  setApprove(data);
+                }}
+                danger
+                style={{ marginLeft: "3px", backgroundColor: "#429d15" }}
+              >
+                Approve
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpenCancelModal(true);
+                  setCancelled(data);
+                }}
+                style={{ marginLeft: "3px", backgroundColor: "#aa8e05" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpen(true);
+                  setServiceToDelete(data);
+                }}
+                danger
+                style={{ marginLeft: "3px" }}
+              >
+                <DeleteOutlined />
+              </Button>
+            </>
+          )}
+          {data.status === "approved" && (
+            <>
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpenCancelModal(true);
+                  setCancelled(data);
+                }}
+                style={{ marginLeft: "3px", backgroundColor: "#aa8e05" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  setOpen(true);
+                  setServiceToDelete(data);
+                }}
+                danger
+                style={{ marginLeft: "3px" }}
+              >
+                <DeleteOutlined />
+              </Button>
+            </>
+          )}
         </>
       ),
     },

@@ -157,8 +157,12 @@ const UserTablePage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
+            label: "admin",
             link: "/super_admin",
+          },
+          {
+            label: "viewblog",
+            link: "/admin/blog",
           },
         ]}
         style={{ marginTop: "10px", color: "black" }}
@@ -201,7 +205,10 @@ const UserTablePage = () => {
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
-        showPagination={true} sortOrder={""} sortBy={""}      />
+        showPagination={true}
+        sortOrder={""}
+        sortBy={""}
+      />
 
       <UMModal
         title="Remove blog"

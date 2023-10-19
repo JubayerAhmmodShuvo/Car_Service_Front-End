@@ -39,7 +39,8 @@ const History = ({ params }: IDProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
-  const { id:serviceId } = params;
+  const { id: serviceId } = params;
+  const { role } = getUserInfo() as any;
 
  
 
@@ -169,10 +170,7 @@ const History = ({ params }: IDProps) => {
     <div>
       <UMBreadCrumb
         items={[
-          {
-            label: "User",
-            link: "/user",
-          },
+          { label: `${role}`, link: `/${role}` },
           {
             label: "order history",
             link: "/user/orderhistory",
@@ -181,10 +179,7 @@ const History = ({ params }: IDProps) => {
         style={{ marginTop: "10px", color: "black" }}
       />
 
-      <ActionBar
-       
-        title="User History"
-      >
+      <ActionBar title="User History">
         <div
           style={{
             marginRight: "20px",

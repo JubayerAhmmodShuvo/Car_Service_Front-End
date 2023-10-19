@@ -71,7 +71,7 @@ const UpdateServicePage = ({ params }: IDProps) => {
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
-          { label: "update", link: `/${role}/update` },
+          { label: "updateservice", link: `/${role}/updateservice` },
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />
