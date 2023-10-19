@@ -32,7 +32,10 @@ const Admin = () => {
 
   
 
-  const { data: admin } = useGetUserProfileQuery(id);
+  const { data: admin } = useGetUserProfileQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 6000,
+  });
 
   return (
     <>

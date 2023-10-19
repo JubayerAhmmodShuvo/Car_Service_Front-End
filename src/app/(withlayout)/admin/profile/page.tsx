@@ -30,7 +30,10 @@ const responsiveCardStyle = {
 const Admin = () => {
   const { id, role } = getUserInfo() as any;
 
-  const { data: admin } = useGetUserProfileQuery(id);
+  const { data: admin } = useGetUserProfileQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 6000,
+  });
 
   return (
     <>
