@@ -68,7 +68,7 @@ const Admin = () => {
                     margin: "10px 0px",
                   }}
                 >
-                 Name:  {admin?.name}
+                  Name: {admin?.name}
                 </h1>
                 <h3
                   style={{
@@ -86,7 +86,7 @@ const Admin = () => {
                     marginTop: "16px",
                   }}
                 >
-                  Number{admin?.number}
+                  Number: {admin?.number}
                 </h3>
 
                 <h3
@@ -105,7 +105,7 @@ const Admin = () => {
                     marginTop: "16px",
                   }}
                 >
-                Address:  {admin?.address}
+                  Address: {admin?.address}
                 </h3>
                 <h1
                   style={{

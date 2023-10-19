@@ -87,7 +87,7 @@ const Admin = () => {
                   marginTop: "16px",
                 }}
               >
-                Number{admin?.number}
+                Number: {admin?.number}
               </h3>
 
               <h3
