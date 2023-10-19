@@ -6,7 +6,8 @@ export enum tagTypes {
   super_admin = "super_admin",
   service = "service",
   blog="blog",
-  faq="faq"
+  faq = "faq",
+  booking="booking"
  
 }
 
@@ -17,5 +18,7 @@ export const tagTypesList = [
   tagTypes.super_admin,
   tagTypes.blog,
   tagTypes.faq,
-  tagTypes.service,
+  tagTypes.service,      
+
+  tagTypes.booking,      
 ]
