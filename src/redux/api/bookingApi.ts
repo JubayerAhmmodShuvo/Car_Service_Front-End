@@ -13,11 +13,11 @@ export const bookingApi = baseApi.injectEndpoints({
     }),
     createBooking: build.mutation({
       query: (body) => ({
-        url: BOOKING_URL,
+        url: `${BOOKING_URL}/create-booking`,
         method: "POST",
         data: body,
       }),
-      invalidatesTags: [tagTypes.booking], 
+      invalidatesTags: [tagTypes.booking],
     }),
     updateBookingById: build.mutation({
       query: (data) => ({
@@ -25,14 +25,14 @@ export const bookingApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data.body,
       }),
-      invalidatesTags: [tagTypes.booking], 
+      invalidatesTags: [tagTypes.booking],
     }),
     deleteBooking: build.mutation({
       query: (id) => ({
         url: `${BOOKING_URL}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.booking], 
+      invalidatesTags: [tagTypes.booking],
     }),
     getAllBookings: build.query({
       query: () => ({

@@ -6,13 +6,11 @@ import { getUserInfo } from "@/services/auth.service";
 
 const Profile = () => {
   
- const { id ,role} = getUserInfo() as any;
+ const { id:userId ,role} = getUserInfo() as any;
 
 
 
-  const {
-  data:user
-  } = useGetUserProfileQuery(id);
+  const { data: user } = useGetUserProfileQuery(userId);
  
 
 

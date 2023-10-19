@@ -91,9 +91,11 @@ const CustomCard: React.FC<CustomCardProps> = ({
         justifyContent: "space-between",
       }}
     >
-      <Button type="primary" onClick={onAddToCart}>
-        Add to Cart
-      </Button>
+      <Link href={`/user/booking/${serviceId}`}>
+        <Button type="primary" onClick={onAddToCart}>
+          Add to Cart
+        </Button>
+      </Link>
 
       <Link href={`/viewservice/${serviceId}`}>
         {/* <Button>Details</Button> */}

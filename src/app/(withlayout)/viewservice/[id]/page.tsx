@@ -44,10 +44,7 @@ const responsiveCardStyle = {
 
 const ViewServicePage = ({ params }: IDProps) => {
   const id = params.id;
-  const { data: service } = useGetServiceByIdQuery(id, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
+  const { data: service } = useGetServiceByIdQuery(id);
   const { role, name, id: userId } = getUserInfo() as any;
   const { data: individualId } = useGetUserProfileQuery(userId);
 
