@@ -1,3 +1,4 @@
+
 "use client";
 
 type User = {
@@ -24,39 +25,61 @@ import {
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { useCancelBookingMutation, useDeleteBookingMutation, useGetUserBookingByIdQuery } from "@/redux/api/bookingApi";
-import { getUserInfo } from "@/services/auth.service";
+import { useGetAllBookingsQuery } from "@/redux/api/bookingApi";
 
-type IDProps = {
-  params: any;
-};
-
-const History = ({ params }: IDProps) => {
+const BookingTablePage = () => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
-  const { id:serviceId } = params;
+   const {
+     data: users,
+     isLoading,
+     refetch,
+   } = useGetAllBookingsQuery(
+     {},
+     { refetchOnMountOrArgChange: true, pollingInterval: 2000 }
+   );
 
- 
-
-  const { data: users, isLoading } = useGetUserBookingByIdQuery(serviceId, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 2000,
-  });
-
- 
-
-  const history = users || [];
+   const filteredUsers = users || [];
 
   const [open, setOpen] = useState(false);
   const [adminId, setAdminId] = useState("");
-  const [deleteAdmin] = useCancelBookingMutation();
+  const [deleteAdmin] = useDeleteUserProfileMutation();
 
-
+  // useEffect(() => {
+  //   if (users) {
+  //     const sortedUsers = [...users];
+  //     if (sortOrder === "ascend") {
+  //       sortedUsers.sort((a, b) => {
+  //         if (sortBy === "name") {
+  //           return a.name.localeCompare(b.name);
+  //         } else if (sortBy === "createdAt") {
+  //           return a.createdAt - b.createdAt;
+  //         }
+  //       });
+  //     } else if (sortOrder === "descend") {
+  //       sortedUsers.sort((a, b) => {
+  //         if (sortBy === "name") {
+  //           return b.name.localeCompare(a.name);
+  //         } else if (sortBy === "createdAt") {
+  //           return b.createdAt - a.createdAt;
+  //         }
+  //       });
+  //     }
+  //     const newFilteredUsers = sortedUsers.filter((user) => {
+  //       return (
+  //         user.role === "admin" &&
+  //         (user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //           user.role.toLowerCase().includes(searchTerm.toLowerCase()))
+  //       );
+  //     });
+  //     setFilteredUsers(newFilteredUsers);
+  //   }
+  // }, [users, searchTerm, sortBy, sortOrder]);
 
   const totalRecords = users ? users.length : 0;
   const totalPages = Math.ceil(totalRecords / size);
@@ -106,20 +129,18 @@ const History = ({ params }: IDProps) => {
 
   const columns = [
     {
-      title: "Order Name",
-      dataIndex: "orderName",
+      title: "Name",
+      dataIndex: "user",
+      sorter: true,
+      sortDirections: ["ascend", "descend"],
     },
     {
-      title: "Status",
-      dataIndex: "status",
+      title: "Role",
+      dataIndex: "role",
     },
     {
-      title: "Order Date",
-      dataIndex: "date",
-    },
-    {
-      title: "Order Time",
-      dataIndex: "time",
+      title: "Email",
+      dataIndex: "email",
     },
     {
       title: "CreatedAt",
@@ -131,7 +152,7 @@ const History = ({ params }: IDProps) => {
       title: "Action",
       render: (data: { id: React.SetStateAction<string> }) => (
         <>
-          <Link href={`/super_admin/userprofile/${data.id}`}>
+          <Link href={`/admin/userprofile/${data.id}`}>
             <Button
               style={{
                 margin: "0px 5px",
@@ -141,19 +162,17 @@ const History = ({ params }: IDProps) => {
               <EditOutlined />
             </Button>
           </Link>
-        
-            <Button
-              type="primary"
-              onClick={() => {
-                setOpen(true);
-                setAdminId(serviceId);
-              }}
-              danger
-              style={{ marginLeft: "3px" }}
-            >
-              <DeleteOutlined />
-            </Button>
-      
+          <Button
+            type="primary"
+            onClick={() => {
+              setOpen(true);
+              setAdminId(data.id);
+            }}
+            danger
+            style={{ marginLeft: "3px" }}
+          >
+            <DeleteOutlined />
+          </Button>
         </>
       ),
     },
@@ -164,26 +183,44 @@ const History = ({ params }: IDProps) => {
       <UMBreadCrumb
         items={[
           {
-            label: "User",
-            link: "/user",
-          },
-          {
-            label: "order history",
-            link: "/user/orderhistory",
+            label: "super_admin",
+            link: "/super_admin",
           },
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />
 
-      <ActionBar
-       
-        title="User History"
-      >
+      <ActionBar title="User List">
+        <div>
+          <Input
+            type="text"
+            size="large"
+            placeholder="Search..."
+            style={{
+              width: "30vw",
+              margin: "0px 10px",
+            }}
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setPage(1);
+            }}
+          />
+          {searchTerm !== "" && (
+            <span style={{ marginLeft: "1rem" }}>
+              {filteredUsers.length} results found
+            </span>
+          )}
+        </div>
+
         <div
           style={{
             marginRight: "20px",
           }}
         >
+          <Link href="/admin/createuser">
+            <Button type="primary">Create User</Button>
+          </Link>
           {(sortBy || sortOrder || searchTerm) && (
             <Button
               onClick={resetFilters}
@@ -199,7 +236,7 @@ const History = ({ params }: IDProps) => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={history}
+        dataSource={filteredUsers}
         pageSize={size}
         totalPages={totalPages}
         showSizeChanger={true}
@@ -211,15 +248,15 @@ const History = ({ params }: IDProps) => {
       />
 
       <UMModal
-        title="Cancel Order"
+        title="Remove User"
         isOpen={open}
         closeModal={() => setOpen(false)}
         handleOk={() => deleteAdminHandler(adminId)}
       >
-        <p className="my-5">Do you want to cancel this user?</p>
+        <p className="my-5">Do you want to remove this user?</p>
       </UMModal>
     </div>
   );
 };
 
-export default History;
+export default BookingTablePage;

@@ -47,6 +47,20 @@ export const bookingApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    cancelBooking: build.mutation({
+      query: (id) => ({
+        url: `${BOOKING_URL}/cancel/${id}`,
+        method: "PATCH", 
+      }),
+     
+    }),
+    approveBooking: build.mutation({
+      query: (id) => ({
+        url: `${BOOKING_URL}/approve/${id}`,
+        method: "PATCH", // or "POST" depending on your API
+      }),
+     
+    }),
   }),
 });
 
@@ -57,4 +71,6 @@ export const {
   useDeleteBookingMutation,
   useGetAllBookingsQuery,
   useGetUserBookingByIdQuery,
+  useCancelBookingMutation,
+  useApproveBookingMutation
 } = bookingApi;

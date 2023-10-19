@@ -9,9 +9,13 @@ export function withRoleAccess(allowedRoles: string | string[]) {
      const router = useRouter();
     const { role } = getUserInfo() as any; 
 
-    useEffect(() => {
-     router.push("/unauthorized");
-    }, [role]);
+   useEffect(() => {
+    
+     if (!allowedRoles.includes(role)) {
+       console.log("Unauthorized, redirecting..."); 
+       router.replace("/unauthorized"); 
+     }
+   }, [role]);
 
     if (!allowedRoles.includes(role)) {
       return null; 

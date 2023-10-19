@@ -63,8 +63,8 @@ export const sidebarItems = (role: string) => {
       icon: <ControlOutlined />,
       children: [
         {
-          label: <Link href={`/${role}/user-table`}>User Table</Link>,
-          key: `/${role}/user-table`,
+          label: <Link href={`/${role}/servicetable`}>Service Table</Link>,
+          key: `/${role}/servicetable`,
         },
       ],
     },
@@ -73,9 +73,11 @@ export const sidebarItems = (role: string) => {
       key: "Booking-management",
       icon: <BookOutlined />,
       children: [
+       
+
         {
-          label: <Link href={`/${role}/user-table`}>User Table</Link>,
-          key: `/${role}/user-table`,
+          label: <Link href={`/${role}/booking`}>Booking Table</Link>,
+          key: `/${role}/booking`,
         },
       ],
     },
@@ -119,9 +121,45 @@ export const sidebarItems = (role: string) => {
       ],
     },
     {
-      label: <Link href={`/${role}/user`}>Manage User</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/user`,
+      label: "Service Management",
+      key: "service-management",
+      icon: <ControlOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/servicetable`}>Service Table</Link>,
+          key: `/${role}/servicetable`,
+        },
+      ],
+    },
+    {
+      label: "Booking Management",
+      key: "Booking-management",
+      icon: <BookOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/booking`}>Booking Table</Link>,
+          key: `/${role}/booking`,
+        },
+      ],
+    },
+    {
+      label: "Content Management",
+      key: "content-management",
+      icon: <AppstoreOutlined />,
+      children: [
+        {
+          label: <Link href={`/${role}/blogs/addblog`}>Add Blogs</Link>,
+          key: `/${role}/add-blogs`,
+        },
+        {
+          label: <Link href={`/${role}/blogs`}>Blogs</Link>,
+          key: `/${role}/blogs`,
+        },
+        {
+          label: <Link href={`/${role}/faqs`}>FAQs</Link>,
+          key: `/${role}/faqs`,
+        },
+      ],
     },
   ];
 

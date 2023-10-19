@@ -50,6 +50,13 @@ export const serviceApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    createService: build.mutation({
+      query: (data: any) => ({
+        url: `${SERVICE_URL}`,
+        method: "POST",
+        data: data,
+      }),
+    }),
   }),
 });
 
@@ -59,5 +66,6 @@ export const {
   useGetServiceByIdQuery,
   useDeleteServiceMutation,
   useAddReviewMutation,
-  useSearchServicesQuery
+  useSearchServicesQuery,
+  useCreateServiceMutation
 } = serviceApi;
