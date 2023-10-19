@@ -52,7 +52,7 @@ const ServicePage = () => {
   
 
   const [deleteService] = useDeleteServiceMutation();
-;
+
 
   
    const [serviceToDelete, setServiceToDelete] = useState<any>(null); 
@@ -211,7 +211,7 @@ const ServicePage = () => {
         closeModal={() => setOpen(false)}
         handleOk={() => deleteServiceHandler()}
       >
-        <p className="my-5">Do you want to remove this user?</p>
+        <p className="my-5">Do you want to remove this service?</p>
       </UMModal>
     </div>
   );

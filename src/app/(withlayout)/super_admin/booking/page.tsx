@@ -25,7 +25,7 @@ import {
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { useGetAllBookingsQuery } from "@/redux/api/bookingApi";
+import { useApproveBookingMutation, useCancelBookingMutation, useDeleteBookingMutation, useGetAllBookingsQuery } from "@/redux/api/bookingApi";
 
 const BookingTablePage = () => {
   const [page, setPage] = useState(1);
@@ -46,40 +46,16 @@ const BookingTablePage = () => {
    const filteredUsers = users || [];
 
   const [open, setOpen] = useState(false);
-  const [adminId, setAdminId] = useState("");
-  const [deleteAdmin] = useDeleteUserProfileMutation();
+  const[openApproveModal, setOpenApproveModal] = useState(false);
+  const [openCancelModal, setOpenCancelModal] = useState(false);
+ 
+ 
+  const [deleteHistory] = useDeleteBookingMutation();
+  const [approval] = useApproveBookingMutation();
+  const [cancel] = useCancelBookingMutation();
+  
 
-  // useEffect(() => {
-  //   if (users) {
-  //     const sortedUsers = [...users];
-  //     if (sortOrder === "ascend") {
-  //       sortedUsers.sort((a, b) => {
-  //         if (sortBy === "name") {
-  //           return a.name.localeCompare(b.name);
-  //         } else if (sortBy === "createdAt") {
-  //           return a.createdAt - b.createdAt;
-  //         }
-  //       });
-  //     } else if (sortOrder === "descend") {
-  //       sortedUsers.sort((a, b) => {
-  //         if (sortBy === "name") {
-  //           return b.name.localeCompare(a.name);
-  //         } else if (sortBy === "createdAt") {
-  //           return b.createdAt - a.createdAt;
-  //         }
-  //       });
-  //     }
-  //     const newFilteredUsers = sortedUsers.filter((user) => {
-  //       return (
-  //         user.role === "admin" &&
-  //         (user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //           user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //           user.role.toLowerCase().includes(searchTerm.toLowerCase()))
-  //       );
-  //     });
-  //     setFilteredUsers(newFilteredUsers);
-  //   }
-  // }, [users, searchTerm, sortBy, sortOrder]);
+
 
   const totalRecords = users ? users.length : 0;
   const totalPages = Math.ceil(totalRecords / size);
@@ -115,17 +91,46 @@ const BookingTablePage = () => {
     setSearchTerm("");
   };
 
-  const deleteAdminHandler = async (id: string) => {
-    try {
-      const res = await deleteAdmin(id);
-      if (res) {
-        message.success("User Successfully Deleted!");
-        setOpen(false);
-      }
-    } catch (error: any) {
-      message.error(error.message);
-    }
-  };
+ const [serviceToDelete, setServiceToDelete] = useState<any>(null);
+ const [approve, setApprove] = useState<any>(null);
+ const [cancelled, setCancelled] = useState<any>(null);
+
+ const cancelServiceHandler = async () => {
+   if (cancelled) {
+     try {
+       const res = await cancel(cancelled._id);
+       if (res) {
+         message.success("Order cancelled");
+        setOpenCancelModal(false);
+         setServiceToDelete(null);
+       }
+     } catch (error: any) {}
+   }
+ };
+ const approveServiceHandler = async () => {
+   if (approve) {
+     try {
+       const res = await approval(approve._id);
+       if (res) {
+         message.success("Order Approved");
+         setOpenApproveModal(false);
+         setServiceToDelete(null);
+       }
+     } catch (error: any) {}
+   }
+ };
+ const deleteServiceHandler = async () => {
+   if (serviceToDelete) {
+     try {
+       const res = await deleteHistory(serviceToDelete._id);
+       if (res) {
+         message.success("Booking Successfully Deleted!");
+         setOpen(false);
+         setServiceToDelete(null);
+       }
+     } catch (error: any) {}
+   }
+ };
 
   const columns = [
     {
@@ -143,8 +148,12 @@ const BookingTablePage = () => {
       dataIndex: "status",
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Order Time",
+      dataIndex: "time",
+    },
+    {
+      title: "Order Date",
+      dataIndex: "date",
     },
     {
       title: "CreatedAt",
@@ -156,21 +165,32 @@ const BookingTablePage = () => {
       title: "Action",
       render: (data: { id: React.SetStateAction<string> }) => (
         <>
-          <Link href={`/admin/userprofile/${data.id}`}>
-            <Button
-              style={{
-                margin: "0px 5px",
-              }}
-              type="primary"
-            >
-              <EditOutlined />
-            </Button>
-          </Link>
+          <Button
+            type="primary"
+            onClick={() => {
+             setOpenApproveModal(true);
+              setApprove(data);
+            }}
+            danger
+            style={{ marginLeft: "3px", backgroundColor: "#429d15" }}
+          >
+            Approve
+          </Button>
+          <Button
+            type="primary"
+            onClick={() => {
+              setOpenCancelModal(true);
+              setCancelled(data);
+            }}
+            style={{ marginLeft: "3px", backgroundColor: "#aa8e05" }}
+          >
+            cancel
+          </Button>
           <Button
             type="primary"
             onClick={() => {
               setOpen(true);
-              setAdminId(data.id);
+              setServiceToDelete(data);
             }}
             danger
             style={{ marginLeft: "3px" }}
@@ -190,52 +210,13 @@ const BookingTablePage = () => {
             label: "super_admin",
             link: "/super_admin",
           },
+          {
+            label: "history",
+            link: "/super_admin/history",
+          },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ marginTop: "10px", marginBottom: "30px", color: "black" }}
       />
-
-      <ActionBar title="User List">
-        <div>
-          <Input
-            type="text"
-            size="large"
-            placeholder="Search..."
-            style={{
-              width: "30vw",
-              margin: "0px 10px",
-            }}
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setPage(1);
-            }}
-          />
-          {searchTerm !== "" && (
-            <span style={{ marginLeft: "1rem" }}>
-              {filteredUsers.length} results found
-            </span>
-          )}
-        </div>
-
-        <div
-          style={{
-            marginRight: "20px",
-          }}
-        >
-          <Link href="/admin/createuser">
-            <Button type="primary">Create User</Button>
-          </Link>
-          {(sortBy || sortOrder || searchTerm) && (
-            <Button
-              onClick={resetFilters}
-              type="primary"
-              style={{ margin: "0px 5px" }}
-            >
-              <ReloadOutlined />
-            </Button>
-          )}
-        </div>
-      </ActionBar>
 
       <UMTable
         loading={isLoading}
@@ -252,12 +233,28 @@ const BookingTablePage = () => {
       />
 
       <UMModal
-        title="Remove User"
+        title="Remove Booking"
         isOpen={open}
         closeModal={() => setOpen(false)}
-        handleOk={() => deleteAdminHandler(adminId)}
+        handleOk={() => deleteServiceHandler()}
       >
-        <p className="my-5">Do you want to remove this user?</p>
+        <p className="my-5">Do you want to remove this user booking?</p>
+      </UMModal>
+      <UMModal
+        title="Approve Booking"
+        isOpen={openApproveModal}
+        closeModal={() => setOpenApproveModal(false)}
+        handleOk={() => approveServiceHandler()}
+      >
+        <p className="my-5">Do you want to approve this user booking?</p>
+      </UMModal>
+      <UMModal
+        title="Cancel Booking"
+        isOpen={openCancelModal}
+        closeModal={() => setOpenCancelModal(false)}
+        handleOk={() => cancelServiceHandler()}
+      >
+        <p className="my-5">Do you want to cancel this user booking?</p>
       </UMModal>
     </div>
   );

@@ -59,7 +59,7 @@ const CreateOrderPage = ({ params }: IDProps) => {
 
       message.loading("Creating...");
       const response = await createOrder(newVal);
-       router.push("/user/orderhistory");
+       router.push("/");
 
       if (response) {
         message.success("Order created successfully!");
