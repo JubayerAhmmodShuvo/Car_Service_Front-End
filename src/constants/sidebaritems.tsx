@@ -6,6 +6,7 @@ import {
   UserOutlined,
   ControlOutlined,
   BookOutlined,
+  HistoryOutlined,
   BulbOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
@@ -129,9 +130,14 @@ export const sidebarItems = (role: string) => {
   const userSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
+      label: <Link href={`/${role}/history/${id}`}>Order History</Link>,
+      icon: <HistoryOutlined />,
+      key: `/${role}/history`,
+    },
+    {
       label: <Link href={`/${role}/blog`}>Blogs</Link>,
       icon: <BookOutlined />,
-      key: `/${role}/courses`,
+      key: `/${role}/blog`,
     },
     {
       label: <Link href={`/${role}/faq`}>FAQ's</Link>,

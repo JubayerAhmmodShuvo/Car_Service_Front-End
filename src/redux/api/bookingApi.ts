@@ -3,11 +3,18 @@ import { baseApi } from "./baseApi";
 
 const BOOKING_URL = "/booking"; 
 
+
 export const bookingApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getBookingById: build.query({
       query: (id) => ({
         url: `${BOOKING_URL}/${id}`,
+        method: "GET",
+      }),
+    }),
+    getUserBookingById: build.query({
+      query: (id) => ({
+        url: `${BOOKING_URL}/bookings/${id}`,
         method: "GET",
       }),
     }),
@@ -49,4 +56,5 @@ export const {
   useUpdateBookingByIdMutation,
   useDeleteBookingMutation,
   useGetAllBookingsQuery,
+  useGetUserBookingByIdQuery,
 } = bookingApi;
