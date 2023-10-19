@@ -1,25 +1,3 @@
-// import { useGetAllBookingsQuery } from '@/redux/api/bookingApi';
-// import React from 'react';
-
-// const page = () => {
-//      const {
-//        data: users,
-//        isLoading,
-//        refetch,
-//      } = useGetAllBookingsQuery(
-//        {},
-//        { refetchOnMountOrArgChange: true, pollingInterval: 2000 }
-//      );
-//      console.log(users);
-//   return (
-//     <div>
-
-//     </div>
-//   );
-// };
-
-// export default page;
-
 "use client";
 import {
   DeleteOutlined,
@@ -38,9 +16,13 @@ import { useDebounced } from "@/redux/hooks";
 import dayjs from "dayjs";
 import { useGetAllBookingsQuery } from "@/redux/api/bookingApi";
 import UMTable2 from "@/components/ui/UMTable2";
-import { useGetAllServiceQuery } from "@/redux/api/serviceApi";
+import {
+  useDeleteServiceMutation,
+  useGetAllServiceQuery,
+} from "@/redux/api/serviceApi";
+import UMModal from "@/components/ui/UMModal";
 
-const ManageDepartmentPage = () => {
+const ServicePage = () => {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -48,6 +30,7 @@ const ManageDepartmentPage = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [open, setOpen] = useState(false);
 
   query["limit"] = size;
   query["page"] = page;
@@ -64,22 +47,24 @@ const ManageDepartmentPage = () => {
     query["searchTerm"] = debouncedTerm;
   }
   const { data, isLoading } = useGetAllServiceQuery({});
-  console.log(data)
 
- const service = data || [];
-  
+  const service = data || [];
 
-  // const deleteHandler = async (id: string) => {
-  //   message.loading("Deleting.....");
-  //   try {
-  //     //   console.log(data);
-  //     await deleteDepartment(id);
-  //     message.success("Department Deleted successfully");
-  //   } catch (err: any) {
-  //     //   console.error(err.message);
-  //     message.error(err.message);
-  //   }
-  // };
+  const [deleteService] = useDeleteServiceMutation();
+  const [serviceToDelete, setServiceToDelete] = useState<any>(null);
+
+  const deleteServiceHandler = async () => {
+    if (serviceToDelete) {
+      try {
+        const res = await deleteService(serviceToDelete._id);
+        if (res) {
+          message.success("Service Successfully Deleted!");
+          setOpen(false);
+          setServiceToDelete(null);
+        }
+      } catch (error: any) {}
+    }
+  };
 
   const columns = [
     {
@@ -108,30 +93,34 @@ const ManageDepartmentPage = () => {
     },
     {
       title: "Action",
-      render: function (data: any) {
-        return (
-          <>
-            {/* <Link href={`/super_admin/department/edit/${data?.id}`}>
-              <Button
-                style={{
-                  margin: "0px 5px",
-                }}
-                onClick={() => console.log(data)}
-                type="primary"
-              >
-                <EditOutlined />
-              </Button>
-            </Link>
+      render: (data: {
+        [x: string]: any;
+        id: React.SetStateAction<string>;
+      }) => (
+        <>
+          <Link href={`/admin/editservice/${data?._id}`}>
             <Button
-              onClick={() => deleteHandler(data?.id)}
+              style={{
+                margin: "0px 5px",
+              }}
               type="primary"
-              danger
             >
-              <DeleteOutlined />
-            </Button> */}
-          </>
-        );
-      },
+              <EditOutlined />
+            </Button>
+          </Link>
+          <Button
+            type="primary"
+            onClick={() => {
+              setOpen(true);
+              setServiceToDelete(data);
+            }}
+            danger
+            style={{ marginLeft: "3px" }}
+          >
+            <DeleteOutlined />
+          </Button>
+        </>
+      ),
     },
   ];
 
@@ -158,13 +147,17 @@ const ManageDepartmentPage = () => {
       <UMBreadCrumb
         items={[
           {
-            label: "super_admin",
-            link: "/super_admin",
+            label: "admin",
+            link: "/admin",
+          },
+          {
+            label: "service table",
+            link: "/admin/servicetable",
           },
         ]}
       />
 
-      <ActionBar title="Department List">
+      <ActionBar title="Service List">
         <Input
           type="text"
           size="large"
@@ -177,16 +170,20 @@ const ManageDepartmentPage = () => {
           }}
         />
         <div>
-          <Link href="/super_admin/department/create">
+          <Link href="/admin/create">
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || !!searchTerm) && (
             <Button
-              onClick={resetFilters}
               type="primary"
-              style={{ margin: "0px 5px" }}
+              onClick={() => {
+                setOpen(true);
+                setServiceToDelete(data);
+              }}
+              danger
+              style={{ marginLeft: "3px" }}
             >
-              <ReloadOutlined />
+              <DeleteOutlined />
             </Button>
           )}
         </div>
@@ -201,9 +198,21 @@ const ManageDepartmentPage = () => {
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
-        showPagination={true} sortOrder={""} sortBy={""}      />
+        showPagination={true}
+        sortOrder={""}
+        sortBy={""}
+      />
+
+      <UMModal
+        title="Remove User"
+        isOpen={open}
+        closeModal={() => setOpen(false)}
+        handleOk={() => deleteServiceHandler()}
+      >
+        <p className="my-5">Do you want to remove this user?</p>
+      </UMModal>
     </div>
   );
 };
 
-export default ManageDepartmentPage;
+export default ServicePage;
