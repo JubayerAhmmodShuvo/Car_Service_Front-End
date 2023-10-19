@@ -7,7 +7,7 @@ import { Row, Col, Button } from "antd";
 import CustomCard from '@/components/ui/CustomCard';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 
-const page = () => {
+const AllService = () => {
   const { data: services, isLoading } = useGetAllServiceQuery({});
    const [visibleServices, setVisibleServices] = useState(6);
 
@@ -86,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AllService;

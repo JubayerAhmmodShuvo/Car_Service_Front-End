@@ -89,7 +89,7 @@ const UpdateFaqPage= ({ params }: IDProps) => {
           }}
         >
           <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
-            Question's Answer
+            Questions Answer
           </p>
           <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
             <Col

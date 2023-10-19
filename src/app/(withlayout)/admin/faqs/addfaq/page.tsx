@@ -132,7 +132,7 @@ const CreateFaqPage = ({ params }: IDProps) => {
               width: "20%",
             }}
           >
-            Add FAQ's
+            Add FAQs
           </Button>
         </div>
       </Form>

@@ -97,7 +97,8 @@ const LoginPage = () => {
             </Space>
           </Form>
           <p style={{ textAlign: "center", fontSize: "20px" }}>
-            Don't have an account? Please <Link href="/signup">Signup</Link>.
+            Don&rsquo;t have an account? Please{" "}
+            <Link href="/signup">Signup</Link>.
           </p>
         </div>
       </Col>

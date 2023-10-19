@@ -178,7 +178,7 @@ export const sidebarItems = (role: string) => {
       key: `/${role}/blog`,
     },
     {
-      label: <Link href={`/${role}/faq`}>FAQ's</Link>,
+      label: <Link href={`/${role}/faq`}>FAQs</Link>,
       icon: <BulbOutlined />,
       key: `/${role}/faqs`,
     },

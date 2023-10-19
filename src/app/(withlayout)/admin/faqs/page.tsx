@@ -142,7 +142,7 @@ const FaqTablePage = () => {
         style={{ marginTop: "10px", color: "black" }}
       />
 
-      <ActionBar title="FAQ's List">
+      <ActionBar title="FAQ List">
         <Input
           type="text"
           size="large"
