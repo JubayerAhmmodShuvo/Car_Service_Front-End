@@ -26,6 +26,7 @@ import {
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
+import { CSSProperties } from "react";
 
 const UserTablePage = () => {
   const [page, setPage] = useState(1);
@@ -47,6 +48,21 @@ const UserTablePage = () => {
   const [open, setOpen] = useState(false);
   const [adminId, setAdminId] = useState("");
   const [deleteAdmin] = useDeleteUserProfileMutation();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const tableStyle: CSSProperties | undefined = isSmallScreen
+    ? { overflowX: "auto" }
+    : undefined;
 
   useEffect(() => {
     if (users) {
@@ -173,9 +189,11 @@ const UserTablePage = () => {
       ),
     },
   ];
+    
+
 
   return (
-    <div>
+    <div >
       <UMBreadCrumb
         items={[
           {
@@ -198,13 +216,12 @@ const UserTablePage = () => {
             placeholder="Search..."
             style={{
               width: "30vw",
-              margin:"0px 10px"
-             
+              margin: "0px 10px",
             }}
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
-              setPage(1); 
+              setPage(1);
             }}
           />
           {searchTerm !== "" && (
@@ -214,9 +231,11 @@ const UserTablePage = () => {
           )}
         </div>
 
-        <div style={{
-marginRight:"20px"
-        }}>
+        <div
+          style={{
+            marginRight: "20px",
+          }}
+        >
           <Link href="/admin/createuser">
             <Button type="primary">Create User</Button>
           </Link>
@@ -232,19 +251,21 @@ marginRight:"20px"
         </div>
       </ActionBar>
 
-      <UMTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={filteredUsers}
-        pageSize={size}
-        totalPages={totalPages}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        sortOrder={sortOrder}
-        sortBy={sortBy}
-      />
+      <div style={tableStyle}>
+        <UMTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={filteredUsers}
+          pageSize={size}
+          totalPages={totalPages}
+          showSizeChanger={true}
+          onPaginationChange={onPaginationChange}
+          onTableChange={onTableChange}
+          showPagination={true}
+          sortOrder={sortOrder}
+          sortBy={sortBy}
+        />
+      </div>
 
       <UMModal
         title="Remove User"

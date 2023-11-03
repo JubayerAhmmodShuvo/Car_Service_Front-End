@@ -7,7 +7,7 @@ type User = {
   email: string;
   createdAt: Date;
 };
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { Button, Input, message } from "antd";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -94,6 +94,22 @@ const BookingTablePage = () => {
   const [serviceToDelete, setServiceToDelete] = useState<any>(null);
   const [approve, setApprove] = useState<any>(null);
   const [cancelled, setCancelled] = useState<any>(null);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const tableStyle: CSSProperties | undefined = isSmallScreen
+    ? { overflowX: "auto" }
+    : undefined;
 
   const cancelServiceHandler = async () => {
     if (cancelled) {
@@ -246,21 +262,21 @@ const BookingTablePage = () => {
         ]}
         style={{ marginTop: "10px", marginBottom: "30px", color: "black" }}
       />
-
-      <UMTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={filteredUsers}
-        pageSize={size}
-        totalPages={totalPages}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        sortOrder={sortOrder}
-        sortBy={sortBy}
-      />
-
+      <div style={tableStyle}>
+        <UMTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={filteredUsers}
+          pageSize={size}
+          totalPages={totalPages}
+          showSizeChanger={true}
+          onPaginationChange={onPaginationChange}
+          onTableChange={onTableChange}
+          showPagination={true}
+          sortOrder={sortOrder}
+          sortBy={sortBy}
+        />
+      </div>
       <UMModal
         title="Remove Booking"
         isOpen={open}
