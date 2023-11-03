@@ -26,9 +26,9 @@ const PartnerShip = () => {
       <h1
         style={{
           padding: "30px",
-          backgroundColor: "#001529",
+          backgroundColor: "#fff",
           overflowX: "hidden",
-          color: "#fff",
+          color: "black",
           textAlign: "center",
           fontStyle: "italic",
           fontSize:"2rem"
@@ -39,7 +39,7 @@ const PartnerShip = () => {
       </h1>
       <div
         style={{
-          backgroundColor: "#f0f0f0",
+          backgroundColor: "#fff",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

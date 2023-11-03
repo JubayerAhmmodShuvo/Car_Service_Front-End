@@ -36,11 +36,11 @@ const BlogPage = () => {
     <div
       style={{
         padding: "20px",
-        backgroundColor: "#001529",
+        backgroundColor: "#fff",
         overflowX: "hidden",
       }}
     >
-      <h1 style={{fontStyle:"italic", fontSize:"2rem", color:"#fff", textAlign:"center"}} >Blogs</h1>
+      <h1 style={{fontStyle:"italic", fontSize:"2rem", color:"black", textAlign:"center"}} >Blogs</h1>
       <div>
         {isLoading ? (
           <p>Loading...</p>

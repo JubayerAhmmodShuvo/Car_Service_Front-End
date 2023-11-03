@@ -54,7 +54,7 @@ const UpComingServices = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#001529", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: "#fff", overflowX: "hidden" }}>
       <div style={{ margin: "30px" }}>
         <h1
           style={{

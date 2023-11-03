@@ -30,7 +30,7 @@ const AskHere = () => {
      }
    };
   return (
-    <div style={{ backgroundColor: "", overflowX: "hidden" }}>
+    <div style={{ backgroundColor: "#fff", overflowX: "hidden" }}>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={24} md={12} lg={12}>
           <img

@@ -23,13 +23,13 @@ const WhyChooseUs = () => {
     <div
       style={{
         padding: "50px",
-        backgroundColor: "#001529",
+        backgroundColor: "#fff",
         paddingBottom: "5rem",
         overflowX: "hidden",
       }}
     >
       <Title
-        style={{ textAlign: "center", color: "#ffffff", paddingBottom: "20px" }}
+        style={{ textAlign: "center", color: "black", paddingBottom: "20px" }}
       >
         Why Choose Us
       </Title>

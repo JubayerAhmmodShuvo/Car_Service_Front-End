@@ -37,7 +37,7 @@ const TeamMembers = () => {
     <div
       style={{
         padding: "20px",
-        backgroundColor: "#001529",
+     
         overflowX: "hidden",
       }}
     >

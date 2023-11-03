@@ -64,9 +64,9 @@ const Testimonials = () => {
         style={{
           padding: "30px 0px",
           textAlign: "center",
-          color: "white",
+          color: "black",
           justifyContent: "center",
-          backgroundColor: "#001529",
+          backgroundColor: "#fff",
           margin: "auto",
           alignItems: "center",
           fontSize:"28px" , overflowX: "hidden"
@@ -80,7 +80,7 @@ const Testimonials = () => {
           paddingBottom: "50px",
           display: "flex",
           justifyContent: "center",
-          backgroundColor: "#001529",
+          backgroundColor: "#fff",
           height: "100%",
           margin: "auto",
           alignItems: "center",

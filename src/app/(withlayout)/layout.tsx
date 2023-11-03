@@ -26,7 +26,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <Layout hasSider>
+    <Layout
+      hasSider
+      style={{
+       
+        backgroundColor: "#fff",
+      }}
+    >
       <SideBar />
       <Contents>{children}</Contents>
     </Layout>

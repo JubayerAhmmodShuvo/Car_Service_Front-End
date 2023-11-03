@@ -97,7 +97,7 @@ const buttonStyles = {
 const MainPage = () => {
   return (
     <>
-      {/* Your existing content */}
+     
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
@@ -108,6 +108,7 @@ const MainPage = () => {
       <div
         style={{
           margin: "20px 0px 0px 0px",
+             backgroundColor: "#fff",
         }}
       >
         <HeroSectionPage />
@@ -122,7 +123,7 @@ const MainPage = () => {
         <Footer />
       </div>
 
-      {/* Scroll button */}
+  
       <ScrollButton />
     </>
   );
