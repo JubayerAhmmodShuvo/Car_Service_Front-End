@@ -10,7 +10,7 @@ import UMTable from "@/components/ui/UMTable";
 
 import { Button, Input, message } from "antd";
 import Link from "next/link";
-import { useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import ActionBar from "@/components/ui/ActionBar";
 import { useDebounced } from "@/redux/hooks";
 import dayjs from "dayjs";
@@ -44,6 +44,22 @@ const UserTablePage = () => {
   const [adminId, setAdminId] = useState<string>("");
   const [deleteblog] = useDeleteblogMutation();
 
+
+   const [isSmallScreen, setIsSmallScreen] = useState(false);
+   useEffect(() => {
+     const handleResize = () => {
+       setIsSmallScreen(window.innerWidth < 768);
+     };
+     window.addEventListener("resize", handleResize);
+     handleResize();
+
+     return () => {
+       window.removeEventListener("resize", handleResize);
+     };
+   }, []);
+   const tableStyle: CSSProperties | undefined = isSmallScreen
+     ? { overflowX: "auto" }
+     : undefined;
 
   
 
@@ -195,7 +211,8 @@ const UserTablePage = () => {
           )}
         </div>
       </ActionBar>
-
+      <div style={tableStyle}>
+        
       <UMTable
         loading={isLoading}
         columns={columns}
@@ -207,6 +224,7 @@ const UserTablePage = () => {
         onTableChange={onTableChange}
         showPagination={true} sortOrder={""} sortBy={""}      />
 
+</div>
       <UMModal
         title="Remove blog"
         isOpen={open}

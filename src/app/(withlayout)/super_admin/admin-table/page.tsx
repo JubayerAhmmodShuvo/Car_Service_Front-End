@@ -7,7 +7,7 @@ type User = {
   email: string;
   createdAt: Date;
 };
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { Button, Input, message } from "antd";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -45,6 +45,22 @@ const AdminTablePage = () => {
   const [open, setOpen] = useState(false);
   const [adminId, setAdminId] = useState("");
   const [deleteAdmin] = useDeleteUserProfileMutation();
+
+   const [isSmallScreen, setIsSmallScreen] = useState(false);
+   useEffect(() => {
+     const handleResize = () => {
+       setIsSmallScreen(window.innerWidth < 768);
+     };
+     window.addEventListener("resize", handleResize);
+     handleResize();
+
+     return () => {
+       window.removeEventListener("resize", handleResize);
+     };
+   }, []);
+   const tableStyle: CSSProperties | undefined = isSmallScreen
+     ? { overflowX: "auto" }
+     : undefined;
 
   useEffect(() => {
     if (users) {
@@ -233,7 +249,8 @@ const AdminTablePage = () => {
           )}
         </div>
       </ActionBar>
-
+      <div style={tableStyle}>
+        
       <UMTable
         loading={isLoading}
         columns={columns}
@@ -246,7 +263,8 @@ const AdminTablePage = () => {
         showPagination={true}
         sortOrder={sortOrder}
         sortBy={sortBy}
-      />
+        />
+        </div>
 
       <UMModal
         title="Remove Admin"

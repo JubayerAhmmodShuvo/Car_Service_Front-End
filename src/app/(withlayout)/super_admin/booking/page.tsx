@@ -8,7 +8,7 @@ type User = {
   email: string;
   createdAt: Date;
 };
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { Button, Input, message } from "antd";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
@@ -33,6 +33,22 @@ const BookingTablePage = () => {
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
+   const [isSmallScreen, setIsSmallScreen] = useState(false);
+   useEffect(() => {
+     const handleResize = () => {
+       setIsSmallScreen(window.innerWidth < 768);
+     };
+     window.addEventListener("resize", handleResize);
+     handleResize();
+
+     return () => {
+       window.removeEventListener("resize", handleResize);
+     };
+   }, []);
+   const tableStyle: CSSProperties | undefined = isSmallScreen
+     ? { overflowX: "auto" }
+     : undefined;
 
    const {
      data: users,
@@ -248,7 +264,8 @@ const BookingTablePage = () => {
         ]}
         style={{ marginTop: "10px", marginBottom: "30px", color: "black" }}
       />
-
+      <div style={tableStyle}>
+        
       <UMTable
         loading={isLoading}
         columns={columns}
@@ -261,7 +278,8 @@ const BookingTablePage = () => {
         showPagination={true}
         sortOrder={sortOrder}
         sortBy={sortBy}
-      />
+        />
+        </div>
 
       <UMModal
         title="Remove Booking"
