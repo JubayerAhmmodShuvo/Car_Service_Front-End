@@ -19,7 +19,7 @@ import {
 import { getUserInfo } from "@/services/auth.service";
 
 const { role } = getUserInfo() as any;
-console.log(role)
+//console.log(role)
 
 
 
@@ -97,7 +97,6 @@ const buttonStyles = {
 const MainPage = () => {
   return (
     <>
-     
       <UMBreadCrumb
         items={[
           { label: `${role}`, link: `/${role}` },
@@ -105,25 +104,28 @@ const MainPage = () => {
         ]}
         style={{ marginTop: "10px", color: "black" }}
       />
-      <div
-        style={{
-          margin: "20px 0px 0px 0px",
-             backgroundColor: "#fff",
-        }}
-      >
+      <div className="">
         <HeroSectionPage />
-        <AbailableService />
-        <UpComingServices />
-        <Testimonials />
-        <TeamMembers />
-        <BlogPage />
-        <PartnerShip />
-        <WhyChooseUs />
-        <AskHere />
+        <div
+          style={{
+            // margin: "20px 0px 0px 0px",
+            backgroundColor: "#fff",
+            maxWidth: "1400px",
+            margin: "0 auto",
+          }}
+        >
+          <AbailableService />
+          <UpComingServices />
+          <Testimonials />
+          <TeamMembers />
+          <BlogPage />
+          <PartnerShip />
+          <WhyChooseUs />
+          <AskHere />
+        </div>
         <Footer />
       </div>
 
-  
       <ScrollButton />
     </>
   );

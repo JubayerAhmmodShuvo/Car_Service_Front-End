@@ -12,7 +12,7 @@ export function withRoleAccess(allowedRoles: string | string[]) {
 
       useEffect(() => {
         if (!allowedRoles.includes(role)) {
-          console.log("Unauthorized, redirecting...");
+     //     console.log("Unauthorized, redirecting...");
           router.replace("/unauthorized");
         }
       }, [role, router]);

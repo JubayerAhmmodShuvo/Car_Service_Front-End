@@ -49,7 +49,7 @@ const UpdateFaqPage= ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating faq:", err);
       message.error(err.message || "Failed to update faq");
-      console.log(err);
+      
     }
   };
   const userData = updatedFaq || faq;

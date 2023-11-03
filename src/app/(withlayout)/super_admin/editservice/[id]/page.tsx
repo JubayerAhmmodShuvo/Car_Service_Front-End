@@ -51,7 +51,7 @@ const UpdateServicePage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating service:", err);
       message.error(err.message || "Failed to update service");
-      console.log(err);
+     
     }
   };
   const userData = updatedUser || user;

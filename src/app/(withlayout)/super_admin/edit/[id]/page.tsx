@@ -49,7 +49,7 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
   
     }
   };
-  console.log(links);
+ 
 
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
@@ -78,7 +78,7 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
         id: id,
         body: val,
       }).unwrap();
-      console.log(res);
+     
 
       if (res?.id) {
         setUpdatedUser(res);
@@ -89,7 +89,7 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating Super_Admin:", err);
       message.error(err.message || "Failed to update super-admin");
-      console.log(err);
+    
     }
   };
 

@@ -41,15 +41,15 @@ const EditAdminPage = ({ params }: IDProps) => {
        let arr = [];
        for (let i = 0; i < image.length; i++) {
          const userProfile = await uploadCloudinary(image[i]);
-         console.log(userProfile.url);
+        // console.log(userProfile.url);
          arr.push(userProfile.url); 
        }
        setLinks(arr); 
      } catch (err: any) {
-       console.log("error", err);
+      // console.log("error", err);
      }
    };
-  console.log(links);
+//  console.log(links);
 
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
@@ -80,7 +80,7 @@ const EditAdminPage = ({ params }: IDProps) => {
        id: id,
        body: val,
      }).unwrap();
-     console.log(res);
+    // console.log(res);
 
      if (res?.id) {
        setUpdatedUser(res);
@@ -91,7 +91,7 @@ const EditAdminPage = ({ params }: IDProps) => {
    } catch (err: any) {
      console.error("Error updating user:", err);
      message.error(err.message || "Failed to update user");
-     console.log(err);
+     //console.log(err);
    }
  };
 

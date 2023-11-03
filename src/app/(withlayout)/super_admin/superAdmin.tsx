@@ -8,7 +8,7 @@ import { getUserInfo } from "@/services/auth.service";
 const SuperAdminPage = () => {
   const { id, role } = getUserInfo() as any;
 
-  console.log(id);
+
 
   const { data: user } = useGetUserProfileQuery(id);
 

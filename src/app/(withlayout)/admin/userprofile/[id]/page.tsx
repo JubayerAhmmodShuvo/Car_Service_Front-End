@@ -50,7 +50,7 @@ const UserUpdatePage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating user:", err);
       message.error(err.message || "Failed to update user");
-      console.log(err);
+     // console.log(err);
     }
   };
   const userData = updatedUser || user;

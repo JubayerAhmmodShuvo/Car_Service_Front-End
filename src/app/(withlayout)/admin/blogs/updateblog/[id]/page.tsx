@@ -48,7 +48,7 @@ const UpdateBLogPage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating blog:", err);
       message.error(err.message || "Failed to update blog");
-      console.log(err);
+    //  console.log(err);
     }
   };
   const userData = updatedBlog || blog;
