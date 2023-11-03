@@ -44,7 +44,7 @@ const TeamMembers = () => {
       <Title
         style={{
           textAlign: "center",
-          color: "white",
+          color: "black",
           fontStyle: "italic",
           padding: "30px 0px",
         }}
@@ -56,19 +56,19 @@ const TeamMembers = () => {
           <Col key={index} xs={24} sm={12} md={8} lg={6}>
             <Card
               style={{
-                backgroundColor: "black",
-                color: "white",
+                backgroundColor: "#fff",
+                color: "#000000",
                 textAlign: "center",
                 padding: "20px",
                 borderRadius: "10px",
               }}
             >
               <Avatar src={member.photo} size={100} />
-              <Title style={{ color: "white" }} level={4}>
+              <Title style={{ color: "#000000" }} level={4}>
                 {member.name}
               </Title>
-              <Paragraph style={{ color: "white" }}>{member.role}</Paragraph>
-              <Paragraph style={{ color: "white" }}>
+              <Paragraph style={{ color: "#000000" }}>{member.role}</Paragraph>
+              <Paragraph style={{ color: "#000000" }}>
                 {member.description}
               </Paragraph>
             </Card>
