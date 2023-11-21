@@ -102,7 +102,7 @@ const MainPage = () => {
           { label: `${role}`, link: `/${role}` },
           { label: "home", link: `/${role}/home` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <div className="">
         <HeroSectionPage />

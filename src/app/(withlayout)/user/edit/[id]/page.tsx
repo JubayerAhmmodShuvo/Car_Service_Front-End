@@ -32,13 +32,14 @@ const UserPage = ({ params }: IDProps) => {
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
   const onSubmit = async (values: any) => {
-    message.loading("User Updating.....");
+   
+    console.log(values)
     try {
       const res = await updateUserProfile({
         id: id,
         body: values,
       }).unwrap();
-
+console.log(res)
       if (res?.id) {
         setUpdatedUser(res);
         message.success("User Successfully Updated!");
