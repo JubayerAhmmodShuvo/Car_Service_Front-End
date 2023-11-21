@@ -1,11 +1,14 @@
-"use client"
+"use client";
 import { Button, Col, Row, Select, message } from "antd";
 import FormInput from "../FORMS/FormInput";
 import FormTextArea from "../FORMS/FormTextArea";
 import Form from "../FORMS/Form";
 import UMBreadCrumb from "./UMBreadCrumb";
 import { getUserInfo } from "@/services/auth.service";
-import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/redux/api/userProfile";
+import {
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
+} from "@/redux/api/userProfile";
 import { FormEvent } from "react";
 
 const { Option } = Select;
@@ -18,23 +21,19 @@ const AdminUpdate = () => {
 
   const [updateUserProfile] = useUpdateUserProfileMutation();
 
-   const OnSubmit = async (values: any) => {
-     try {
-       
-       const response = await updateUserProfile({ id, ...values });
+  const OnSubmit = async (values: any) => {
+    try {
+      const response = await updateUserProfile({ id, ...values });
 
-       if ("error" in response) {
-         console.error(response.error);
-       } else {
-        
-         message.success("User profile updated successfully");
-        
-       }
-     } catch (error) {
-       
-       console.error(error);
-     }
-   };
+      if ("error" in response) {
+        console.error(response.error);
+      } else {
+        message.success("User profile updated successfully");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -43,7 +42,7 @@ const AdminUpdate = () => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{
