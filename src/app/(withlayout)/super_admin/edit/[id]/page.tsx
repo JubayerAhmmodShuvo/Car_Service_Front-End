@@ -41,15 +41,12 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
       let arr = [];
       for (let i = 0; i < image.length; i++) {
         const userProfile = await uploadCloudinary(image[i]);
-    
+
         arr.push(userProfile.url);
       }
       setLinks(arr);
-    } catch (err: any) {
-  
-    }
+    } catch (err: any) {}
   };
- 
 
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
@@ -78,7 +75,6 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
         id: id,
         body: val,
       }).unwrap();
-     
 
       if (res?.id) {
         setUpdatedUser(res);
@@ -89,7 +85,6 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating Super_Admin:", err);
       message.error(err.message || "Failed to update super-admin");
-    
     }
   };
 
@@ -104,7 +99,7 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
     bio: userData?.bio || "",
     bloodGroup: userData?.bloodGroup || "",
     address: userData?.address || "",
-   
+
     location: userData?.location || "",
   };
 
@@ -115,7 +110,7 @@ const EditSuperAdminPage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{

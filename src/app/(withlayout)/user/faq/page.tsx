@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Button, Collapse } from "antd";
@@ -19,12 +19,28 @@ const Page = () => {
     }
   );
 
- 
-  const formattedFaqs: ItemProps[] = faqs?.map((faq: { question: any; answer: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }, index: { toString: () => any; }) => ({
-    key: index.toString(), 
-    label: faq.question,
-    children: <p>{faq.answer}</p>,
-  }));
+  const formattedFaqs: ItemProps[] = faqs?.map(
+    (
+      faq: {
+        question: any;
+        answer:
+          | string
+          | number
+          | boolean
+          | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+          | Iterable<React.ReactNode>
+          | React.ReactPortal
+          | React.PromiseLikeOfReactNode
+          | null
+          | undefined;
+      },
+      index: { toString: () => any }
+    ) => ({
+      key: index.toString(),
+      label: faq.question,
+      children: <p>{faq.answer}</p>,
+    })
+  );
 
   return (
     <div style={{ overflowX: "hidden" }}>
@@ -39,7 +55,7 @@ const Page = () => {
             link: "/user/faq",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{
@@ -60,7 +76,7 @@ const Page = () => {
             justifyContent: "center",
             display: "flex",
             alignItems: "center",
-            marginBottom:"20px"
+            marginBottom: "20px",
           }}
         >
           Ask Here

@@ -16,7 +16,10 @@ import { bloodGroupOptions } from "@/constants/global";
 import { Button, Col, Row, Select, message } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGetServiceByIdQuery, useUpdateServiceByIdMutation } from "@/redux/api/serviceApi";
+import {
+  useGetServiceByIdQuery,
+  useUpdateServiceByIdMutation,
+} from "@/redux/api/serviceApi";
 
 const { Option } = Select;
 
@@ -40,7 +43,6 @@ const UpdateServicePage = ({ params }: IDProps) => {
         id: id,
         body: values,
       }).unwrap();
-    
 
       if (res?._id) {
         setUpdatedUser(res);
@@ -51,7 +53,7 @@ const UpdateServicePage = ({ params }: IDProps) => {
     } catch (err: any) {
       console.error("Error updating service:", err);
       message.error(err.message || "Failed to update service");
-    //  console.log(err);
+      //  console.log(err);
     }
   };
   const userData = updatedUser || user;
@@ -63,7 +65,6 @@ const UpdateServicePage = ({ params }: IDProps) => {
     pricing: userData?.pricing || "",
     contactInfo: userData?.contactInfo || "",
     email: userData?.email || "",
-  
   };
 
   return (
@@ -73,7 +74,7 @@ const UpdateServicePage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "updateservice", link: `/${role}/updateservice` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{

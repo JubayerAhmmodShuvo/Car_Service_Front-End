@@ -13,7 +13,10 @@ import { bloodGroupOptions } from "@/constants/global";
 import { Button, Col, Row, Select, message } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGetBlogByIdQuery, useUpdateBlogMutation } from "@/redux/api/blogsApi";
+import {
+  useGetBlogByIdQuery,
+  useUpdateBlogMutation,
+} from "@/redux/api/blogsApi";
 
 const { Option } = Select;
 
@@ -42,13 +45,12 @@ const UpdateBLogPage = ({ params }: IDProps) => {
       if (res?.id) {
         setUpdatedBlog(res);
         message.success("Blog Successfully Updated!");
-       
+
         router.push("/admin/blogs");
       }
     } catch (err: any) {
       console.error("Error updating blog:", err);
       message.error(err.message || "Failed to update blog");
-    
     }
   };
   const userData = updatedBlog || blog;
@@ -57,7 +59,6 @@ const UpdateBLogPage = ({ params }: IDProps) => {
   const defaultValues = {
     title: userData?.title || "",
     email: userData?.description || "",
-   
   };
 
   return (
@@ -67,7 +68,7 @@ const UpdateBLogPage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{

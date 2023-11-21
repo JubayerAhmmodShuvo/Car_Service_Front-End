@@ -9,7 +9,6 @@ type IDProps = {
 const ViewBlog = ({ params }: IDProps) => {
   const id = params.id;
 
-
   const { data: blog, isLoading, isError } = useGetBlogByIdQuery(id);
 
   return (
@@ -25,7 +24,7 @@ const ViewBlog = ({ params }: IDProps) => {
             link: "/admin/viewblog",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       {isLoading ? (
         <div></div>

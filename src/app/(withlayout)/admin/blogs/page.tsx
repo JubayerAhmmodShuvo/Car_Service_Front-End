@@ -19,9 +19,11 @@ import {
   useDeleteUserProfileMutation,
 } from "@/redux/api/userProfile";
 import UMModal from "@/components/ui/UMModal";
-import { useDeleteblogMutation, useGetAllBlogsQuery } from "@/redux/api/blogsApi";
+import {
+  useDeleteblogMutation,
+  useGetAllBlogsQuery,
+} from "@/redux/api/blogsApi";
 import { withRoleAccess } from "@/app/roleBasedAccessControl";
-
 
 const UserTablePage = () => {
   const query: Record<string, any> = {};
@@ -32,11 +34,7 @@ const UserTablePage = () => {
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const {
-    data,
-    isLoading,
-    refetch,
-  } = useGetAllBlogsQuery(
+  const { data, isLoading, refetch } = useGetAllBlogsQuery(
     {},
     { refetchOnMountOrArgChange: true, pollingInterval: 2000 }
   );
@@ -60,9 +58,6 @@ const UserTablePage = () => {
     ? { overflowX: "auto" }
     : undefined;
 
-
-  
-
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
@@ -71,9 +66,9 @@ const UserTablePage = () => {
   const columns = [
     {
       title: "Title",
-      dataIndex: "title", 
+      dataIndex: "title",
     },
-    
+
     {
       title: "CreatedAt",
       dataIndex: "createdAt",
@@ -98,9 +93,8 @@ const UserTablePage = () => {
                 style={{
                   margin: "0px 5px",
                   color: "green",
-                  backgroundColor:"greenyellow"
+                  backgroundColor: "greenyellow",
                 }}
-            
                 type="primary"
               >
                 <EyeOutlined />
@@ -135,7 +129,7 @@ const UserTablePage = () => {
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
-   // console.log("Page:", page, "PageSize:", pageSize);
+    // console.log("Page:", page, "PageSize:", pageSize);
     setPage(page);
     setSize(pageSize);
   };
@@ -153,10 +147,9 @@ const UserTablePage = () => {
   };
 
   const deleteAdminHandler = async (id: any) => {
-   
     try {
       const fi = id?._id;
-      
+
       const res = await deleteblog(fi);
 
       if (res) {
@@ -181,7 +174,7 @@ const UserTablePage = () => {
             link: "/admin/blog",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
 
       <ActionBar title="Blogs List">
@@ -237,6 +230,5 @@ const UserTablePage = () => {
     </div>
   );
 };
-
 
 export default withRoleAccess(["admin"])(UserTablePage);

@@ -19,7 +19,6 @@ import { useCreateServiceMutation } from "@/redux/api/serviceApi";
 
 const CreateUserPage = () => {
   const [addAdminWithFormData] = useCreateServiceMutation();
-  
 
   const onSubmit = async (values: any) => {
     try {
@@ -57,7 +56,7 @@ const CreateUserPage = () => {
             link: "/super_admin/create-service",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1 style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
         Create User
@@ -166,12 +165,8 @@ const CreateUserPage = () => {
                   name=" contactInfo"
                   size="large"
                   label="ContactInfo"
-                
                 />
               </Col>
-
-             
-             
             </Row>
           </div>
 

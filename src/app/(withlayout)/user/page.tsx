@@ -4,13 +4,10 @@ import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { useGetUserProfileQuery } from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
 
-
 const User = () => {
   const { id, role } = getUserInfo() as any;
 
-
-
-  const { data: user} = useGetUserProfileQuery(id);
+  const { data: user } = useGetUserProfileQuery(id);
 
   return (
     <>
@@ -21,7 +18,7 @@ const User = () => {
             link: `/${role}`,
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <div>
         <h1>{role} profile</h1>

@@ -15,7 +15,7 @@ import ActionBar from "@/components/ui/ActionBar";
 import { useDebounced } from "@/redux/hooks";
 import dayjs from "dayjs";
 import { useGetAllBookingsQuery } from "@/redux/api/bookingApi";
-import UMTable2 from "@/components/ui/UMTable2";
+
 import {
   useDeleteServiceMutation,
   useGetAllServiceQuery,

@@ -24,7 +24,11 @@ import {
   EditOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { useCancelBookingMutation, useDeleteBookingMutation, useGetUserBookingByIdQuery } from "@/redux/api/bookingApi";
+import {
+  useCancelBookingMutation,
+  useDeleteBookingMutation,
+  useGetUserBookingByIdQuery,
+} from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/services/auth.service";
 
 type IDProps = {
@@ -42,22 +46,16 @@ const History = ({ params }: IDProps) => {
   const { id: serviceId } = params;
   const { role } = getUserInfo() as any;
 
- 
-
   const { data: users, isLoading } = useGetUserBookingByIdQuery(serviceId, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 2000,
   });
-
- 
 
   const history = users || [];
 
   const [open, setOpen] = useState(false);
   const [adminId, setAdminId] = useState("");
   const [deleteAdmin] = useCancelBookingMutation();
-
-
 
   const totalRecords = users ? users.length : 0;
   const totalPages = Math.ceil(totalRecords / size);
@@ -130,9 +128,7 @@ const History = ({ params }: IDProps) => {
     },
     {
       title: "Action",
-      render: (data: {
-        status: string; id: React.SetStateAction<string> 
-}) => (
+      render: (data: { status: string; id: React.SetStateAction<string> }) => (
         <>
           {data.status === "approved" && (
             <Link href={`/super_admin/userprofile/${data.id}`}>
@@ -176,7 +172,7 @@ const History = ({ params }: IDProps) => {
             link: "/user/orderhistory",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
 
       <ActionBar title="User History">

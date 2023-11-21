@@ -1,4 +1,3 @@
-
 "use client";
 
 type User = {
@@ -6,8 +5,7 @@ type User = {
   name: string;
   role: string;
   email: string;
-  createdAt: Date; 
-
+  createdAt: Date;
 };
 import React, { useEffect, useState } from "react";
 import { Button, Input, message } from "antd";
@@ -34,7 +32,7 @@ const UserTablePage = () => {
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
- const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   const {
     data: users,
@@ -74,7 +72,6 @@ const UserTablePage = () => {
           } else if (sortBy === "createdAt") {
             return a.createdAt - b.createdAt;
           }
-         
         });
       } else if (sortOrder === "descend") {
         sortedUsers.sort((a, b) => {
@@ -83,12 +80,11 @@ const UserTablePage = () => {
           } else if (sortBy === "createdAt") {
             return b.createdAt - a.createdAt;
           }
-         
         });
       }
       const newFilteredUsers = sortedUsers.filter((user) => {
         return (
-          user.role === "user" && 
+          user.role === "user" &&
           (user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.role.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -98,26 +94,32 @@ const UserTablePage = () => {
     }
   }, [users, searchTerm, sortBy, sortOrder]);
 
- 
   const totalRecords = users ? users.length : 0;
   const totalPages = Math.ceil(totalRecords / size);
 
-  const onPaginationChange = (page: React.SetStateAction<number>, pageSize: React.SetStateAction<number>) => {
+  const onPaginationChange = (
+    page: React.SetStateAction<number>,
+    pageSize: React.SetStateAction<number>
+  ) => {
     setPage(page);
     setSize(pageSize);
   };
 
-  const onTableChange = (pagination: { current: any; pageSize: any; }, filter: any, sorter: { order: any; field: any; }) => {
+  const onTableChange = (
+    pagination: { current: any; pageSize: any },
+    filter: any,
+    sorter: { order: any; field: any }
+  ) => {
     const { current, pageSize } = pagination;
-    
+
     onPaginationChange(current, pageSize);
-     if (sorter.field && sorter.order) {
-       setSortBy(sorter.field);
-       setSortOrder(sorter.order);
-     } else {
-       setSortBy("");
-       setSortOrder("");
-     }
+    if (sorter.field && sorter.order) {
+      setSortBy(sorter.field);
+      setSortOrder(sorter.order);
+    } else {
+      setSortBy("");
+      setSortOrder("");
+    }
   };
 
   const resetFilters = () => {
@@ -133,7 +135,7 @@ const UserTablePage = () => {
         message.success("User Successfully Deleted!");
         setOpen(false);
       }
-    } catch (error:any) {
+    } catch (error: any) {
       message.error(error.message);
     }
   };
@@ -142,7 +144,7 @@ const UserTablePage = () => {
     {
       title: "Name",
       dataIndex: "name",
-      sorter: true, 
+      sorter: true,
       sortDirections: ["ascend", "descend"],
     },
     {
@@ -158,7 +160,6 @@ const UserTablePage = () => {
       dataIndex: "createdAt",
       render: (data: string | number | Date | dayjs.Dayjs | null | undefined) =>
         data && dayjs(data).format("MMM D, YYYY hh:mm A"),
-  
     },
     {
       title: "Action",
@@ -189,11 +190,9 @@ const UserTablePage = () => {
       ),
     },
   ];
-    
-
 
   return (
-    <div >
+    <div>
       <UMBreadCrumb
         items={[
           {
@@ -205,7 +204,7 @@ const UserTablePage = () => {
             link: "/admin/user-table",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
 
       <ActionBar title="User List">

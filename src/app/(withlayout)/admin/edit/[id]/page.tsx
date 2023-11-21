@@ -1,13 +1,15 @@
 "use client";
 
-
 import Form from "@/components/FORMS/Form";
 import FormInput from "@/components/FORMS/FormInput";
 import FormSelectField from "@/components/FORMS/FormSelectField";
 import FormTextArea from "@/components/FORMS/FormTextArea";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
-import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/redux/api/userProfile";
+import {
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
+} from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
 import { bloodGroupOptions } from "@/constants/global";
 
@@ -18,82 +20,78 @@ import { uploadCloudinary } from "@/types/uploads";
 
 const { Option } = Select;
 
-
-
 type IDProps = {
   params: any;
 };
 
 const EditAdminPage = ({ params }: IDProps) => {
   const { id } = params;
- const router = useRouter();
+  const router = useRouter();
   const [updatedUser, setUpdatedUser] = useState(null);
-  const { data: user,refetch } = useGetUserProfileQuery(id);
+  const { data: user, refetch } = useGetUserProfileQuery(id);
   const { role } = getUserInfo() as any;
 
-   const [image, setImage] = useState<File[]>([]);
-   const [links, setLinks] = useState<string[]>([]); 
+  const [image, setImage] = useState<File[]>([]);
+  const [links, setLinks] = useState<string[]>([]);
 
-   const handleSubmit = async (e: any) => {
-     e.preventDefault();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
 
-     try {
-       let arr = [];
-       for (let i = 0; i < image.length; i++) {
-         const userProfile = await uploadCloudinary(image[i]);
+    try {
+      let arr = [];
+      for (let i = 0; i < image.length; i++) {
+        const userProfile = await uploadCloudinary(image[i]);
         // console.log(userProfile.url);
-         arr.push(userProfile.url); 
-       }
-       setLinks(arr); 
-     } catch (err: any) {
+        arr.push(userProfile.url);
+      }
+      setLinks(arr);
+    } catch (err: any) {
       // console.log("error", err);
-     }
-   };
-//  console.log(links);
+    }
+  };
+  //  console.log(links);
 
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
- const onSubmit = async (values: any) => {
-   message.loading("Updating.....");
-   try {
-    if (links.length > 0) {
-      values.image = links[0]; 
+  const onSubmit = async (values: any) => {
+    message.loading("Updating.....");
+    try {
+      if (links.length > 0) {
+        values.image = links[0];
+      }
+
+      const val = {
+        title: values.title,
+        description: values.description,
+        image: values.image,
+        pricing: values.pricing,
+        availability: values.availability,
+        location: values.location,
+        contactInfo: values.contactInfo,
+        bio: values.bio,
+        bloodGroup: values.bloodGroup,
+        address: values.address,
+        number: values.number,
+      };
+
+      const res = await updateUserProfile({
+        id: id,
+        body: val,
+      }).unwrap();
+      // console.log(res);
+
+      if (res?.id) {
+        setUpdatedUser(res);
+        message.success("Admin Successfully Updated!");
+        refetch();
+        router.push("/profile");
+      }
+    } catch (err: any) {
+      console.error("Error updating user:", err);
+      message.error(err.message || "Failed to update user");
+      //console.log(err);
     }
-
- 
-    const val = {
-      title: values.title,
-      description: values.description,
-      image: values.image, 
-      pricing: values.pricing,
-      availability: values.availability,
-      location: values.location,
-      contactInfo: values.contactInfo,
-      bio: values.bio,
-      bloodGroup: values.bloodGroup,
-      address: values.address,
-      number:values.number,
-    };
-    
-
-     const res = await updateUserProfile({
-       id: id,
-       body: val,
-     }).unwrap();
-    // console.log(res);
-
-     if (res?.id) {
-       setUpdatedUser(res);
-       message.success("Admin Successfully Updated!");
-       refetch();
-       router.push("/profile");
-     }
-   } catch (err: any) {
-     console.error("Error updating user:", err);
-     message.error(err.message || "Failed to update user");
-     //console.log(err);
-   }
- };
+  };
 
   const userData = updatedUser || user;
 
@@ -107,11 +105,8 @@ const EditAdminPage = ({ params }: IDProps) => {
     bloodGroup: userData?.bloodGroup || "",
     address: userData?.address || "",
 
-    location:userData?.location || ""
-   
-   
+    location: userData?.location || "",
   };
-  
 
   return (
     <>
@@ -120,7 +115,7 @@ const EditAdminPage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{

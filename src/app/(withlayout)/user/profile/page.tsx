@@ -45,7 +45,7 @@ const Admin = () => {
             link: `/${role}/profile`,
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <div style={centerAlign}>
         <div style={{ overflowX: "hidden" }}>
@@ -118,7 +118,7 @@ const Admin = () => {
                     marginTop: "16px",
                   }}
                 >
-                 BloodGroup: {admin?.bloodGroup}
+                  BloodGroup: {admin?.bloodGroup}
                 </h1>
               </div>
             </Col>

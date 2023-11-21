@@ -1,20 +1,20 @@
-"use client"; 
+"use client";
 
-import { useGetAllServiceQuery } from '@/redux/api/serviceApi';
+import { useGetAllServiceQuery } from "@/redux/api/serviceApi";
 import React, { useState } from "react";
 
 import { Row, Col, Button } from "antd";
-import CustomCard from '@/components/ui/CustomCard';
-import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
+import CustomCard from "@/components/ui/CustomCard";
+import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 
 const AllService = () => {
   const { data: services, isLoading } = useGetAllServiceQuery({});
-   const [visibleServices, setVisibleServices] = useState(6);
+  const [visibleServices, setVisibleServices] = useState(6);
 
-   const loadMore = () => {
-     setVisibleServices(visibleServices + 6);
-   };
-  
+  const loadMore = () => {
+    setVisibleServices(visibleServices + 6);
+  };
+
   return (
     <div style={{ backgroundColor: "#fff7e6", overflowX: "hidden" }}>
       <UMBreadCrumb
@@ -28,7 +28,7 @@ const AllService = () => {
             link: "/user/all",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{

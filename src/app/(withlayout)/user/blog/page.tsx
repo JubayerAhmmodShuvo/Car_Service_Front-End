@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useGetAllBlogsQuery } from "@/redux/api/blogsApi";
 import React from "react";
 import { Card, Row, Col } from "antd";
@@ -30,7 +30,7 @@ const Blog = () => {
             link: "/user/viewblog",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1>Blog List</h1>
       {isLoading ? (

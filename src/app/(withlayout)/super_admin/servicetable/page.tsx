@@ -1,4 +1,3 @@
-
 "use client";
 import {
   DeleteOutlined,
@@ -16,8 +15,11 @@ import ActionBar from "@/components/ui/ActionBar";
 import { useDebounced } from "@/redux/hooks";
 import dayjs from "dayjs";
 import { useGetAllBookingsQuery } from "@/redux/api/bookingApi";
-import UMTable2 from "@/components/ui/UMTable2";
-import { useDeleteServiceMutation, useGetAllServiceQuery } from "@/redux/api/serviceApi";
+
+import {
+  useDeleteServiceMutation,
+  useGetAllServiceQuery,
+} from "@/redux/api/serviceApi";
 import UMModal from "@/components/ui/UMModal";
 
 const ServicePage = () => {
@@ -45,49 +47,41 @@ const ServicePage = () => {
     query["searchTerm"] = debouncedTerm;
   }
   const { data, isLoading } = useGetAllServiceQuery({});
-  
+
   const service = data || [];
- 
-  
-  
 
   const [deleteService] = useDeleteServiceMutation();
 
+  const [serviceToDelete, setServiceToDelete] = useState<any>(null);
 
-  
-  const [serviceToDelete, setServiceToDelete] = useState<any>(null); 
-  
-   const [isSmallScreen, setIsSmallScreen] = useState(false);
-   useEffect(() => {
-     const handleResize = () => {
-       setIsSmallScreen(window.innerWidth < 768);
-     };
-     window.addEventListener("resize", handleResize);
-     handleResize();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
-     return () => {
-       window.removeEventListener("resize", handleResize);
-     };
-   }, []);
-   const tableStyle: CSSProperties | undefined = isSmallScreen
-     ? { overflowX: "auto" }
-     : undefined;
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const tableStyle: CSSProperties | undefined = isSmallScreen
+    ? { overflowX: "auto" }
+    : undefined;
 
-   const deleteServiceHandler = async () => {
-     if (serviceToDelete) {
-       try {
-         const res = await deleteService(serviceToDelete._id); 
-         if (res) {
-           message.success("Service Successfully Deleted!");
-           setOpen(false);
-           setServiceToDelete(null);
-         }
-       } catch (error: any) {
-        
-       }
-     }
-   }
-
+  const deleteServiceHandler = async () => {
+    if (serviceToDelete) {
+      try {
+        const res = await deleteService(serviceToDelete._id);
+        if (res) {
+          message.success("Service Successfully Deleted!");
+          setOpen(false);
+          setServiceToDelete(null);
+        }
+      } catch (error: any) {}
+    }
+  };
 
   const columns = [
     {
@@ -117,8 +111,9 @@ const ServicePage = () => {
     {
       title: "Action",
       render: (data: {
-        [x: string]: any; id: React.SetStateAction<string> 
-}) => (
+        [x: string]: any;
+        id: React.SetStateAction<string>;
+      }) => (
         <>
           <Link href={`/super_admin/editservice/${data?._id}`}>
             <Button
@@ -147,7 +142,6 @@ const ServicePage = () => {
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
-   
     setPage(page);
     setSize(pageSize);
   };
@@ -211,22 +205,20 @@ const ServicePage = () => {
         </div>
       </ActionBar>
       <div style={tableStyle}>
-        
-      <UMTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={service}
-        pageSize={size}
-        totalPages={100}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        sortOrder={""}
-        sortBy={""}
+        <UMTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={service}
+          pageSize={size}
+          totalPages={100}
+          showSizeChanger={true}
+          onPaginationChange={onPaginationChange}
+          onTableChange={onTableChange}
+          showPagination={true}
+          sortOrder={""}
+          sortBy={""}
         />
-
-        </div>
+      </div>
       <UMModal
         title="Remove User"
         isOpen={open}

@@ -1,6 +1,5 @@
 "use client";
 
-
 import Form from "@/components/FORMS/Form";
 import FormInput from "@/components/FORMS/FormInput";
 import FormSelectField from "@/components/FORMS/FormSelectField";
@@ -8,7 +7,10 @@ import FormTextArea from "@/components/FORMS/FormTextArea";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
 import { bloodGroupOptions } from "@/constants/global";
-import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/redux/api/userProfile";
+import {
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
+} from "@/redux/api/userProfile";
 import { getUserInfo } from "@/services/auth.service";
 
 import { Button, Col, Row, Select, message } from "antd";
@@ -16,7 +18,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const { Option } = Select;
-
 
 type IDProps = {
   params: any;
@@ -32,14 +33,13 @@ const UserPage = ({ params }: IDProps) => {
   const [updateUserProfile, { error }] = useUpdateUserProfileMutation();
 
   const onSubmit = async (values: any) => {
-   
-    console.log(values)
+    console.log(values);
     try {
       const res = await updateUserProfile({
         id: id,
         body: values,
       }).unwrap();
-console.log(res)
+      console.log(res);
       if (res?.id) {
         setUpdatedUser(res);
         message.success("User Successfully Updated!");
@@ -48,7 +48,6 @@ console.log(res)
     } catch (err: any) {
       console.error("Error updating user:", err);
       message.error(err.message || "Failed to update user");
-   
     }
   };
   const userData = updatedUser || user;
@@ -62,7 +61,6 @@ console.log(res)
     bio: userData?.bio || "",
     bloodGroup: userData?.bloodGroup || "",
     address: userData?.address || "",
-    
   };
 
   return (
@@ -72,7 +70,7 @@ console.log(res)
           { label: `${role}`, link: `/${role}` },
           { label: "update", link: `/${role}/update` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{
@@ -90,7 +88,7 @@ console.log(res)
             borderRadius: "5px",
             padding: "15px",
             marginBottom: "10px",
-             overflowX: "hidden" 
+            overflowX: "hidden",
           }}
         >
           <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>

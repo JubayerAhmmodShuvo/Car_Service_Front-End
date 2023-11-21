@@ -30,8 +30,6 @@ const responsiveCardStyle = {
 const Admin = () => {
   const { id, role } = getUserInfo() as any;
 
-  
-
   const { data: admin } = useGetUserProfileQuery(id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 6000,
@@ -46,7 +44,7 @@ const Admin = () => {
             link: `/${role}`,
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <div style={{ overflowX: "hidden" }}>
         <Row gutter={[16, 16]}>
@@ -118,7 +116,7 @@ const Admin = () => {
                   marginTop: "16px",
                 }}
               >
-                 BloodGroup: {admin?.bloodGroup}
+                BloodGroup: {admin?.bloodGroup}
               </h1>
             </div>
           </Col>

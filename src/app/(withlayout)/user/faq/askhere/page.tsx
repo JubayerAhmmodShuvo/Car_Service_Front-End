@@ -16,11 +16,8 @@ const Ask = () => {
   // const { data: user } = useGetUserProfileQuery(userId);
   // console.log(user.name);
 
-
-
   const [create, { error }] = useCreateFaqMutation();
   const onSubmit = async (values: any) => {
-  
     try {
       const formData = new FormData();
 
@@ -35,7 +32,6 @@ const Ask = () => {
 
       if (response) {
         message.success("Faq's created successfully!");
-      
       } else {
         message.error("Faq's creation failed.");
       }
@@ -56,7 +52,7 @@ const Ask = () => {
             link: "/user/askhere",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <Form submitHandler={onSubmit}>
         <div

@@ -57,7 +57,7 @@ const CreateUserPage = () => {
             link: "/super_admin/create-user",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1 style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
         Create User

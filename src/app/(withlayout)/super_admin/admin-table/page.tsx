@@ -46,21 +46,21 @@ const AdminTablePage = () => {
   const [adminId, setAdminId] = useState("");
   const [deleteAdmin] = useDeleteUserProfileMutation();
 
-   const [isSmallScreen, setIsSmallScreen] = useState(false);
-   useEffect(() => {
-     const handleResize = () => {
-       setIsSmallScreen(window.innerWidth < 768);
-     };
-     window.addEventListener("resize", handleResize);
-     handleResize();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
-     return () => {
-       window.removeEventListener("resize", handleResize);
-     };
-   }, []);
-   const tableStyle: CSSProperties | undefined = isSmallScreen
-     ? { overflowX: "auto" }
-     : undefined;
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  const tableStyle: CSSProperties | undefined = isSmallScreen
+    ? { overflowX: "auto" }
+    : undefined;
 
   useEffect(() => {
     if (users) {
@@ -204,7 +204,7 @@ const AdminTablePage = () => {
             link: "/super_admin/admin-table",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
 
       <ActionBar title="Admin List">
@@ -250,21 +250,20 @@ const AdminTablePage = () => {
         </div>
       </ActionBar>
       <div style={tableStyle}>
-        
-      <UMTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={filteredUsers}
-        pageSize={size}
-        totalPages={totalPages}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        sortOrder={sortOrder}
-        sortBy={sortBy}
+        <UMTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={filteredUsers}
+          pageSize={size}
+          totalPages={totalPages}
+          showSizeChanger={true}
+          onPaginationChange={onPaginationChange}
+          onTableChange={onTableChange}
+          showPagination={true}
+          sortOrder={sortOrder}
+          sortBy={sortBy}
         />
-        </div>
+      </div>
 
       <UMModal
         title="Remove Admin"

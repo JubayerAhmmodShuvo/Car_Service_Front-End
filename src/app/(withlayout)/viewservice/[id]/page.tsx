@@ -53,13 +53,6 @@ const ViewServicePage = ({ params }: IDProps) => {
     setVisibleComments((prev) => prev + 4);
   };
 
-
-
-
-
-
-  
-
   const serviceId: string = service?._id;
 
   const [addReview, { error }] = useAddReviewMutation();
@@ -91,8 +84,8 @@ const ViewServicePage = ({ params }: IDProps) => {
   const onAddToCart = () => {
     // Your logic to handle the click event
     // You can access the 'serviceId' here
-   // console.log("Service ID:", serviceId);
-  }
+    // console.log("Service ID:", serviceId);
+  };
 
   return (
     <>
@@ -101,7 +94,7 @@ const ViewServicePage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "viewdetails", link: `` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <div style={centerAlign}>
         <div style={{ overflowX: "hidden" }}>
@@ -217,8 +210,7 @@ const ViewServicePage = ({ params }: IDProps) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          margin:"30px"
-         
+          margin: "30px",
         }}
       >
         <Link href={`/user/booking/${serviceId}`}>

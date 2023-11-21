@@ -30,7 +30,6 @@ const CreateBlogPage = ({ params }: IDProps) => {
   const router = useRouter();
   const [updatedBlog, setUpdatedBlog] = useState(null);
 
-
   const { role } = getUserInfo() as any;
 
   const [blog, { error }] = useCreateBlogMutation();
@@ -47,11 +46,10 @@ const CreateBlogPage = ({ params }: IDProps) => {
 
       message.loading("Creating...");
       const response = await blog(formData);
-     
 
       if (response) {
         message.success("Blog created successfully!");
-         router.push("/admin/blogs");
+        router.push("/admin/blogs");
       } else {
         message.error("Blogr creation failed.");
       }
@@ -60,9 +58,6 @@ const CreateBlogPage = ({ params }: IDProps) => {
     }
   };
 
- 
-
-  
   return (
     <>
       <UMBreadCrumb
@@ -70,7 +65,7 @@ const CreateBlogPage = ({ params }: IDProps) => {
           { label: `${role}`, link: `/${role}` },
           { label: "blogadd", link: `/${role}/addblog` },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
       <h1
         style={{

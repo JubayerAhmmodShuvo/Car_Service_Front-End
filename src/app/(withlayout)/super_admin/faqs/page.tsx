@@ -64,13 +64,11 @@ const FaqTablePage = () => {
       render: function (data: any) {
         return (
           <>
-          
             <Link href={`/admin/faqs/updatefaq/${data?._id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
                 }}
-              
                 type="primary"
               >
                 <EditOutlined />
@@ -94,7 +92,6 @@ const FaqTablePage = () => {
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
-   
     setPage(page);
     setSize(pageSize);
   };
@@ -139,7 +136,7 @@ const FaqTablePage = () => {
             link: "/super_admin/faqs",
           },
         ]}
-        style={{ marginTop: "10px", color: "black" }}
+        style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
 
       <ActionBar title="FAQ's List">
@@ -179,7 +176,10 @@ const FaqTablePage = () => {
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
-        showPagination={true} sortOrder={""} sortBy={""}      />
+        showPagination={true}
+        sortOrder={""}
+        sortBy={""}
+      />
 
       <UMModal
         title="Remove blog"
