@@ -23,7 +23,7 @@ export const sidebarItems = (role: string) => {
        
         {
           label: <Link href={"/"}>Home</Link>,
-          key: `/${role}/profile`,
+          key: `/${role}/home`,
         },
         {
           label: <Link href={`/${role}/profile`}>Account Profile</Link>,
