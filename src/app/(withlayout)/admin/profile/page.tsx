@@ -9,14 +9,16 @@ const centerAlign = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  height: "100vh",
 };
 
 const imageStyle = {
-  width: "100%",
-  maxWidth: "90%",
-  height: "auto",
-  margin: "20px",
+  width: "300px",
+  height: "300px",
+  borderRadius: "50%",
+  objectFit: "cover" as "cover",
 };
+
 
 const cardStyle = {
   marginBottom: "16px",
@@ -50,62 +52,76 @@ const Admin = () => {
         ]}
         style={{ margin: "10px   0px 10px 5px", color: "black" }}
       />
-      <div>
-        <h1
-          style={{
-            color: "palevioletred",
-            fontSize: "2rem",
-            margin: "10px 0px",
-          }}
-        >
-          Name: {admin?.name}
-        </h1>
-        <h3
-          style={{
-            color: "SlateBlue",
-            fontSize: "16px",
-            marginTop: "16px",
-          }}
-        >
-          Email: {admin?.email}
-        </h3>
-        <h3
-          style={{
-            color: "SlateBlue",
-            fontSize: "16px",
-            marginTop: "16px",
-          }}
-        >
-          Number: {admin?.number}
-        </h3>
-
-        <h3
-          style={{
-            color: "#6a5acd",
-            fontSize: "16px",
-            marginTop: "16px",
-          }}
-        >
-          Bio: {admin?.bio}
-        </h3>
-        <h3
-          style={{
-            color: "#6a5acd",
-            fontSize: "16px",
-            marginTop: "16px",
-          }}
-        >
-          Address: {admin?.address}
-        </h3>
-        <h1
-          style={{
-            color: "MediumSeaGreen",
-            fontSize: "16px",
-            marginTop: "16px",
-          }}
-        >
-          BloodGroup: {admin?.bloodGroup}
-        </h1>
+      <div style={centerAlign}>
+        <Card style={{ width: "500px" }}>
+          <Row gutter={[16, 16]}>
+            <Col span={24}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src={admin?.image}
+                  alt="service image"
+                  style={imageStyle}
+                />
+              </div>
+            </Col>
+            <Col span={24}>
+              <h1
+                style={{
+                  color: "palevioletred",
+                  fontSize: "2rem",
+                  margin: "10px 0px",
+                }}
+              >
+                Name: {admin?.name}
+              </h1>
+              <h3
+                style={{
+                  color: "SlateBlue",
+                  fontSize: "16px",
+                  marginTop: "16px",
+                }}
+              >
+                Email: {admin?.email}
+              </h3>
+              <h3
+                style={{
+                  color: "SlateBlue",
+                  fontSize: "16px",
+                  marginTop: "16px",
+                }}
+              >
+                Number: {admin?.number}
+              </h3>
+              <h3
+                style={{
+                  color: "#6a5acd",
+                  fontSize: "16px",
+                  marginTop: "16px",
+                }}
+              >
+                Bio: {admin?.bio}
+              </h3>
+              <h3
+                style={{
+                  color: "#6a5acd",
+                  fontSize: "16px",
+                  marginTop: "16px",
+                }}
+              >
+                Address: {admin?.address}
+              </h3>
+              <h1
+                style={{
+                  color: "MediumSeaGreen",
+                  fontSize: "16px",
+                  marginTop: "16px",
+                }}
+              >
+                BloodGroup: {admin?.bloodGroup}
+              </h1>
+            </Col>
+          </Row>
+        </Card>
       </div>
     </>
   );
