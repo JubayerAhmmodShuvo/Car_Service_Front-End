@@ -1,7 +1,7 @@
-/* UpComingServices.css */
+
 .upcoming-services {
   width: 100%;
-  max-width: 600px; /* Adjust the maximum width as needed */
+  max-width: 600px; 
   margin: 0 auto;
   padding: 20px;
 }
@@ -22,7 +22,7 @@
 
 .event-image img {
   width: 100%;
-  max-width: 200px; /* Adjust the maximum image width as needed */
+  max-width: 200px;
   height: auto;
 }
 
