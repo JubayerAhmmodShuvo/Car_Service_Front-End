@@ -50,8 +50,14 @@ const History = ({ params }: IDProps) => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 2000,
   });
+  console.log(users)
+  
 
   const history = users || [];
+  
+
+  const idArray = history.map((item: { _id: any; }) => item?._id);
+ 
 
   const [open, setOpen] = useState(false);
   const [adminId, setAdminId] = useState("");
@@ -128,10 +134,10 @@ const History = ({ params }: IDProps) => {
     },
     {
       title: "Action",
-      render: (data: { status: string; id: React.SetStateAction<string> }) => (
+      render: (data: { status: string; _id: React.SetStateAction<string> }) => (
         <>
           {data.status === "approved" && (
-            <Link href={`/super_admin/userprofile/${data.id}`}>
+            <Link href={`/user/payment/${data._id}`}>
               <Button
                 style={{
                   margin: "0px 5px",
