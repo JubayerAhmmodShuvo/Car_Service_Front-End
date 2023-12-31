@@ -22,12 +22,14 @@ user, admin and super_user.
 
 #### User can read the blogs, can ask question apply for a booking, view his history of booking, he can delete his pending order update his profile, they can give rating and comment on individual service and many more.
 
+#### After the booking approve the user can payment for the booking using stripe.
+
 #### Admin can manage the user. He can create service view the users service and mangage them, admin can also manage the content, reply the questins, manage the bookings etc.
 
 #### Super Admin can manage all of them, he have the full authority to do what he wants. He can make the user admin, admin to user upload image.
 
 
-##### Technology used: Next.js, Express.js, Mongodb, Multer, Ant-Design, jwt, TypeScript, axios many more
+##### Technology used: Next.js, Express.js, Mongodb, Multer, Stripe.js, Ant-Design, jwt, TypeScript, axios many more
 
 
 
