@@ -31,7 +31,7 @@ const carouselData = [
   },
 ];
 
-const HeroSectionPage = ({ }) => (
+const HeroSectionPage = ({}) => (
   <Carousel autoplay>
     {carouselData.map((slide, index) => (
       <div key={index}>
@@ -42,7 +42,7 @@ const HeroSectionPage = ({ }) => (
           }}
         >
           <div>
-            <h3>{slide.text}</h3>
+            <h3 style={{ color: "#79155B" }}>{slide.text}</h3>
             <Button type="primary">{slide.buttonText}</Button>
           </div>
         </div>
