@@ -43,6 +43,8 @@ const HeroSectionPage = ({}) => (
           style={{
             ...contentStyle,
             backgroundImage: `url(${slide.image})`,
+
+            
           }}
         >
           <div>
